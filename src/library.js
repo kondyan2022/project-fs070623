@@ -1,8 +1,7 @@
 import './js/totop';
 import './js/header';
-import './js/hero';
-import './js/weekly';
-import './js/upcoming';
+import './js/libhero';
+import './js/liblist';
 import './js/modal-poster';
 import './js/modal-trailer';
 import './js/ourteam';
