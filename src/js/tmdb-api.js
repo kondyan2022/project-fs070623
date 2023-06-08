@@ -8,14 +8,16 @@ export default class TMDBApiService {
   totalPages;
   itemsPerPage = 20;
   myAxios;
-  constructor(keyApi) {
+  constructor() {
     this.searchString = '';
     this.currentPage = 1;
     this.myAxios = axios.create({
       baseURL: 'https://api.themoviedb.org/3/',
       headers: {
         accept: 'application/json',
-        Authorization: `Bearer ${keyApi}`,
+        // Authorization: `Bearer ${keyApi}`,
+        Authorization:
+          'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2NTAwNDA2MjQ0OWNlZGYyOTlkNDg4YmEwOTYwN2NmMCIsInN1YiI6IjY0N2YyMjVlOTM4MjhlMDBmOWQ5MDkwYyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.ceVszIuLrQRtXQoXFqHvHHwDyDl7RIua5Il818rGd8I',
       },
     });
   }
