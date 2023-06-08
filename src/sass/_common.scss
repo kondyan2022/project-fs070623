@@ -1,1 +1,105 @@
 @import '~node_modules/modern-normalize/modern-normalize.css';
+
+:root {
+  --color-linear: linear-gradient(to bottom, #ffc226ff 0%, #f84119f8 100%);
+  --color-orange: #f87719ff;
+  --color-linear: linear-gradient(
+    to bottom,
+    #00000000 63.48%,
+    #00000000 92.16%
+  );
+  --color-grey: #b7b7b7ff;
+  --color-white: #ffffffff;
+  --color-linear: linear-gradient(to bottom, #f84119f8 0%, #f89f19f8 100%);
+  --color-background: #111111;
+  --color-secondary-text: #f8f8f8;
+  --color-secondary-black: #282828;
+  --color-grey-white-theme: #595959;
+}
+.effect-style-shadow-one {
+  box-shadow: 1px 1px 24px 2px #01010173;
+}
+.effect-style-shadow-two {
+  box-shadow: 1px 1px 14px 4px #ff6b086b;
+}
+.effect-style-white-theme {
+  box-shadow: 1px 1px 14px 4px #00000038;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+}
+
+p:last-child {
+  margin-bottom: 0;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+a {
+  color: currentColor;
+  text-decoration: none;
+}
+
+button {
+  cursor: pointer;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  color: var(--color-grey);
+  background-color: #000;
+}
+
+.container {
+  width: 100%;
+  min-width: 200px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+@media screen and (min-width: 320px) {
+  .container {
+    width: 320px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .container {
+    width: 768px;
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+}
+@media screen and (min-width: 1280px) {
+  .container {
+    width: 1280px;
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+}
