@@ -1,0 +1,60 @@
+.library-hero {
+  padding-top: 14px;
+  .container {
+    position: relative;
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+  @media screen and (min-width: 768px) {
+    padding-top: 0;
+  }
+}
+.library-hero-text-wrapper {
+  position: absolute;
+  top: 40px;
+  left: 20px;
+  max-width: 249px;
+  @media screen and (min-width: 768px) {
+    top: 62px;
+    left: 32px;
+    max-width: 357px;
+  }
+  @media screen and (min-width: 1280px) {
+    max-width: 464px;
+    top: 169px;
+    left: 117px;
+  }
+}
+
+.library-hero-title {
+  width: 235px;
+  margin-bottom: 8px;
+
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 1.19;
+
+  color: #ffffff;
+  @media screen and (min-width: 768px) {
+    width: 332px;
+
+    font-size: 44px;
+    line-height: 1.18;
+  }
+  @media screen and (min-width: 1280px) {
+    width: 100%;
+    margin-bottom: 16px;
+
+    font-size: 64px;
+    font-weight: 700;
+    line-height: 1.17;
+  }
+}
+.library-hero-text {
+  font-size: 14px;
+  line-height: 1.14;
+  @media screen and (min-width: 1280px) {
+    font-size: 16px;
+    line-height: 1.19;
+  }
+}
