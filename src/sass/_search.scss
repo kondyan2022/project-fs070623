@@ -1,0 +1,50 @@
+.cataloge-search {
+    background-color: black;
+}
+.cataloge-search-form {
+    position: relative;
+    display: flex;
+    width: 280px;
+    height: 40px;
+    flex-wrap: wrap;
+}
+
+.cataloge-search-input {
+    width: 315px;
+    height: 48px;
+    border-radius: 8px;
+    border: 1px solid #595959;
+}
+
+.cataloge-search-years {
+padding-left: 15px;
+padding-right: 15px;
+width: 95px;
+height: 48px;
+border: 1px solid #595959;
+border-radius: 8px;
+}
+
+.cataloge-btn-delete {
+    // display: none;
+    width: 18px;
+    height: 18px;
+    position: absolute;
+    border: none;
+    
+}
+
+.cataloge-btn-search{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    width: 48px;
+    height: 48px;
+    background: linear-gradient(141.22deg, #FFC226 9.4%, #F84119 91.91%);
+    border-radius: 50%;
+}
+
+.tui-pagination {
+
+}
