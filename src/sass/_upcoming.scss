@@ -226,7 +226,11 @@
     width: 155px;
     padding: 12px 22px;
     color: var(--color-background);
-    background-color: var(--color-linear); //TODOOOO
+    background-color: linear-gradient(
+      to bottom,
+      #ffc226ff 0%,
+      #f84119f8 100%
+    ); //TODOOOO
     border-radius: 74px;
     border-color: transparent;
   }

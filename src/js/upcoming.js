@@ -1,5 +1,12 @@
 import TMDBApiService from './tmdb-api';
 import getGenres from './get-genres';
+// import dataFromApi from '../testcatalog.json';
+import {
+    saveToLibrary,
+    getLibraryList,
+    isInLibrary,
+    removeFromLibrary,
+} from './local-storage';
 
 const wrapperForRender = document.querySelector('.js-upcoming-wrapper');
 const serviceUpcoming = new TMDBApiService();
@@ -81,10 +88,12 @@ function creatMarkup(movie) {
         </table>
         <p class="upcoming-about">About</p>
         <p class="upcoming-about-descr">${movie.overview}</p>
-        <button type="button" class="up-btn">Add to my library</button>
+        <button type="button" class="up-btn" data-movie-id="${movie.id}">Add to my library</button>
     </div>
     `
 }
+
+const btnSaveToLocalStorage = document.querySelector('.up-btn');
 
 function renderToMarkup(array) {
     const randomIndex = getRandomIndex();
@@ -101,3 +110,29 @@ function getRandomIndex() {
     return Math.floor(Math.random() * 15);
 }
 
+//-------------------handlerBTN
+if (btnSaveToLocalStorage) {
+    btnSaveToLocalStorage.addEventListener('click', buttonHandler);
+}
+
+function buttonHandler(event) {
+
+    // const btn = event.target;
+    // console.log(btn)
+    // const movieEl = btn.closest('.upcoming-right-wrap');
+    // const movieTitle = movieEl.querySelector('.upcoming-movie-title').textContent;
+    // const isInLibrary = isInLibrary(movieTitle);
+    const movieId = event.target.dataset.movieId;
+    // movie - id
+
+    if (movieId) {
+        removeFromLibrary(movieId);
+        btn.textContent = "Add to my library";
+        console.log(remove)
+    } else {
+        saveToLibrary(movieId);
+        btn.textContent = "Remove from my library"
+        console.log(save)
+    }
+
+}
