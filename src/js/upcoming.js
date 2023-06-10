@@ -93,7 +93,6 @@ function creatMarkup(movie) {
     `
 }
 
-const btnSaveToLocalStorage = document.querySelector('.up-btn');
 
 function renderToMarkup(array) {
     const randomIndex = getRandomIndex();
@@ -104,6 +103,7 @@ function renderToMarkup(array) {
     console.log(randomIndex);
 
     wrapperForRender.innerHTML = randomMovie;
+
 }
 
 function getRandomIndex() {
@@ -111,28 +111,26 @@ function getRandomIndex() {
 }
 
 //-------------------handlerBTN
-if (btnSaveToLocalStorage) {
-    btnSaveToLocalStorage.addEventListener('click', buttonHandler);
-}
+// if (btnSaveToLocalStorage) {
+//     btnSaveToLocalStorage.addEventListener('click', buttonHandler);
+// }
+const btnSaveToLocalStorage = document.querySelector('.up-btn');
+
+btnSaveToLocalStorage.addEventListener('click', buttonHandler);
+
 
 function buttonHandler(event) {
-
+    console.log('click')
     // const btn = event.target;
-    // console.log(btn)
-    // const movieEl = btn.closest('.upcoming-right-wrap');
-    // const movieTitle = movieEl.querySelector('.upcoming-movie-title').textContent;
-    // const isInLibrary = isInLibrary(movieTitle);
-    const movieId = event.target.dataset.movieId;
-    // movie - id
+    // const movieId = event.target.dataset.movieId;
 
-    if (movieId) {
-        removeFromLibrary(movieId);
-        btn.textContent = "Add to my library";
-        console.log(remove)
-    } else {
-        saveToLibrary(movieId);
-        btn.textContent = "Remove from my library"
-        console.log(save)
-    }
-
+    // if (movieId) {
+    //     removeFromLibrary(movieId);
+    //     btn.textContent = "Add to my library";
+    //     console.log("remove")
+    // } else {
+    //     saveToLibrary(movieId);
+    //     btn.textContent = "Remove from my library"
+    //     console.log("save")
+    // }
 }
