@@ -48,7 +48,7 @@ export default class TMDBApiService {
     });
   }
   async fetchTrendingWeekMovies() {
-    return await this.myAxios('trending/movie/day', {
+    return await this.myAxios('trending/movie/week', {
       params: { language: 'en-US' },
     });
   }
