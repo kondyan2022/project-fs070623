@@ -1,5 +1,7 @@
 import TMDBApiService from './tmdb-api';
 import getFilmCard from './film-card';
+import getFiveStar from './fivezerostar';
+//import getGenres from './get-genres';
 
 const myService = new TMDBApiService();
 const weeklyGallery = document.querySelector('.weekly-gallery');
@@ -20,7 +22,7 @@ function renderGalleryWeekly() {
       console.log(movies); //отримуємо першу сторінку трендов тижня (20шт)
 
       // отримуємо масив з 3х рендомних індексів
-      const indexes = rendomIndex(movies.length - 1);
+      const indexes = rendomMoviesIndex(movies.length - 1);
       // отримуємо масив з 3х фильмів.
       const weeklyMovies = [];
 
@@ -30,9 +32,7 @@ function renderGalleryWeekly() {
       });
 
       function createMarkup(arr) {
-        return weeklyMovies
-          .map(a => getFilmCard(a, x => String(Math.round(x * 2) / 2)))
-          .join('');
+        return weeklyMovies.map(a => getFilmCard(a, getFiveStar)).join('');
       }
 
       weeklyGallery.innerHTML = createMarkup(weeklyMovies);
@@ -41,7 +41,7 @@ function renderGalleryWeekly() {
     .catch(e => console.error(e));
 }
 
-function rendomIndex(x) {
+function rendomMoviesIndex(x) {
   const rendomIndexes = [];
   for (let i = 0; rendomIndexes.length < 3; i++) {
     const num = Math.floor(Math.random() * x);

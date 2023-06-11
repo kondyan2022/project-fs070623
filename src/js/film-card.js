@@ -1,9 +1,9 @@
 import getGenres from './get-genres';
 export default function getFilmCard(
   { id, title, poster_path, genre_ids, release_date, vote_average },
-  getStatrs
+  getFiveStar
 ) {
-  const stars = getStatrs(vote_average);
+  const stars = getFiveStar(vote_average);
   const noPoster = new URL('../images/no-poster.png', import.meta.url);
   const imgScrSet = poster_path
     ? `srcset="
