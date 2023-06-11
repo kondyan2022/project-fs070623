@@ -91,7 +91,7 @@ export function removeFromLibrary(idForRemove) {
   const arrayLibrary = loadFromLocalStorage('moviesData') || [];
   saveToLocalStorage(
     'moviesData',
-    arrayLibrary.filter(({ id }) => id !== idForRemove)
+    arrayLibrary.filter(({ id }) => id != idForRemove)
   );
 }
 

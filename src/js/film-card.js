@@ -4,9 +4,9 @@ export default function getFilmCard(
   getStatrs
 ) {
   const stars = getStatrs(vote_average);
-  return `<div class="film-card" film-id="${id}">
-  <img
-    srcset="
+  const noPoster = new URL('../images/no-poster.png', import.meta.url);
+  const imgScrSet = poster_path
+    ? `srcset="
       https://image.tmdb.org/t/p/w342/${poster_path}      342w,
       https://image.tmdb.org/t/p/w500/${poster_path}      500w,
       https://image.tmdb.org/t/p/w780/${poster_path}      780w,
@@ -16,18 +16,27 @@ export default function getFilmCard(
           (min-width:768px) 224px,
           (min-width:320px) 280px,
           100vw"
-    src="https://image.tmdb.org/t/p/w342/${poster_path}"
+    `
+    : '';
+
+  return `<div class="film-card" film-id="${id}">
+  <img
+   ${imgScrSet}
+    
+    src="${noPoster.href}"
     alt="${title}"
     class="film-card-poster"
     film-id="${id}"
     loading="lazy"
+    width="500"
+    height="750"
   />
   <div class="film-card-textblock">
     <h3 class="film-card-title">${title}</h3>
     <p class="film-card-genre">${getGenres()
       .filter(({ id }) => genre_ids.includes(id))
       .map(({ name }) => name)
-      .slice(0, 2)
+      .slice(0, 1)
       .join(', ')} | ${release_date.slice(0, 4)}</p>
   </div>
   <div class="film-card-stars">${stars}</div>
