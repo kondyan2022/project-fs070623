@@ -45,7 +45,7 @@ serviceUpcoming
                     button.textContent = "Add to my library";
                     console.log("remove")
                 } else {
-                    saveToLibrary(getMovie[0]);
+                    saveToLibrary(getMovie);
                     button.textContent = "Remove from my library"
                     console.log("save")
                 }
