@@ -1,103 +1,154 @@
-// import TMDBApiService from './tmdb-api'
 import getGenres from "./get-genres";
 import getFilmCard from './film-card';
 import SlimSelect from 'slim-select';
+import "slim-select/dist/slimselect.css";
+import { getLibraryList } from './local-storage';
 
-// import dataFromApi from '../testcatalog.json';
+const refs = {
+    listCards: document.querySelector('.js-liblist'),
+    selectWrapper: document.querySelector('#library-filter'),
+    wrapperForMessage: document.querySelector('.js-lib-content-wrap'),
+    option: document.querySelector('.js-lib-select'),
+    btnLoadMore: document.querySelector('.js-load-more')
+}
 
-import {
-    saveToLibrary,
-    getLibraryList,
-    isInLibrary,
-    removeFromLibrary,
-} from './local-storage';
+const arrayGenres = getGenres(); // console.log(arrayGenres)
+const getMovies = getLibraryList(); //list from local storage
 
-// const { results } = dataFromApi;
+const perPageMovies = 9; //quantity of cards shown
+let gotMovies = 9; //getMovies.length;
 
-const arrayGenres = getGenres();
-console.log(arrayGenres)
-
-const listCards = document.querySelector('.js-liblist');
-const selectWrapper = document.querySelector('#library-filter');
-const wrapperForMessage = document.querySelector('.js-lib-content-wrap')
-
-
+/**-----------------------------------------------------------------------
+ * function by create markup for function renderMarkUpInSelect()
+ * @param {*object} item 
+ * @returns markup
+ */
 function createMarkupInSelect(item) {
     return `
     <option class="lib-option" value="${item.id}">${item.name}</option>
     `
 }
 
+/**-----------------------------------------------------------------------
+ * function by render genre of movie to select
+ */
 function renderMarkupInSelect() {
-    const gotGenre = arrayGenres.map(genre => createMarkupInSelect(genre)).join('');
-    selectWrapper.innerHTML = gotGenre;
-    // new SlimSelect({
-    //     select: selectWrapper,
-    //     data: '.js-lib-wrap-select'
+    const gotGenre = arrayGenres.map(genre =>
+        createMarkupInSelect(genre)).join('');
+    // refs.selectWrapper.innerHTML = gotGenre;
+    refs.selectWrapper.insertAdjacentHTML('beforeend', gotGenre)
+    // window.addEventListener('DOMContentLoader', () => {
+    //     new SlimSelect({
+    //         select: refs.selectWrapper,
+    //         data: '.js-lib-wrap-select'
+    //     })
     // })
 }
 
-const getMovies = getLibraryList(); //list from local storage
-
+/**-----------------------------------------------------------------------
+ * function by render data(movie) from array to card
+ * @param {*array} list 
+ */
 function renderMovieInCards(list) {
-    // listCards.innerHTML = getMovies
+    // refs.listCards.innerHTML = list
     //     .map(film => getFilmCard(film, x => String(Math.round(x * 2) / 2)))
     //     .join('');
-    listCards.innerHTML = list
+    const load = list
         .map(film => getFilmCard(film, x => String(Math.round(x * 2) / 2)))
         .join('');
+    refs.listCards.insertAdjacentHTML('beforeend', load)
 }
 
+/**-----------------------------------------------------------------------
+ * function to show cards and select
+ */
 function showContent() {
+    // if (getMovies.length > 0) {
+    //     renderMarkupInSelect();
+    //     if (getMovies.length <= perPageMovies) {
+    //         refs.btnLoadMore.style.display = 'none';
+    //     }
+    //     // renderMovieInCards(getMovies);
+    // } else {
+    //     refs.selectWrapper.style.visibility = 'hidden';
+    //     refs.wrapperForMessage.innerHTML = '<p class="lib-error">OOPS... We are very sorry! You dont have any movies at your library.</p >  <a href="./catalog.html" class="lib-btn-search-movie">Search movie</a>';
+    // }
     if (getMovies.length > 0) {
         renderMarkupInSelect();
-        renderMovieInCards(getMovies);
+        const startMovies = getMovies.slice(0, perPageMovies);
+        renderMovieInCards(startMovies);
+
+        if (getMovies.length <= perPageMovies) {
+            refs.btnLoadMore.style.display = 'none';
+        } else {
+            refs.btnLoadMore.style.display = 'block';
+            gotMovies = perPageMovies;
+        }
     } else {
-        // selectWrapper.style.visibility = 'hidden';
-        wrapperForMessage.innerHTML = '<p class="lib-error">OOPS... We are very sorry! You dont have any movies at your library.</p >  <a href="./catalog.html" class="lib-btn-search-movie">Search movie</a>';
+        refs.selectWrapper.style.visibility = 'hidden';
+        refs.wrapperForMessage.innerHTML = '<p class="lib-error">OOPS... We are very sorry! You dont have any movies at your library.</p >  <a href="./catalog.html" class="lib-btn-search-movie">Search movie</a>';
+        refs.btnLoadMore.style.display = 'none';
     }
 }
 
+// calling a function
 showContent();
 
-//----------handler on select
+/**-----------------------------------------------------------------------
+ * adds handler to the select
+ */
+refs.selectWrapper.addEventListener('change', () => {
+    const selectedGenre = Number(refs.selectWrapper.value);
 
-selectWrapper.addEventListener('change', () => {
-    const selectedGenre = Number(selectWrapper.value);
-
-    console.log(selectedGenre);
-
-    // const filteredGotMovies = getMovies.filter(movie => {
-    //     arrayGenres
-    //         .filter(({ id }) => movie.genre_ids.includes(id))
-    //         .map(({ name }) => name);
-    //     return arrayGenres.includes(parseInt(selectedGenre));
-    // });
-
-    // const filteredGotMovies = getMovies.filter(movie => {
-    //     return movie.genre_ids.includes(parseInt(selectedGenre));
-    // });
     const filteredGotMovies = getMovies.filter(({ genre_ids }) =>
         genre_ids.includes(selectedGenre)
     )
+    let optionValue = refs.option.value;
 
-    console.log(filteredGotMovies) // []
-    console.log(getMovies)
+    // if (optionValue !== "all") {
+    //     renderMovieInCards(filteredGotMovies);
+    // } else if (optionValue === "all") {
+    //     renderMovieInCards(getMovies);
+    // } else {
+    //     console.log('');
+    // }
 
-    // listCards.innerHTML = '';
-    renderMovieInCards(filteredGotMovies);
+    if (optionValue === "all") {
+        renderMovieInCards(getMovies);
+    } else {
+        renderMovieInCards(filteredGotMovies);
+    }
+
 
     if (filteredGotMovies.length > 0) {
         filteredGotMovies.map(movie => {
             const movieCard = getFilmCard(movie, stars);
-            listCards.appendChild(movieCard);
+            refs.listCards.appendChild(movieCard);
         })
     } else {
-        selectWrapper.style.visibility = 'hidden';
-        // const messageMarkup = '<p class="lib-error">No movies in the selected genre!</p> <button type="button" class="lib-btn-search-movie">Search movie</button>';
-        const messageMarkup = '<p class="lib-error">No movies in the selected genre!</p> <a href="./catalog.html" class="lib-btn-search-movie">Search movie</a>';
-        wrapperForMessage.innerHTML = messageMarkup;
+        showMessage();
     }
 })
 
+/**-----------------------------------------------------------------------
+ * function to show the message and button 'Search movie'
+ */
+function showMessage() {
+    // refs.listCards.innerHTML = '';
+    refs.selectWrapper.style.visibility = 'hidden';
+    const messageMarkup = '<p class="lib-error">No movies in the selected genre!</p> <a href="./catalog.html" class="lib-btn-search-movie">Search movie</a>';
+    refs.wrapperForMessage.innerHTML = messageMarkup;
+    refs.btnLoadMore.style.display = 'none';
+}
 
+//---------------------load more----------------------
+refs.btnLoadMore.addEventListener('click', () => {
+    const nextMovies = getMovies.slice(gotMovies + 1, gotMovies + perPageMovies); //13, 13+9
+    console.log(nextMovies);
+    renderMovieInCards(nextMovies);
+    gotMovies += perPageMovies;
+
+    if (gotMovies >= getMovies.length) {
+        refs.btnLoadMore.style.display = 'none';
+    }
+})
