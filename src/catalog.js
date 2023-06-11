@@ -9,8 +9,8 @@ import './js/modal-trailer';
 import './js/ourteam';
 import './js/footer';
 
-import getFiveStar from './js/fivezerostar';
-document.querySelector('.film-card-stars').innerHTML = getFiveStar(5);
+// import getFiveStar from './js/fivezerostar';
+// document.querySelector('.film-card-stars').innerHTML = getFiveStar(5);
 //example for getFilmCardnpm
 
 // import dataFromApi from './testcatalog.json';
