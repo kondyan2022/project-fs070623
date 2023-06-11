@@ -29,7 +29,7 @@ export default function getFilmCard(
     <p class="film-card-genre">${getGenres()
       .filter(({ id }) => genre_ids.includes(id))
       .map(({ name }) => name)
-      .slice(0, 2)
+      .slice(0, 1)
       .join(', ')} | ${release_date.slice(0, 4)}</p>
   </div>
   <div class="film-card-stars">${stars}</div>
