@@ -90,16 +90,18 @@ selectWrapper.addEventListener('change', () => {
         })
     } else {
         selectWrapper.style.visibility = 'hidden';
-        const messageMarkup = '<p class="lib-error">No movies in the selected genre!</p> <button type="button" class="lib-btn-search-movie">Search movie</button>';
+        // const messageMarkup = '<p class="lib-error">No movies in the selected genre!</p> <button type="button" class="lib-btn-search-movie">Search movie</button>';
+        const messageMarkup = '<p class="lib-error">No movies in the selected genre!</p> <a href="./catalog.html" class="lib-btn-search-movie">Search movie</a>';
+
         wrapperForMessage.innerHTML = messageMarkup;
 
-        const btnSearchMovie = document.querySelector('.lib-btn-search-movie');
-        btnSearchMovie.addEventListener('click', (evt) => {
-            console.log('click');
-            selectWrapper.style.visibility = 'visibile';
-            wrapperForMessage.innerHTML = '';
-            showContent();
-        })
+        // const btnSearchMovie = document.querySelector('.lib-btn-search-movie');
+        // btnSearchMovie.addEventListener('click', (evt) => {
+        //     console.log('click');
+        //     selectWrapper.style.visibility = 'visibile';
+        //     wrapperForMessage.innerHTML = '';
+        //     showContent();
+        // })
     }
 })
 
