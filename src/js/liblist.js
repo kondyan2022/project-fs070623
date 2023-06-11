@@ -1,6 +1,7 @@
 // import TMDBApiService from './tmdb-api'
 import getGenres from "./get-genres";
 import getFilmCard from './film-card';
+import SlimSelect from 'slim-select';
 
 import dataFromApi from '../testcatalog.json';
 
@@ -21,15 +22,21 @@ const selectWrapper = document.querySelector('#library-filter');
 const wrapperForMessage = document.querySelector('.js-lib-content-wrap')
 
 
+
 function createMarkupInSelect(item) {
     return `
-    <option value="${item.name}">${item.name}</option>
+    <option class="lib-option" value="${item.id}">${item.name}</option>
     `
 }
 
 function renderMarkupInSelect() {
+
     const gotGenre = arrayGenres.map(genre => createMarkupInSelect(genre)).join('');
     selectWrapper.innerHTML = gotGenre;
+    // new SlimSelect({
+    //     select: selectWrapper,
+    //     data: '.js-lib-wrap-select'
+    // })
 }
 
 
@@ -74,7 +81,6 @@ selectWrapper.addEventListener('change', () => {
     if (filteredGotMovies.length > 0) {
         // filteredGotMovies.forEach(movie => {
         //     const movieCard = getFilmCard(movie, stars);
-
         //     listCards.appendChild(movieCard);
         // })
         filteredGotMovies.map(movie => {
@@ -83,6 +89,9 @@ selectWrapper.addEventListener('change', () => {
             listCards.appendChild(movieCard);
         })
     } else {
-        wrapperForMessage.innerHTML = '<p class="lib-error">No movies in the selected genre!</p > '
+        selectWrapper.style.visibility = 'hidden';
+        const messageMarkup = '<p class="lib-error">No movies in the selected genre!</p> <button type="button" class="lib-btn-search-movie">Search movie</button>';
+        wrapperForMessage.innerHTML = messageMarkup;
     }
 })
+
