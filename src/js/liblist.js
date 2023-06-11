@@ -3,7 +3,7 @@ import getGenres from "./get-genres";
 import getFilmCard from './film-card';
 import SlimSelect from 'slim-select';
 
-import dataFromApi from '../testcatalog.json';
+// import dataFromApi from '../testcatalog.json';
 
 import {
     saveToLibrary,
@@ -12,7 +12,7 @@ import {
     removeFromLibrary,
 } from './local-storage';
 
-const { results } = dataFromApi;
+// const { results } = dataFromApi;
 
 const arrayGenres = getGenres();
 console.log(arrayGenres)
@@ -30,7 +30,6 @@ function createMarkupInSelect(item) {
 }
 
 function renderMarkupInSelect() {
-
     const gotGenre = arrayGenres.map(genre => createMarkupInSelect(genre)).join('');
     selectWrapper.innerHTML = gotGenre;
     // new SlimSelect({
@@ -39,25 +38,25 @@ function renderMarkupInSelect() {
     // })
 }
 
-
 const getMovies = getLibraryList(); //list from local storage
 
 function renderMovieInCards() {
-    // getMovies.forEach(movie => {
-    //     const dataCard = getFilmCard(movie);
-    //     listCards.insertAdjacentHTML('beforeend', dataCard)
-    // })
-    listCards.innerHTML = results
+    listCards.innerHTML = getMovies
         .map(film => getFilmCard(film, x => String(Math.round(x * 2) / 2)))
         .join('');
 }
 
-if (getMovies.length > 0) {
-    renderMarkupInSelect();
-    renderMovieInCards()
-} else (
-    wrapperForMessage.innerHTML = '<p class="lib-error">OOPS... We are very sorry! You dont have any movies at your library.</p > '
-)
+function showContent() {
+    if (getMovies.length > 0) {
+        renderMarkupInSelect();
+        renderMovieInCards();
+    } else (
+        wrapperForMessage.innerHTML = '<p class="lib-error">OOPS... We are very sorry! You dont have any movies at your library.</p > '
+    )
+}
+
+showContent();
+
 
 //----------handler for select
 
@@ -69,12 +68,13 @@ selectWrapper.addEventListener('change', () => {
         arrayGenres
             .filter(({ id }) => movie.genre_ids.includes(id))
             .map(({ name }) => name);
-
-        console.log(arrayGenres)
-
-        return arrayGenres.includes(selectedGenre);
-
+        return arrayGenres.includes(parseInt(selectedGenre));
     });
+
+    // const filteredGotMovies = getMovies.filter(movie => {
+    //     return movie.genre_ids.includes(parseInt(selectedGenre));
+    // });
+
 
     listCards.innerHTML = '';
 
@@ -84,7 +84,7 @@ selectWrapper.addEventListener('change', () => {
         //     listCards.appendChild(movieCard);
         // })
         filteredGotMovies.map(movie => {
-            const movieCard = getFilmCard(movie, stars);
+            const movieCard = getFilmCard(movie, stars); //<= here arg will be (movie, stars)
 
             listCards.appendChild(movieCard);
         })
@@ -92,6 +92,14 @@ selectWrapper.addEventListener('change', () => {
         selectWrapper.style.visibility = 'hidden';
         const messageMarkup = '<p class="lib-error">No movies in the selected genre!</p> <button type="button" class="lib-btn-search-movie">Search movie</button>';
         wrapperForMessage.innerHTML = messageMarkup;
+
+        const btnSearchMovie = document.querySelector('.lib-btn-search-movie');
+        btnSearchMovie.addEventListener('click', (evt) => {
+            console.log('click');
+            selectWrapper.style.visibility = 'visibile';
+            wrapperForMessage.innerHTML = '';
+            showContent();
+        })
     }
 })
 
