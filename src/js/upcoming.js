@@ -38,14 +38,14 @@ serviceUpcoming
             btnSaveToLocalStorage.addEventListener('click', (event) => {
                 const button = event.target;
                 const movieId = event.target.dataset.movieId;
-                const getMovie = arrayResults.find((movie) => movie.id === movieId);
+                const getMovie = arrayResults.find((movie) => movie.id == movieId);
                 console.log(getMovie)
                 if (isInLibrary(movieId)) {
                     removeFromLibrary(movieId);
                     button.textContent = "Add to my library";
                     console.log("remove")
                 } else {
-                    saveToLibrary(getMovie);
+                    saveToLibrary(getMovie[0]);
                     button.textContent = "Remove from my library"
                     console.log("save")
                 }
