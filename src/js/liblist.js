@@ -50,9 +50,10 @@ function showContent() {
     if (getMovies.length > 0) {
         renderMarkupInSelect();
         renderMovieInCards();
-    } else (
-        wrapperForMessage.innerHTML = '<p class="lib-error">OOPS... We are very sorry! You dont have any movies at your library.</p > '
-    )
+    } else {
+        selectWrapper.style.visibility = 'hidden';
+        wrapperForMessage.innerHTML = '<p class="lib-error">OOPS... We are very sorry! You dont have any movies at your library.</p > ';
+    }
 }
 
 showContent();
