@@ -20,8 +20,8 @@
   />
   <div class="film-card-textblock">
     <h3 class="film-card-title">${t}</h3>
-    <p class="film-card-genre">${(function(){let{genres:e}=JSON.parse(localStorage.getItem("genres"))??{genres:[]};return e})().filter(({id:e})=>r.includes(e)).map(({name:e})=>e).slice(0,2).join(", ")} | ${l.slice(0,4)}</p>
+    <p class="film-card-genre">${(function(){let{genres:e}=JSON.parse(localStorage.getItem("genres"))??{genres:[]};return e})().filter(({id:e})=>r.includes(e)).map(({name:e})=>e).slice(0,1).join(", ")} | ${l.slice(0,4)}</p>
   </div>
   <div class="film-card-stars">${a}</div>
 </div>`})(e,e=>String(Math.round(2*e)/2))).join(""),console.log(r)}).catch(e=>console.error(e)),r("cbbxM"),r("ijwS8"),r("guHir"),r("7hKzD")}();
-//# sourceMappingURL=index.bf664067.js.map
+//# sourceMappingURL=index.e7ff0fda.js.map

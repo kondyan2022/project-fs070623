@@ -20,8 +20,8 @@ var e="undefined"!=typeof globalThis?globalThis:"undefined"!=typeof self?self:"u
   />
   <div class="film-card-textblock">
     <h3 class="film-card-title">${t}</h3>
-    <p class="film-card-genre">${(function(){let{genres:e}=JSON.parse(localStorage.getItem("genres"))??{genres:[]};return e})().filter(({id:e})=>r.includes(e)).map(({name:e})=>e).slice(0,2).join(", ")} | ${l.slice(0,4)}</p>
+    <p class="film-card-genre">${(function(){let{genres:e}=JSON.parse(localStorage.getItem("genres"))??{genres:[]};return e})().filter(({id:e})=>r.includes(e)).map(({name:e})=>e).slice(0,1).join(", ")} | ${l.slice(0,4)}</p>
   </div>
   <div class="film-card-stars">${a}</div>
 </div>`})(e,e=>String(Math.round(2*e)/2))).join(""),console.log(r)}).catch(e=>console.error(e)),r("38Z3Q"),r("I2Abx"),r("6fsAg"),r("epHO8");
-//# sourceMappingURL=index.7d0d14a5.js.map
+//# sourceMappingURL=index.5cbc51ea.js.map
