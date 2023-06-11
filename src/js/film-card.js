@@ -21,6 +21,8 @@ export default function getFilmCard(
     class="film-card-poster"
     film-id="${id}"
     loading="lazy"
+    width="500"
+    height="750"
   />
   <div class="film-card-textblock">
     <h3 class="film-card-title">${title}</h3>
