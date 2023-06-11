@@ -1,6 +1,6 @@
 import TMDBApiService from './tmdb-api';
 import getGenres from './get-genres';
-// import dataFromApi from '../testcatalog.json';
+import dataFromApi from '../testcatalog.json';
 import {
     saveToLibrary,
     getLibraryList,
@@ -31,7 +31,26 @@ serviceUpcoming
         const arrayResults = datasUpcoming.results;
 
         if (arrayResults.length > 0) {
-            renderToMarkup(arrayResults)
+            renderToMarkup(arrayResults);
+
+            const btnSaveToLocalStorage = document.querySelector('.up-btn');
+            // btnSaveToLocalStorage.addEventListener('click', buttonHandler);
+            btnSaveToLocalStorage.addEventListener('click', (event) => {
+                const button = event.target;
+                const movieId = event.target.dataset.movieId;
+                const getMovie = arrayResults.find((movie) => movie.id === movieId);
+                console.log(getMovie)
+                if (isInLibrary(movieId)) {
+                    removeFromLibrary(movieId);
+                    button.textContent = "Add to my library";
+                    console.log("remove")
+                } else {
+                    saveToLibrary(getMovie);
+                    button.textContent = "Remove from my library"
+                    console.log("save")
+                }
+            });
+
         } else if (arrayResults.length === 0) {
             wrapperForRender.innerHTML = '<p class="upcoming-error">OOPS... We are very sorry! Upcoming this month not found.</p>'
         }
@@ -111,26 +130,33 @@ function getRandomIndex() {
 }
 
 //-------------------handlerBTN
-// if (btnSaveToLocalStorage) {
-//     btnSaveToLocalStorage.addEventListener('click', buttonHandler);
+
+// function buttonHandler(event) {
+//     const { results } = dataFromApi;
+
+//     results.forEach(saveToLibrary)
+//     console.log(results)
+
+//     // const { results } = dataFromApi;
+//     // results.forEach(saveToLibrary);
+
+//     const button = event.target;
+//     console.log(button)
+//     const movieId = event.target.dataset.movieId;
+//     console.log(movieId);
+//     getMovie = getMovieById(movieId);
+
+//     if (isInLibrary(movieId)) {
+//         removeFromLibrary(movieId);
+//         button.textContent = "Add to my library";
+//         console.log("remove")
+//     } else {
+//         saveToLibrary(getMovie);
+//         button.textContent = "Remove from my library"
+//         console.log("save")
+//     }
 // }
-const btnSaveToLocalStorage = document.querySelector('.up-btn');
 
-btnSaveToLocalStorage.addEventListener('click', buttonHandler);
-
-
-function buttonHandler(event) {
-    console.log('click')
-    // const btn = event.target;
-    // const movieId = event.target.dataset.movieId;
-
-    // if (movieId) {
-    //     removeFromLibrary(movieId);
-    //     btn.textContent = "Add to my library";
-    //     console.log("remove")
-    // } else {
-    //     saveToLibrary(movieId);
-    //     btn.textContent = "Remove from my library"
-    //     console.log("save")
-    // }
-}
+// function getMovieById(movieId) {
+//     return arrayResults.find(movie => movie.id === movieId);
+// }
