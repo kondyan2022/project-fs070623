@@ -1,6 +1,5 @@
 import TMDBApiService from './tmdb-api';
 import getFilmCard from './film-card';
-//import getGenres from './get-genres';
 
 const myService = new TMDBApiService();
 const weeklyGallery = document.querySelector('.weekly-gallery');
