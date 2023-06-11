@@ -17,8 +17,9 @@ export default function getFilmCard(
           (min-width:320px) 280px,
           100vw"
     src="https://image.tmdb.org/t/p/w342/${poster_path}"
-    alt="John Wick: Chapter 4"
+    alt="${title}"
     class="film-card-poster"
+    film-id="${id}
     loading="lazy"
   />
   <div class="film-card-textblock">
