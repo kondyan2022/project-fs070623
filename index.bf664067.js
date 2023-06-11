@@ -15,6 +15,8 @@
     class="film-card-poster"
     film-id="${e}"
     loading="lazy"
+    width="500"
+    height="750"
   />
   <div class="film-card-textblock">
     <h3 class="film-card-title">${t}</h3>
@@ -22,4 +24,4 @@
   </div>
   <div class="film-card-stars">${a}</div>
 </div>`})(e,e=>String(Math.round(2*e)/2))).join(""),console.log(r)}).catch(e=>console.error(e)),r("cbbxM"),r("ijwS8"),r("guHir"),r("7hKzD")}();
-//# sourceMappingURL=index.ee350578.js.map
+//# sourceMappingURL=index.bf664067.js.map

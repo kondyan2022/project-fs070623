@@ -15,6 +15,8 @@ var e="undefined"!=typeof globalThis?globalThis:"undefined"!=typeof self?self:"u
     class="film-card-poster"
     film-id="${e}"
     loading="lazy"
+    width="500"
+    height="750"
   />
   <div class="film-card-textblock">
     <h3 class="film-card-title">${t}</h3>
@@ -22,4 +24,4 @@ var e="undefined"!=typeof globalThis?globalThis:"undefined"!=typeof self?self:"u
   </div>
   <div class="film-card-stars">${a}</div>
 </div>`})(e,e=>String(Math.round(2*e)/2))).join(""),console.log(r)}).catch(e=>console.error(e)),r("38Z3Q"),r("I2Abx"),r("6fsAg"),r("epHO8");
-//# sourceMappingURL=index.d0bb7eb3.js.map
+//# sourceMappingURL=index.7d0d14a5.js.map
