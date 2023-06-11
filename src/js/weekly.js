@@ -44,9 +44,12 @@ function renderGalleryWeekly() {
 
 function rendomIndex(x) {
   const rendomIndexes = [];
-  for (let i = 0; i < 3; i++) {
-    rendomIndexes.push(Math.floor(Math.random() * x));
-  }
+  for (let i = 0; rendomIndexes.length < 3; i++) {
+    const num = Math.floor(Math.random() * x);
 
+    if (!rendomIndexes.includes(num)) {
+      rendomIndexes.push(num);
+    }
+  }
   return rendomIndexes;
 }
