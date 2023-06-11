@@ -1,7 +1,6 @@
 import TMDBApiService from './tmdb-api';
 import getFilmCard from './film-card';
 import getFiveStar from './fivezerostar';
-//import getGenres from './get-genres';
 
 const myService = new TMDBApiService();
 const weeklyGallery = document.querySelector('.weekly-gallery');
@@ -19,7 +18,6 @@ function renderGalleryWeekly() {
     .fetchTrendingWeekMovies()
     .then(resp => {
       const movies = resp.data.results;
-      console.log(movies); //отримуємо першу сторінку трендов тижня (20шт)
 
       // отримуємо масив з 3х рендомних індексів
       const indexes = rendomMoviesIndex(movies.length - 1);
