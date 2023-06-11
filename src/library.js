@@ -1,3 +1,4 @@
+import './js/load-genres';
 import './js/totop';
 import './js/header';
 import './js/libhero';

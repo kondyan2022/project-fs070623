@@ -1,5 +1,5 @@
 import TMDBApiService from './tmdb-api';
-import axios from 'axios';
+
 import Swiper from 'swiper';
 
 const myApiService = new TMDBApiService();
@@ -8,7 +8,7 @@ const paretteContainer = document.querySelector('.swiper-wrapper');
 
 async function createMarkupFilms() {
   try {
-    const response = await axios.get('URL_API'); // 'URL_API' на фактичний URL API
+    const response = await myApiService.fetchTrendingDayMovies(); 
     const movies = response.data.results;
 
     const markup = movies.map(({ original_name, name, original_title, overview, backdrop_path, vote_average, id }) => {

@@ -1,0 +1,58 @@
+.film-card {
+  display: inline-block;
+  position: relative;
+}
+.film-card-poster {
+  width: 280px;
+  border-radius: 5px;
+  @media screen and (min-width: 768px) {
+    width: 224px;
+  }
+  @media screen and (min-width: 1280px) {
+    width: 395px;
+  }
+}
+
+.film-card-textblock {
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+  right: 100px;
+  @media screen and (min-width: 1280px) {
+    bottom: 20px;
+    left: 21px;
+  }
+}
+.film-card-title {
+  font-size: 12px;
+  font-weight: 500;
+
+  line-height: 1.67;
+  color: #fff;
+  @media screen and (min-width: 768px) {
+    line-height: 1.5;
+  }
+  @media screen and (min-width: 1280px) {
+    margin-bottom: 8px;
+    font-size: 20px;
+    line-height: 1.2;
+  }
+}
+
+.film-card-genre {
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.67;
+  @media screen and (min-width: 768px) {
+    line-height: 1.5;
+  }
+  @media screen and (min-width: 1280px) {
+    font-size: 20px;
+    line-height: 1.2;
+  }
+}
+.film-card-stars {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+}
