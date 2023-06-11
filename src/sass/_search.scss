@@ -1,19 +1,20 @@
-.cataloge-search {
-    background-color: black;
-}
+
+    
 .cataloge-search-form {
-    position: relative;
-    display: flex;
-    width: 280px;
-    height: 40px;
+   display: flex;
     flex-wrap: wrap;
+    width: 220px;
+    margin-bottom: 48px;
+
 }
 
 .cataloge-search-input {
     width: 315px;
     height: 48px;
-    border-radius: 8px;
-    border: 1px solid #595959;
+    margin-right: 12px;
+    padding-left:  24px;
+    padding-right: 30px;
+    
 }
 
 .cataloge-search-years {
@@ -21,8 +22,8 @@ padding-left: 15px;
 padding-right: 15px;
 width: 95px;
 height: 48px;
-border: 1px solid #595959;
-border-radius: 8px;
+margin-right: 20px;
+
 }
 
 .cataloge-btn-delete {
@@ -31,7 +32,13 @@ border-radius: 8px;
     height: 18px;
     position: absolute;
     border: none;
-    
+    left: 220px;
+    top: 11%;
+    transform: translateY(-50%);
+    background-color:  transparent;
+    font-size: medium;
+    font-weight:  500;
+    cursor: pointer;
 }
 
 .cataloge-btn-search{
@@ -45,6 +52,84 @@ border-radius: 8px;
     border-radius: 50%;
 }
 
-.tui-pagination {
+.warning {
+    display: none;
+}
+
+@media screen and (min-width: 320px) {
+    
+    .cataloge-search {
+        padding-top: 40px;
+        padding-bottom: 16px;
+        margin-bottom: 50px;   
+    }
+
+    .cataloge-search-form {
+        display: flex;
+        position: relative;
+        flex-wrap: wrap;
+        margin: auto;
+        width: 280px;
+        height: 40px;
+      }
+
+.form {
+display: block;
+font-family: 'Roboto';
+font-style: normal;
+font-weight: 500;
+font-size: 14px;
+line-height: 16px;
+color: #B7B7B7;
+box-sizing: border-box;
+border: 1px solid #595959;
+border-radius: 8px;
+    }
+
+    .cataloge-search-input {
+        width: 173px;
+        height: 40px;
+        margin-right: 12px;
+        padding: 24px;
+        padding-right: 30px;
+    }
+
+    .cataloge-search-years {
+       width:  95px; 
+       height:  40px;
+       padding-left:  16px;
+       padding-right: 15px;
+
+    }
+
+    .cataloge-btn-delete {
+        top: 50%;
+        transform: translateY(-50%);
+        left: 53%;
+
+    }
+
+    .cataloge-btn-search {
+        width: 40px;
+        height: 40px;
+    }
 
 }
+
+@media screen and (min-width: 768px) {
+    .cataloge-search-form {
+       
+        flex-wrap: nowrap;
+        margin: auto;
+        width: 548px;
+        height: 44px;
+      }
+}
+
+@media screen and (min-width: 1280px) {
+    .cataloge-search-form {
+      width: 795px;
+    height: 48px;
+      }
+}
+
