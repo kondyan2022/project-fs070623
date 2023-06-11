@@ -21,13 +21,15 @@ export default function getFilmCard(
     class="film-card-poster"
     film-id="${id}"
     loading="lazy"
+    width="500"
+    height="750"
   />
   <div class="film-card-textblock">
     <h3 class="film-card-title">${title}</h3>
     <p class="film-card-genre">${getGenres()
       .filter(({ id }) => genre_ids.includes(id))
       .map(({ name }) => name)
-      .slice(0, 2)
+      .slice(0, 1)
       .join(', ')} | ${release_date.slice(0, 4)}</p>
   </div>
   <div class="film-card-stars">${stars}</div>
