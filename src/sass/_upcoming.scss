@@ -1,0 +1,237 @@
+.upcoming {
+  padding-top: 32px;
+}
+
+.upcoming-title,
+.upcoming-data,
+.upcom-data-release,
+.upcoming-about {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: calc(19 / 16);
+  text-align: left;
+}
+
+.upcoming-title {
+  text-transform: uppercase;
+  color: var(--color-white);
+
+  margin-bottom: 24px;
+}
+
+.upcoming-movie-title {
+  font-weight: 500;
+  font-size: 20px;
+  line-height: calc(23 / 20);
+  color: var(--color-white);
+  text-transform: uppercase;
+  text-align: left;
+
+  margin-top: 18px;
+}
+
+.upcoming-table {
+  width: 260px;
+  height: 112px;
+  margin-top: 20px;
+}
+
+.upcoming-data {
+  color: var(--color-grey);
+
+  padding-top: 6px;
+  padding-bottom: 6px;
+}
+
+.upcom-data-release {
+  color: var(--color-orange);
+}
+
+.upcoming-data-get {
+  color: var(--color-white);
+}
+
+.upcoming-data-average {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: calc(16 / 14);
+  color: var(--color-grey);
+}
+
+.up-count,
+.up-average {
+  color: var(--color-background);
+  border: 1px solid transparent;
+  background: var(--color-white);
+  border-radius: 5px;
+
+  padding: 1px 4px;
+}
+.up-count {
+  margin-left: 9px;
+}
+.up-average {
+  margin-right: 9px;
+}
+
+.upcoming-about {
+  color: var(--color-grey);
+  text-transform: uppercase;
+
+  margin-top: 20px;
+}
+
+.upcoming-about-descr {
+  font-size: 14px;
+  line-height: calc(20 / 14);
+  color: var(--color-secondary-text);
+
+  margin-top: 16px;
+}
+
+.up-btn {
+  margin-top: 20px;
+}
+.up-thumb {
+  max-width: 280px;
+  height: 402px;
+  border: 0.1px solid transparent;
+  border-radius: 5px;
+  overflow: hidden;
+}
+.upcoming-image {
+  display: block;
+  max-width: 100%;
+  height: 100%;
+}
+
+// @media screen and (min-width: 320px) {
+// }
+
+// =================== styles for tablet ==================================
+@media (max-width: 767px) {
+  .up-thumb {
+    max-width: 280px;
+    height: 402px;
+  }
+  .upcoming-image {
+    display: block;
+    min-width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .upcoming {
+    padding-top: 44px;
+  }
+  .upcoming-title {
+    font-size: 24px;
+    line-height: calc(28 / 24);
+  }
+  .up-thumb {
+    max-width: 704px;
+    height: 400px;
+  }
+  .upcoming-movie-title {
+    font-style: 28px;
+    line-height: calc(33 / 28);
+
+    margin-top: 32px;
+  }
+  .upcoming-table {
+    width: 625px;
+    height: 67px;
+    margin-top: 24px;
+  }
+  .upcoming-tab-row {
+    max-width: 50%;
+    width: 312px;
+    float: left;
+  }
+  @media screen and (max-width: 1279px) {
+    .upcoming-data {
+      padding-right: 30px;
+    }
+    .upcom-data-release {
+      padding-left: 42px;
+    }
+    .upcoming-data-average {
+      padding-left: 14px;
+    }
+    .upcoming-data-get {
+      padding-left: 62px;
+    }
+    .upcoming-about-descr {
+      max-width: 625px;
+    }
+  }
+}
+
+// =================== styles for desktop ==================================
+
+@media screen and (min-width: 1280px) {
+  .upcoming {
+    padding-top: 60px;
+  }
+  .upcoming-wrapper {
+    display: flex;
+    // max-width: 805px;
+    // height: 458px;
+  }
+  .upcoming-left-wrap {
+    margin-right: 16px;
+  }
+  .upcoming-right-wrap {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; //??????????????????????
+  }
+  .upcoming-title {
+    font-size: 28px;
+    line-height: calc(33 / 28);
+
+    margin-bottom: 28px;
+  }
+  .upcoming-movie-title {
+    font-size: 32px;
+    line-height: calc(38 / 32);
+
+    margin-top: 0px;
+  }
+  .up-thumb {
+    width: 805px;
+    height: 458px;
+  }
+  // .upcoming-image {
+  //   // object-fit: ;
+  // }
+  .upcoming-table {
+    margin-top: 28px;
+    width: 360px;
+    height: 112px;
+  }
+  .upcoming-tab-row {
+    max-width: 100%;
+    float: none;
+  }
+  .up-btn {
+    // margin-top: auto;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: calc(16 / 14);
+    text-align: center;
+
+    width: 155px;
+    padding: 12px 22px;
+    color: var(--color-background);
+    background-color: linear-gradient(
+      to bottom,
+      #ffc226ff 0%,
+      #f84119f8 100%
+    ); //TODOOOO
+    border-radius: 74px;
+    border-color: transparent;
+  }
+}
