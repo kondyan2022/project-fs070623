@@ -52,7 +52,7 @@ function showContent() {
         renderMovieInCards();
     } else {
         selectWrapper.style.visibility = 'hidden';
-        wrapperForMessage.innerHTML = '<p class="lib-error">OOPS... We are very sorry! You dont have any movies at your library.</p > ';
+        wrapperForMessage.innerHTML = '<p class="lib-error">OOPS... We are very sorry! You dont have any movies at your library.</p >  <a href="./catalog.html" class="lib-btn-search-movie">Search movie</a>';
     }
 }
 
