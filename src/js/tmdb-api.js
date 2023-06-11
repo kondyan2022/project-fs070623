@@ -93,7 +93,7 @@ export default class TMDBApiService {
 // HOW TO USE
 // const myService = new TMDBApiService(key);
 // console.log(myService);
-
+//
 // myService
 //   .fetchGenres()
 //   .then((resp) => console.log("Genres", resp))
@@ -102,10 +102,12 @@ export default class TMDBApiService {
 //   .fetchTrendingDayMovies()
 //   .then((resp) => console.log("Day", resp))
 //   .catch((e) => console.error(e));
+
 // myService
 //   .fetchTrendingWeekMovies()
 //   .then((resp) => console.log("Week", resp))
 //   .catch((e) => console.error(e));
+
 // myService
 //   .fetchMovieById(569094)
 //   .then((resp) => console.log("MoveId", resp))

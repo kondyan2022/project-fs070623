@@ -1,5 +1,8 @@
 @import './common';
 
+.film-card:not(:first-child){
+   display: none;
+}
 
 @media screen and (min-width: 320px){
 
@@ -21,27 +24,46 @@ text-transform: uppercase;
    .weekly-wrap{
       display: flex;
       justify-content: space-between;
+      margin-bottom: 24px;
    }
+
+   
 
 }
 
 @media screen and (min-width: 768px){
+
    .weekly-title{
       font-size: 24px;
 line-height: 1.17;
    }
 
    .weekly-link{
-     
       font-size: 24px;
       line-height: 1.17;
+   }
 
+   .weekly-list{
+      display: flex;
+   }
+
+   .film-card:not(:first-child){
+      display: block;
+   }
+
+   .weekly-gallery{
+      display: flex;
+      gap: 16px;
    }
 
 
 }
 
 @media screen and (min-width: 1280px){
+
+   .weekly-wrap{
+      margin-bottom: 28px;
+   }
 
    .weekly-title{
       font-size: 28px;
