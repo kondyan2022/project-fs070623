@@ -19,7 +19,7 @@ export default function getFilmCard(
     src="https://image.tmdb.org/t/p/w342/${poster_path}"
     alt="${title}"
     class="film-card-poster"
-    film-id="${id}
+    film-id="${id}"
     loading="lazy"
   />
   <div class="film-card-textblock">

@@ -3,18 +3,13 @@ import getFilmCard from './film-card';
 //import getGenres from './get-genres';
 
 const myService = new TMDBApiService();
-
 const weeklyGallery = document.querySelector('.weekly-gallery');
 
 weeklyGallery.addEventListener('click', hendlerOpenModalWindow);
 
 function hendlerOpenModalWindow(evt) {
-  console.log(evt.currentTarget);
+  console.log(evt.target.getAttribute('film-id'), 'Це id фільму');
 }
-
-// weeklyList.innerHTML = results
-//   .map(a => getFilmCard(a, x => String(Math.round(x * 2) / 2)))
-//   .join('');
 
 renderGalleryWeekly();
 
