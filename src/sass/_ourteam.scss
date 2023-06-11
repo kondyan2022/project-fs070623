@@ -1,16 +1,34 @@
+.backdrop-team-modal {
+  visibility: visible;
+    opacity: 1;
+    position: fixed;
+    z-index: 1001;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(46, 47, 66, 0.4);
+}
+
+.backdrop-team-modal.is-hidden {
+  visibility: hidden;
+  opacity: 0;
+}
+
 .team-modal {
   display: block;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 1200px;
-  height: 800px;
+  width: 300px;
+  height: 500px;
+  overflow: auto;
 
-  padding: 40px 20px 20px 20px;
+  padding: 40px 20px 40px 20px;
   text-align: center;
-  color: #000000;
-  background-color: #000000;
+  color: var(--color-background);
+  background-color: var(--color-background);
   border-radius: 5%;
   box-shadow: 0 0 15px 2px orangered;
 
@@ -29,12 +47,14 @@
   }
 
   &-item {
-    width: 200px;
-    height: 300px;
+    width: 176px;
+    min-height: 0px;
+    height: auto;
     padding-top: 10px;
+    padding-bottom: 10px;
 
-    background-color: #ffffff;
-    border-radius: 3%;
+    background-color: var(--color-white);
+    border-radius: 5%;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 
     &-img {
@@ -44,9 +64,8 @@
       width: 150px;
       height: 150px;
 
-      border: 2тзpx solid #000000;
+      border: 2px solid #000000;
       border-radius: 50%;
-      background-color: aqua;
       box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     }
 
@@ -62,7 +81,7 @@
   &-soc-list {
     display: flex;
     justify-content: center;
-    gap: 20px;
+    gap: 30px;
   }
 
   &-soc-link {
@@ -74,5 +93,47 @@
     height: 100%;
   }
 
+  &-soc-icon {
+    transition: transform 0.25s;
 
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+
+  &-close-btn {
+    position: absolute;
+    padding: 0;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    background-color: transparent;
+    width: 25px;
+    height: 25px;
+    right: 10px;
+    top: 10px;
+
+    &-icon {
+      stroke: var(--color-white);
+    }
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .team-modal {
+    width: 700px;
+
+    &-close-btn {
+      right: 40px;
+      top: 40px;
+    }
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .team-modal {
+    width: 1000px;
+    height: auto;
+  }
 }

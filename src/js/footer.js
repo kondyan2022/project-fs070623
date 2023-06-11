@@ -1,11 +1,12 @@
 const refs = {
-  openModal: document.querySelector('#open-team-modal')
+  teamModal: document.querySelector('.backdrop-team-modal'),
+  openTeamModal: document.querySelector('#open-team-modal')
 }
 
-refs.openModal.addEventListener('click', onOpenModalClick);
+refs.openTeamModal.addEventListener('click', onOpenModalClick);
 
 function onOpenModalClick(e) {
   e.preventDefault()
 
-  console.log('hello');
+  refs.teamModal.classList.toggle('is-hidden');
 }
