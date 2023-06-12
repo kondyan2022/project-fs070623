@@ -242,15 +242,15 @@
 
 // ----------------ligth theme---------------------------------\
 
-// .up-btn .js-ligth-theme {
-//   background-color: var(--color-background);
-// }
+.up-btn .js-ligth-theme {
+  background-color: var(--color-background);
+}
 
-// .js-ligth-theme {
-//   .upcoming-title,
-//   .upcoming-data,
-//   .upcom-data-release,
-//   .upcoming-about {
-//     color: var(--color-grey-white-theme);
-//   }
-// }
+.js-ligth-theme {
+  .upcoming-title,
+  .upcoming-data,
+  .upcom-data-release,
+  .upcoming-about {
+    color: var(--color-grey-white-theme);
+  }
+}
