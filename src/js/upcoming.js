@@ -62,18 +62,18 @@ function creatMarkup(movie) {
     return `
     <div class="upcoming-left-wrap">
         <div class="up-thumb">
-            <img 
+            <img
                 srcset="
-                    https:/image.tmdb.org/t/p/w342/${movie.poster_path} 342w,
-                    https:/image.tmdb.org/t/p/w500/${movie.backdrop_path} 500w,
-                    https:/image.tmdb.org/t/p/w780/${movie.backdrop_path} 780w,
+                    https:/image.tmdb.org/t/p/w342/${movie.backdrop_path}      342w,
+                    https:/image.tmdb.org/t/p/w500/${movie.backdrop_path}      500w,
+                    https:/image.tmdb.org/t/p/w780/${movie.backdrop_path}      780w,
                     https:/image.tmdb.org/t/p/original/${movie.backdrop_path} 2000w
                 "
-                sizes="(min-width: 320px),
-                    (min-width: 768px),
-                    (min-width: 1280px),
-                "
-                src="https:/image.tmdb.org/t/p/original/${movie.backdrop_path}" 
+                sizes="(min-width: 320px) 280px,
+                        (min-width: 768px) 704px,
+                        (min-width: 1280px) 805px,
+                        "
+                src="https:/image.tmdb.org/t/p/original/${movie.backdrop_path}"
                 alt="${movie.title}"
                 class="upcoming-image"
             />
