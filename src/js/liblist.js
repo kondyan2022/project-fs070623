@@ -1,7 +1,7 @@
 import getGenres from "./get-genres";
 import getFilmCard from './film-card';
-// import SlimSelect from 'slim-select';
-// import "slim-select/dist/slimselect.css";
+import SlimSelect from 'slim-select';
+import "slim-select/dist/slimselect.css";
 import { getLibraryList } from './local-storage';
 import getFiveStar from './fivezerostar.js';
 import '../sass/_fivestar.scss';
@@ -10,7 +10,6 @@ const refs = {
     listCards: document.querySelector('.js-liblist'),
     selectWrapper: document.querySelector('#library-filter'),
     wrapperForMessage: document.querySelector('.js-lib-content-wrap'),
-    option: document.querySelector('.js-lib-select'),
     btnLoadMore: document.querySelector('.js-load-more')
 }
 
@@ -19,6 +18,11 @@ const getMovies = getLibraryList(); //list from local storage
 
 const perPageMovies = 9; //quantity of cards shown
 let gotMovies = 9; //getMovies.length;
+
+// //  * adds handler on the select
+// refs.selectWrapper.addEventListener('change', onSelect);
+
+
 
 /**-----------------------------------------------------------------------
  * function by create markup for function renderMarkUpInSelect()
@@ -39,12 +43,6 @@ function renderMarkupInSelect() {
         createMarkupInSelect(genre)).join('');
     // refs.selectWrapper.innerHTML = gotGenre;
     refs.selectWrapper.insertAdjacentHTML('beforeend', gotGenre)
-    // window.addEventListener('DOMContentLoader', () => {
-    //     new SlimSelect({
-    //         select: refs.selectWrapper,
-    //         data: '.js-lib-wrap-select'
-    //     })
-    // })
 }
 
 /**-----------------------------------------------------------------------
@@ -63,15 +61,34 @@ function renderMovieInCards(list) {
 function showContent() {
     if (getMovies.length > 0) {
         renderMarkupInSelect();
-        const startMovies = getMovies.slice(0, perPageMovies);
-        renderMovieInCards(startMovies);
 
-        if (getMovies.length <= perPageMovies) {
-            refs.btnLoadMore.style.display = 'none';
-        } else {
-            refs.btnLoadMore.style.display = 'block';
-            gotMovies = perPageMovies;
-        }
+
+        renderMovieInCards(getMovies);//???
+
+        //use older pagination
+
+        // const startMovies = getMovies.slice(0, perPageMovies);
+        // renderMovieInCards(startMovies);
+
+        // if (getMovies.length <= perPageMovies) {
+        //     refs.btnLoadMore.style.display = 'none';
+        // } else {
+        //     refs.btnLoadMore.style.display = 'block';
+        //     // gotMovies = perPageMovies;
+        // }
+
+        //----------test use pagination----------
+        // const { markupPage, isMore } = paginationSavedCards(getMovies, perPageMovies);
+        // // refs.listCards.innerHtml = markupPage;
+
+        // renderMovieInCards(markupPage)
+
+        // if (isMore) {
+        //     refs.btnLoadMore.style.display = 'block';
+        // } else {
+        //     refs.btnLoadMore.style.display = 'none';
+        // }
+        //---------------------------------------
     } else {
         refs.selectWrapper.style.visibility = 'hidden';
         refs.wrapperForMessage.innerHTML = '<p class="lib-error">OOPS... We are very sorry! You dont have any movies at your library.</p >  <a href="./catalog.html" class="lib-btn-search-movie">Search movie</a>';
@@ -79,74 +96,116 @@ function showContent() {
     }
 }
 
-// calling a function
-showContent();
-
 /**-----------------------------------------------------------------------
  * adds handler on the select
  */
-refs.selectWrapper.addEventListener('change', () => {
+// refs.selectWrapper.addEventListener('change', onSelect);
+
+function onSelect() {
     const selectedGenre = Number(refs.selectWrapper.value);
 
     const filteredGotMovies = getMovies.filter(({ genre_ids }) =>
         genre_ids.includes(selectedGenre)
     )
-    let optionValue = refs.option.value;
+    const optionValue = refs.selectWrapper.value;
     console.log(optionValue)
 
-    // if (optionValue !== "all") {
-    //     renderMovieInCards(filteredGotMovies);
-    // } else if (optionValue === "all") {
-    //     renderMovieInCards(getMovies);
-    // } else {
-    //     console.log('');
-    // }
-
-    // if (optionValue === "all") {
-    //     renderMovieInCards(getMovies);
-    // } else {
-    //     renderMovieInCards(filteredGotMovies);
-    // }
-
-    // if (filteredGotMovies.length < 0) {
-    //     showMessage();
-    // }
-    if (filteredGotMovies.length < 0 && getMovies.length < 0) {
-        showMessage();
-    } else if (optionValue === "all") {
+    if (optionValue === "all") {
         renderMovieInCards(getMovies);
-    } else {
+    } else if (filteredGotMovies.length > 0) {
         renderMovieInCards(filteredGotMovies);
+    } else {
+        showMessage();
     }
-})
+}
+
+// calling a function
+showContent();
 
 /**-----------------------------------------------------------------------
  * function to show the message and button 'Search movie'
  */
 function showMessage() {
     // refs.listCards.innerHTML = '';
-    refs.selectWrapper.style.visibility = 'hidden';
+    // refs.selectWrapper.style.visibility = 'hidden';
     const messageMarkup = '<p class="lib-error">No movies in the selected genre!</p> <a href="./catalog.html" class="lib-btn-search-movie">Search movie</a>';
     refs.wrapperForMessage.innerHTML = messageMarkup;
     refs.btnLoadMore.style.display = 'none';
 }
 
 //---------------------load more------------------------------------------
+// refs.btnLoadMore.addEventListener('click', onLoadMore);
 
-refs.btnLoadMore.addEventListener('click', () => {
-    const nextMovies = getMovies.slice(gotMovies, gotMovies + perPageMovies);
-    console.log(nextMovies);
-    renderNextLoadCard(nextMovies);
-    gotMovies += perPageMovies;
+//     () => {
+//     const nextMovies = getMovies.slice(gotMovies, gotMovies + perPageMovies);
+//     // console.log(nextMovies);
+//     renderNextLoadCard(nextMovies);
+//     gotMovies += perPageMovies;
 
-    if (gotMovies >= getMovies.length) {
-        refs.btnLoadMore.style.display = 'none';
+//     if (gotMovies >= getMovies.length) {
+//         refs.btnLoadMore.style.display = 'none';
+//     }
+// })
+// function renderNextLoadCard(arr) {
+//     const loadNext = arr
+//         .map(film => getFilmCard(film, getFiveStar))
+//         .join('');
+//     refs.listCards.insertAdjacentHTML('beforeend', loadNext);
+// }
+//------------------------------------------------------------------------
+
+// library slim-select
+
+let select = new SlimSelect({
+    select: refs.selectWrapper,
+    events: {
+        afterChange: () => {
+            onSelect()
+        },
+        // beforeOpen: () => {
+        //     console.log('before open')
+        // },
+        // afterOpen: () => {
+        //     console.log('after open')
+        // },
+        // beforeClose: () => {
+        //     console.log('before close')
+        // },
+        // afterClose: () => {
+        //     console.log('after close')
+        // },
     }
 })
-function renderNextLoadCard(arr) {
-    const loadNext = arr
-        .map(film => getFilmCard(film, getFiveStar))
-        .join('');
-    refs.listCards.insertAdjacentHTML('beforeend', loadNext);
+
+
+//---------------------PAGINATION-------------------------------------
+
+refs.btnLoadMore.addEventListener('click', onLoadMore);
+
+function onLoadMore() {
+    const { markupPage, isMore } = paginationSavedCards(getMovies, perPageMovies);
+    // refs.listCards.innerHtml = markupPage;
+
+    renderMovieInCards(markupPage)
+
+    if (isMore) {
+        refs.btnLoadMore.style.display = 'block';
+    } else {
+        refs.btnLoadMore.style.display = 'none';
+    }
 }
-//------------------------------------------------------------------------
+
+function paginationSavedCards(array, quantityCard) {
+
+    const sliceMovies = gotMovies + quantityCard;
+    const shownMovies = array.slice(gotMovies, sliceMovies);
+
+    const isMore = array.length > sliceMovies; //false ar true
+
+    return {
+        markupPage: shownMovies
+            .map(film => getFilmCard(film, getFiveStar))
+            .join(''),
+        hasMore: isMore
+    }
+}
