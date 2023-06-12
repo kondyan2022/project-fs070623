@@ -16,6 +16,7 @@ function setTheme(theme) {
   } else {
     refs.body.classList.remove('js-light-theme');
     refs.checkbox.checked = false;
+    refs.slider.style.transition = '';
   }
 }
 
