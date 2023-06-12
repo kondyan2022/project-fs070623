@@ -65,14 +65,32 @@ const modalController = ({ modal, btnOpen, btnClose, time = 300 }) => {
   function getListMovie(id) {
     myService
       .fetchMovieVideoById(id)
-      .then(resp => console.log('это мое', resp))
+      .then(resp => {
+        if (resp) {
+          // Если трейлер найден, показываем плеер
+          console.log('это мое', resp);
+        } else {
+          // Если трейлер не найден, показываем сообщение об ошибке
+          const errorModalElem = document.createElement('div');
+          errorModalElem.classList.add('modal__error');
+          errorModalElem.innerHTML = `
+          <p>
+            OOPS... <br />
+            We are very sorry! <br />
+            But we couldn’t find the trailer.
+          </p>
+          <img src="../images/oops.jpg" alt="error" />
+        `;
+          modalElem.appendChild(errorModalElem);
+        }
+      })
       .catch(e => console.log(e));
   }
 
   function createPlayer() {
     player = new window.YT.Player('youtube-player', {
       width: '600', // Укажите требуемую ширину
-      height: '400', // Укажите требуемую высоту
+      height: '350', // Укажите требуемую высоту
       videoId: 'rdyoLs85dO0', // Идентификатор воспроизведения
       playerVars: {
         autoplay: 0,

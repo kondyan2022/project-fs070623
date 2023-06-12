@@ -37,17 +37,20 @@
   cursor: pointer;
   padding: 30px;
   overflow-y: auto;
-  display: flex;
+  display: none;
 }
 
 .modal__main {
   position: relative;
-  max-width: 700px;
-  background-color: #111111;
+
+  background-color: #fff;
   margin: auto;
   color: #000;
   border-radius: 16px;
-  padding: 30px 60px 60px 30px;
+
+  width: 700px;
+  height: 400px;
+
   cursor: default;
   .js-light-theme {
     background-color: #fff;
@@ -85,16 +88,14 @@
   font-size: 22px;
   position: absolute;
   top: 10px;
-  right: 10px;
+  right: 20px;
   outline: 1px solid transparent;
   outline-offset: 3px;
   transition: outline-color 0.15s ease-in-out;
-  border-radius: 3px;
+  fill: black;
   padding: 0;
   text-align: center;
   display: block;
-  width: 30px;
-  height: 30px;
 }
 
 .modal__close:focus-visible {
