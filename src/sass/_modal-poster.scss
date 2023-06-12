@@ -1,0 +1,47 @@
+//  ------------------------------------------------ BACKDROP ------------------------------------------------------
+
+.is-hidden {
+  display: none;
+}
+
+.backdrop {
+  position: fixed;
+  background-color: rgba(24, 23, 23, 0.767);
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  opacity: 1;
+  z-index: 1;
+  overflow: auto;
+
+  &.is-hidden {
+    transition: opacity 1000ms linear, visibility 300ms linear;
+  }
+}
+
+
+
+
+
+
+
+
+// ------------------------------------------------ BUTTONS -------------------------------------------------------
+
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 30px;
+    height: 30px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #fff;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  
