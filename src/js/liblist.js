@@ -1,8 +1,10 @@
 import getGenres from "./get-genres";
 import getFilmCard from './film-card';
-import SlimSelect from 'slim-select';
-import "slim-select/dist/slimselect.css";
+// import SlimSelect from 'slim-select';
+// import "slim-select/dist/slimselect.css";
 import { getLibraryList } from './local-storage';
+import getFiveStar from './fivezerostar.js';
+import '../sass/_fivestar.scss';
 
 const refs = {
     listCards: document.querySelector('.js-liblist'),
@@ -50,8 +52,11 @@ function renderMarkupInSelect() {
  * @param {*array} list 
  */
 function renderMovieInCards(list) {
+    // refs.listCards.innerHTML = list
+    //     .map(film => { getFilmCard(film, x => String(Math.round(x * 2) / 2)) })
+    //     .join('');
     refs.listCards.innerHTML = list
-        .map(film => getFilmCard(film, x => String(Math.round(x * 2) / 2)))
+        .map(film => getFilmCard(film, getFiveStar))
         .join('');
 }
 
@@ -115,10 +120,13 @@ refs.selectWrapper.addEventListener('change', () => {
         renderMovieInCards(filteredGotMovies);
     }
 
+    // if (filteredGotMovies.length < 0) {
+    //     showMessage();
+    // }
 
     if (filteredGotMovies.length > 0) {
         filteredGotMovies.map(movie => {
-            const movieCard = getFilmCard(movie, stars);
+            const movieCard = getFilmCard(); //getFilmCard(movie, stars);
             refs.listCards.appendChild(movieCard);
         })
     } else {
@@ -152,7 +160,7 @@ refs.btnLoadMore.addEventListener('click', () => {
 
 function renderNextLoadCard(arr) {
     const loadNext = arr
-        .map(film => getFilmCard(film, x => String(Math.round(x * 2) / 2)))
+        .map(film => getFilmCard(film, getFiveStar))
         .join('');
     refs.listCards.insertAdjacentHTML('beforeend', loadNext);
 }
