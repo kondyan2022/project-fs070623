@@ -1,4 +1,6 @@
 import getGenres from './get-genres';
+import '../sass/_film-card.scss';
+import '../sass/_fivestar.scss';
 export default function getFilmCard(
   { id, title, poster_path, genre_ids, release_date, vote_average },
   getStatrs

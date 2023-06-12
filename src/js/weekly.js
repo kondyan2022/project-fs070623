@@ -1,5 +1,6 @@
 import TMDBApiService from './tmdb-api';
 import getFilmCard from './film-card';
+import getFiveStar from './fivezerostar';
 //import getGenres from './get-genres';
 
 const myService = new TMDBApiService();
@@ -31,9 +32,7 @@ function renderGalleryWeekly() {
       });
 
       function createMarkup(arr) {
-        return weeklyMovies
-          .map(a => getFilmCard(a, x => String(Math.round(x * 2) / 2)))
-          .join('');
+        return weeklyMovies.map(a => getFilmCard(a, getFiveStar)).join('');
       }
 
       weeklyGallery.innerHTML = createMarkup(weeklyMovies);
