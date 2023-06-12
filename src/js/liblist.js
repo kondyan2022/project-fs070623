@@ -62,7 +62,7 @@ function renderMovieInCards(list) {
 function showContent() {
   if (getMovies.length > 0) {
     renderMarkupInSelect();
-    currentCard = getMovies.length > 9 ? 9 : getMovies.length;
+
     renderMovieInCards(getMovies); //???
 
     //use older pagination
@@ -121,7 +121,7 @@ function onSelect() {
 }
 
 // calling a function
-showContent();
+// showContent();
 
 /**-----------------------------------------------------------------------
  * function to show the message and button 'Search movie'
@@ -209,8 +209,8 @@ function onLoadMore() {
 
 function paginationSavedCards(array, firstPosition, quantityCard) {
   const sliceMovies = firstPosition + quantityCard;
-  const shownMovies = array.slice(firstPosition, sliceMovies);
-
+  const shownMovies = array.slice(firstPosition, quantityCard);
+  currentCard = firstPosition + array.length;
   const isMore = array.length > sliceMovies; //false ar true
   console.log(sliceMovies, array.length);
   return {
@@ -236,11 +236,15 @@ function onNewSelect(genreId) {
   refs.listCards.innerHTML = '';
   if (String(genreId[0].value) === 'all') {
     arrayFilter = [];
-    createPaginationMarkUp(getMovies, 0);
+    console.log('all ok');
+    createPaginationMarkUp(getMovies, currentCard);
   } else {
     arrayFilter = getMovies.filter(({ genre_ids }) =>
       genre_ids.includes(Number(genreId[0].value))
     );
-    createPaginationMarkUp(arrayFilter, 0);
+    createPaginationMarkUp(arrayFilter, currentCard);
   }
 }
+
+currentCard = getMovies.length > 9 ? 9 : getMovies.length;
+onNewSelect([{ value: 'all' }]);
