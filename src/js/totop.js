@@ -15,4 +15,14 @@ let observer = new IntersectionObserver((entieres, observer) => {
     }
   });
 }, options);
-observer.observe(refs.switch);
+
+export function totopOn() {
+  observer.observe(refs.switch);
+}
+
+export function totopOff() {
+  observer.unobserve(refs.switch);
+  refs.totop.style.display = 'none';
+}
+
+totopOn();
