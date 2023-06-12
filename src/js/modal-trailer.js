@@ -1,3 +1,5 @@
+import TMDBApiService from './tmdb-api.js';
+
 const modalController = ({ modal, btnOpen, btnClose, time = 300 }) => {
   const buttonElems = document.querySelectorAll(btnOpen);
   const modalElem = document.querySelector(modal);
@@ -32,6 +34,7 @@ const modalController = ({ modal, btnOpen, btnClose, time = 300 }) => {
   };
 
   const openModal = () => {
+    getListMovie(569094);
     modalElem.style.visibility = 'visible';
     modalElem.style.opacity = 1;
     window.addEventListener('keydown', closeModal);
@@ -47,6 +50,8 @@ const modalController = ({ modal, btnOpen, btnClose, time = 300 }) => {
 
   modalElem.addEventListener('click', closeModal);
 
+  const myService = new TMDBApiService();
+
   // Загрузка API YouTube Player и создание плеера
   function loadYoutubePlayerAPI() {
     const tag = document.createElement('script');
@@ -57,11 +62,18 @@ const modalController = ({ modal, btnOpen, btnClose, time = 300 }) => {
     window.onYouTubeIframeAPIReady = createPlayer;
   }
 
+  function getListMovie(id) {
+    myService
+      .fetchMovieVideoById(id)
+      .then(resp => console.log('это мое', resp))
+      .catch(e => console.log(e));
+  }
+
   function createPlayer() {
     player = new window.YT.Player('youtube-player', {
       width: '600', // Укажите требуемую ширину
       height: '400', // Укажите требуемую высоту
-      videoId: 'F9jPMnT1ahw', // Идентификатор воспроизведения
+      videoId: 'rdyoLs85dO0', // Идентификатор воспроизведения
       playerVars: {
         autoplay: 0,
         controls: 1,
