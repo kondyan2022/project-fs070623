@@ -50,13 +50,9 @@ function renderMarkupInSelect() {
  * @param {*array} list 
  */
 function renderMovieInCards(list) {
-    // refs.listCards.innerHTML = list
-    //     .map(film => getFilmCard(film, x => String(Math.round(x * 2) / 2)))
-    //     .join('');
-    const load = list
+    refs.listCards.innerHTML = list
         .map(film => getFilmCard(film, x => String(Math.round(x * 2) / 2)))
         .join('');
-    refs.listCards.insertAdjacentHTML('beforeend', load)
 }
 
 /**-----------------------------------------------------------------------
@@ -95,7 +91,7 @@ function showContent() {
 showContent();
 
 /**-----------------------------------------------------------------------
- * adds handler to the select
+ * adds handler on the select
  */
 refs.selectWrapper.addEventListener('change', () => {
     const selectedGenre = Number(refs.selectWrapper.value);
@@ -141,14 +137,22 @@ function showMessage() {
     refs.btnLoadMore.style.display = 'none';
 }
 
-//---------------------load more----------------------
+//---------------------load more------------------------------------------
+
 refs.btnLoadMore.addEventListener('click', () => {
-    const nextMovies = getMovies.slice(gotMovies + 1, gotMovies + perPageMovies); //13, 13+9
+    const nextMovies = getMovies.slice(gotMovies, gotMovies + perPageMovies); //13, 13+9
     console.log(nextMovies);
-    renderMovieInCards(nextMovies);
+    renderNextLoadCard(nextMovies);
     gotMovies += perPageMovies;
 
     if (gotMovies >= getMovies.length) {
         refs.btnLoadMore.style.display = 'none';
     }
 })
+
+function renderNextLoadCard(arr) {
+    const loadNext = arr
+        .map(film => getFilmCard(film, x => String(Math.round(x * 2) / 2)))
+        .join('');
+    refs.listCards.insertAdjacentHTML('beforeend', loadNext);
+}
