@@ -11,7 +11,7 @@ import 'tui-pagination/dist/tui-pagination.css';
 
 const ref = {
     form: document.querySelector('.cataloge-search-form'),
-    input: document.querySelector('.cataloge-search-input'),
+    input: document.querySelector('.cataloge-searcnpmh-input'),
     selectYear: document.getElementById('selectYear'),
     deleteBtnInput: document.querySelector('.cataloge-btn-delete'),
     searchBtn: document.getElementById('searchBtn'),
