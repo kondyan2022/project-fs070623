@@ -102,12 +102,8 @@
 
 .js-light-theme {
   background-color: var(--color-white);
-  color: var(--color-secondary-black);
 }
 
-.js-light-theme-text {
-  color: var(--color-grey-white-theme);
-}
 .header-container {
   height: 48px;
   padding-top: 8px;
@@ -124,6 +120,12 @@
   font-weight: 500;
 }
 
+.js-light-theme {
+  .header-nav-list {
+    color: var(--color-grey-white-theme);
+  }
+}
+
 .header-nav-list,
 .logo-title {
   display: none;
@@ -135,6 +137,11 @@
   line-height: 1.16;
   text-transform: uppercase;
   cursor: pointer;
+}
+.js-light-theme {
+  .header-mobile-open-menu {
+    color: var(--color-grey-white-theme);
+  }
 }
 
 .mobile-menu-backdrop {
@@ -156,6 +163,13 @@
   transition: opacity 250ms cubic-bezier(0.25, 0.8, 0.25, 1),
     visibility 250ms cubic-bezier(0.25, 0.8, 0.25, 1);
 }
+
+.js-light-theme {
+  .mobile-menu-backdrop {
+    background-color: rgba(0, 0, 0, 0.2);
+  }
+}
+
 .mobile-menu-backdrop.is-open {
   opacity: 1;
   visibility: visible;
@@ -180,6 +194,12 @@
   transition: transform 250ms cubic-bezier(0.25, 0.8, 0.25, 1) 250ms;
 }
 
+.js-light-theme {
+  .mobile-menu {
+    background-color: var(--color-secondary-text);
+  }
+}
+
 .mobile-menu-backdrop.is-open .mobile-menu {
   transform: translateX(0);
 }
@@ -195,6 +215,12 @@
   font-size: 14px;
   line-height: 1.14;
   text-transform: uppercase;
+}
+
+.js-light-theme {
+  .mobile-menu-list {
+    color: var(--color-background);
+  }
 }
 
 .current {
@@ -235,10 +261,24 @@
 
     text-transform: uppercase;
   }
+  .header-nav-list-item {
+    transition: transform 250ms cubic-bezier(0.25, 0.8, 0.25, 1);
+  }
+
+  .header-nav-list-item:hover,
+  .header-nav-list-item:focus {
+    transform: scale(1.1);
+  }
   .header-mobile-logo {
     display: flex;
     align-items: center;
     gap: 8px;
+  }
+
+  .js-light-theme {
+    .logo-title {
+      color: var(--color-secondary-black);
+    }
   }
   .logo-title {
     display: block;
@@ -247,10 +287,6 @@
     line-height: 1.16;
 
     color: var(--color-white);
-  }
-
-  .js-light-theme-logo {
-    color: var(--color-secondary-black);
   }
 }
 
