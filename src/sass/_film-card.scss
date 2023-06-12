@@ -67,13 +67,23 @@
 }
 .film-card-stars {
   position: absolute;
-  bottom: 12px;
+  bottom: 16px;
   right: 12px;
 
   display: flex;
   flex-wrap: nowrap;
   gap: 4px;
+  @media screen and (min-width: 768px) {
+    bottom: 20px;
+    right: 20px;
+  }
+
   z-index: 11;
+  @media screen and (min-width: 1280px) {
+    bottom: 24px;
+    right: 20px;
+  }
+
   .star,
   .star-half,
   .star-outline {
