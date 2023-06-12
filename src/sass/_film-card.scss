@@ -1,10 +1,12 @@
 .film-card {
   display: inline-block;
   position: relative;
+  border-radius: 5px;
 }
 .film-card-poster {
   width: 280px;
   border-radius: 5px;
+  z-index: 5;
   @media screen and (min-width: 768px) {
     width: 224px;
   }
@@ -12,12 +14,22 @@
     width: 395px;
   }
 }
+.film-card-cover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--color-linear-two);
+  z-index: 10;
+}
 
 .film-card-textblock {
   position: absolute;
   bottom: 12px;
   left: 12px;
   right: 100px;
+  z-index: 11;
   @media screen and (min-width: 1280px) {
     bottom: 20px;
     left: 21px;
@@ -28,6 +40,7 @@
   font-weight: 500;
 
   line-height: 1.67;
+
   color: #fff;
   @media screen and (min-width: 768px) {
     line-height: 1.5;
@@ -43,6 +56,7 @@
   font-size: 12px;
   font-weight: 500;
   line-height: 1.67;
+
   @media screen and (min-width: 768px) {
     line-height: 1.5;
   }
@@ -55,4 +69,23 @@
   position: absolute;
   bottom: 12px;
   right: 12px;
+
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 4px;
+  z-index: 11;
+  .star,
+  .star-half,
+  .star-outline {
+    width: 14px;
+    height: 14px;
+    @media screen and (min-width: 768px) {
+      width: 10px;
+      height: 10px;
+    }
+    @media screen and (min-width: 1280px) {
+      width: 18px;
+      height: 18px;
+    }
+  }
 }
