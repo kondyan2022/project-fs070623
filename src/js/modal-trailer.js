@@ -67,11 +67,10 @@ const modalController = ({ modal, btnOpen, btnClose, time = 300 }) => {
       .fetchMovieVideoById(id)
       .then(resp => {
         if (resp) {
-          trailerKey = getTrailerKey(resp); // Сохранение ключа видео в переменную trailerKey
-          // Если трейлер найден, показываем плеер
           console.log('это мое', resp);
+          const trailerKey = getTrailerKey(resp); // Получение ключа видео
+          createPlayer(trailerKey); // Запуск плеера с ключом видео
         } else {
-          // Если трейлер не найден, показываем сообщение об ошибке
           const errorModalElem = document.createElement('div');
           errorModalElem.classList.add('modal__error');
           errorModalElem.innerHTML = `
@@ -104,11 +103,11 @@ const modalController = ({ modal, btnOpen, btnClose, time = 300 }) => {
     }
   }
 
-  function createPlayer() {
+  function createPlayer(videoId) {
     player = new window.YT.Player('youtube-player', {
       width: '600',
       height: '350',
-      videoId: trailerKey, // Использование переменной trailerKey в качестве значения videoId
+      videoId: videoId, // Использование переданного ключа видео в качестве значения videoId
       playerVars: {
         autoplay: 0,
         controls: 1,
