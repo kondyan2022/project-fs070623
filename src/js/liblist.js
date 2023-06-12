@@ -52,9 +52,6 @@ function renderMarkupInSelect() {
  * @param {*array} list 
  */
 function renderMovieInCards(list) {
-    // refs.listCards.innerHTML = list
-    //     .map(film => { getFilmCard(film, x => String(Math.round(x * 2) / 2)) })
-    //     .join('');
     refs.listCards.innerHTML = list
         .map(film => getFilmCard(film, getFiveStar))
         .join('');
@@ -64,16 +61,6 @@ function renderMovieInCards(list) {
  * function to show cards and select
  */
 function showContent() {
-    // if (getMovies.length > 0) {
-    //     renderMarkupInSelect();
-    //     if (getMovies.length <= perPageMovies) {
-    //         refs.btnLoadMore.style.display = 'none';
-    //     }
-    //     // renderMovieInCards(getMovies);
-    // } else {
-    //     refs.selectWrapper.style.visibility = 'hidden';
-    //     refs.wrapperForMessage.innerHTML = '<p class="lib-error">OOPS... We are very sorry! You dont have any movies at your library.</p >  <a href="./catalog.html" class="lib-btn-search-movie">Search movie</a>';
-    // }
     if (getMovies.length > 0) {
         renderMarkupInSelect();
         const startMovies = getMovies.slice(0, perPageMovies);
@@ -105,6 +92,7 @@ refs.selectWrapper.addEventListener('change', () => {
         genre_ids.includes(selectedGenre)
     )
     let optionValue = refs.option.value;
+    console.log(optionValue)
 
     // if (optionValue !== "all") {
     //     renderMovieInCards(filteredGotMovies);
@@ -114,23 +102,21 @@ refs.selectWrapper.addEventListener('change', () => {
     //     console.log('');
     // }
 
-    if (optionValue === "all") {
-        renderMovieInCards(getMovies);
-    } else {
-        renderMovieInCards(filteredGotMovies);
-    }
+    // if (optionValue === "all") {
+    //     renderMovieInCards(getMovies);
+    // } else {
+    //     renderMovieInCards(filteredGotMovies);
+    // }
 
     // if (filteredGotMovies.length < 0) {
     //     showMessage();
     // }
-
-    if (filteredGotMovies.length > 0) {
-        filteredGotMovies.map(movie => {
-            const movieCard = getFilmCard(); //getFilmCard(movie, stars);
-            refs.listCards.appendChild(movieCard);
-        })
-    } else {
+    if (filteredGotMovies.length < 0 && getMovies.length < 0) {
         showMessage();
+    } else if (optionValue === "all") {
+        renderMovieInCards(getMovies);
+    } else {
+        renderMovieInCards(filteredGotMovies);
     }
 })
 
@@ -148,7 +134,7 @@ function showMessage() {
 //---------------------load more------------------------------------------
 
 refs.btnLoadMore.addEventListener('click', () => {
-    const nextMovies = getMovies.slice(gotMovies, gotMovies + perPageMovies); //13, 13+9
+    const nextMovies = getMovies.slice(gotMovies, gotMovies + perPageMovies);
     console.log(nextMovies);
     renderNextLoadCard(nextMovies);
     gotMovies += perPageMovies;
@@ -157,10 +143,10 @@ refs.btnLoadMore.addEventListener('click', () => {
         refs.btnLoadMore.style.display = 'none';
     }
 })
-
 function renderNextLoadCard(arr) {
     const loadNext = arr
         .map(film => getFilmCard(film, getFiveStar))
         .join('');
     refs.listCards.insertAdjacentHTML('beforeend', loadNext);
 }
+//------------------------------------------------------------------------
