@@ -73,7 +73,7 @@ function creatMarkup(movie) {
                         (min-width: 768px) 704px,
                         (min-width: 1280px) 805px,
                         100vw"
-                src="https://image.tmdb.org/t/p/w300/original/${movie.backdrop_path}"
+                src="https://image.tmdb.org/t/p/w300/${movie.backdrop_path}"
                 alt="${movie.title}"
                 class="upcoming-image"
             />

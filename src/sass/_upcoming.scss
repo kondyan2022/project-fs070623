@@ -242,15 +242,32 @@
 
 // ----------------ligth theme---------------------------------\
 
-.up-btn .js-ligth-theme {
-  background-color: var(--color-background);
-}
+.js-light-theme {
+  .up-btn {
+    color: var(--color-background);
+    transition: color linear 500ms, background linear 500ms;
+  }
+  .up-btn:is(:hover, :focus) {
+    color: var(--color-orange);
+    background: var(--color-background);
+  }
 
-.js-ligth-theme {
-  .upcoming-title,
   .upcoming-data,
   .upcom-data-release,
-  .upcoming-about {
+  .upcoming-about,
+  .upcoming-data-average {
     color: var(--color-grey-white-theme);
+  }
+
+  .upcoming-title,
+  .upcoming-movie-title,
+  .upcoming-data-get,
+  .upcoming-about-descr {
+    color: var(--color-background);
+  }
+  .up-count,
+  .up-average {
+    color: var(--color-background);
+    background: var(--color-white);
   }
 }
