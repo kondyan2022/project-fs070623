@@ -92,7 +92,7 @@
   transition: transform 400ms cubic-bezier(0.4, 0, 0.2, 1);
   .checkbox:checked + & {
     transform: translateX(36px) rotate(180deg);
-    // transform: translateX(36px) rotateY(180deg);
+    transform: translateX(36px) rotateY(180deg);
     @media screen and (max-width: 768px) {
       transform: translateX(26px) rotate(180deg);
     }
@@ -102,6 +102,7 @@
 
 .js-light-theme {
   background-color: var(--color-white);
+  color: var(--color-secondary-black);
 }
 
 .js-light-theme-text {
@@ -117,6 +118,10 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+.header-nav-list {
+  font-weight: 500;
 }
 
 .header-nav-list,
