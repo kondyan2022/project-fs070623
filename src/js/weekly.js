@@ -22,7 +22,7 @@ function renderGalleryWeekly() {
       console.log(movies); //отримуємо першу сторінку трендов тижня (20шт)
 
       // отримуємо масив з 3х рендомних індексів
-      const indexes = rendomIndex(movies.length - 1);
+      const indexes = rendomIndx(movies.length - 1);
       // отримуємо масив з 3х фильмів.
       const weeklyMovies = [];
 
@@ -41,11 +41,27 @@ function renderGalleryWeekly() {
     .catch(e => console.error(e));
 }
 
-function rendomIndex(x) {
-  const rendomIndexes = [];
-  for (let i = 0; i < 3; i++) {
-    rendomIndexes.push(Math.floor(Math.random() * x));
-  }
+// function rendomIndex(x) {
+//   const rendomIndexes = [];
+//   for (let i = 0; i < 3; i++) {
+//     rendomIndexes.push(Math.floor(Math.random() * x));
+//   }
 
-  return rendomIndexes;
+//   return rendomIndexes;
+// }
+
+function rendomIndx(x) {
+  const moviesIndx = [];
+
+  while (moviesIndx.length < 3) {
+    const num = Math.floor(Math.random() * x);
+
+    if (moviesIndx.includes(num)) {
+      continue;
+    } else {
+      moviesIndx.push(num);
+      console.log(moviesIndx);
+    }
+  }
+  return moviesIndx;
 }
