@@ -65,7 +65,7 @@ function showContent() {
 
         renderMovieInCards(getMovies);//???
 
-        //use older pagination
+        //use older pagination-------------------
 
         // const startMovies = getMovies.slice(0, perPageMovies);
         // renderMovieInCards(startMovies);
@@ -77,7 +77,7 @@ function showContent() {
         //     // gotMovies = perPageMovies;
         // }
 
-        //----------test use pagination----------
+        //----------test use pagination-----------------
         // const { markupPage, isMore } = paginationSavedCards(getMovies, perPageMovies);
         // // refs.listCards.innerHtml = markupPage;
 
