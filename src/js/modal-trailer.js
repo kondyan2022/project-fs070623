@@ -63,29 +63,32 @@ const modalController = ({ modal, btnOpen, btnClose, time = 300 }) => {
   }
 
   function getListMovie(id) {
-    myService
-      .fetchMovieVideoById(id)
-      .then(resp => {
-        if (resp) {
-          console.log('это мое', resp);
-          const trailerKey = getTrailerKey(resp); // Получение ключа видео
-          createPlayer(trailerKey); // Запуск плеера с ключом видео
-        } else {
-          const errorModalElem = document.createElement('div');
-          errorModalElem.classList.add('modal__error');
-          errorModalElem.innerHTML = `
-          <p class="error-message">
-            OOPS... <br />
-            We are very sorry! <br />
-            But we couldn’t find the trailer.
-          </p>
-          <img class="error-image" src="../images/oops.jpg" alt="error" />
-        `;
+    return new Promise((resolve, reject) => {
+      myService
+        .fetchMovieVideoById(id)
+        .then(resp => {
+          if (resp) {
+            console.log('это мое', resp);
+            const trailerKey = getTrailerKey(resp); // Получение ключа видео
+            resolve(trailerKey); // Возвращение ключа видео в промисе
+          } else {
+            const errorModalElem = document.createElement('div');
+            errorModalElem.classList.add('modal__error');
+            errorModalElem.innerHTML = `
+            <p class="error-message">
+              OOPS... <br />
+              We are very sorry! <br />
+              But we couldn’t find the trailer.
+            </p>
+            <img class="error-image" src="../images/oops.jpg" alt="error" />
+          `;
 
-          modalElem.appendChild(errorModalElem);
-        }
-      })
-      .catch(e => console.log(e));
+            modalElem.appendChild(errorModalElem);
+            reject(new Error('Trailer not found')); // Ошибка в промисе, если трейлер не найден
+          }
+        })
+        .catch(e => reject(e));
+    });
   }
 
   let trailerKey;
