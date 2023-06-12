@@ -70,6 +70,8 @@ function renderSavedFilm() {
     }
 }
 renderSavedFilm()
+// createPaginationMarkUp(getMovies, currentCard);
+
 
 refs.btnLoadMore.addEventListener('click', onLoadMore);
 
@@ -81,9 +83,9 @@ function onLoadMore() {
         createPaginationMarkUp(arrayFilter, currentCard);
     }
 }
-
+console.log(arrayFilter)
 function paginationSavedCards(array, firstPosition, quantityCard) {
-    //   const sliceMovies = firstPosition + quantityCard;
+    // const sliceMovies = firstPosition + quantityCard;
     const shownMovies = array.slice(firstPosition, firstPosition + quantityCard);
     currentCard = firstPosition + shownMovies.length;
     const isMore = array.length > currentCard; //false ar true
@@ -143,4 +145,12 @@ function showMessage() {
     refs.listCards.innerHTML = messageMarkup;
     // refs.wrapperForMessage.insertAdjacentHTML('beforeend', messageMarkup)
     refs.btnLoadMore.style.display = 'none';
+}
+
+if (body.classList.contains(js - light - theme)) {
+    selectWrapper.style.bagckroundColor = "black";
+    selectWrapper.style.color = "white";
+} else {
+    selectWrapper.style.bagckroundColor = "white";
+    selectWrapper.style.color = "black";
 }
