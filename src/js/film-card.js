@@ -43,7 +43,7 @@ export default function getFilmCard(
       .join(', ')} | ${release_date.slice(0, 4)}</p>
   </div>
   <div class="film-card-stars">${stars}</div>
-  <div class="film-card-cover" film-id="${id}"></div>
+  <div class="film-card-cover"></div>
   </div>`;
 }
 // <div class="film-card-cover></div>
