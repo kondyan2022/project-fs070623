@@ -1,15 +1,63 @@
 <header class="header">
-  <div class="container">
-    <ul class="header-list list">
-      <li><a href="./index.html" class="link current">Home</a></li>
-      <li><a href="./catalog.html" class="link">catalogy</a></li>
-      <li><a href="./library.html" class="link">library</a></li>
-    </ul>
-    <div class="toggle-switch">
-      <label class="checkbox-label">
-        <input type="checkbox" class="checkbox" />
-        <span class="slider"></span>
-      </label>
+  <div class="container header-container">
+    <nav class="header-nav">
+      <a href="./index.html" class="link header-mobile-logo">
+        <img
+          src="./images/logo/mobile-logo.svg"
+          alt="logo"
+          class="mobile-logo"
+          width="32px"
+          height="32px"
+        />
+        <img
+          src="./images/logo/tablet-logo.svg"
+          alt="logo"
+          class="tablet-logo"
+        />
+
+        <span class="logo-title">Cinemania</span>
+      </a>
+      <ul class="header-nav-list list">
+        <li>
+          <a href="./index.html" class="link"
+            ><span class="current js-current-home">Home</span></a
+          >
+        </li>
+        <li><a href="./catalog.html" class="link">catalog</a></li>
+        <li><a href="./library.html" class="link">my library</a></li>
+      </ul>
+      <h2 class="header-mobile-open-menu" data-menu-open>Menu</h2>
+      <div class="toggle-switch">
+        <label class="checkbox-label">
+          <input type="checkbox" class="checkbox" />
+          <span class="slider"></span>
+        </label>
+      </div>
+    </nav>
+  </div>
+  <div class="mobile-menu-backdrop" data-menu-close data-menu>
+    <div class="mobile-menu">
+      <div class="mobile-menu-logo">
+        <a href="./index.html" class="link">
+          <img
+            src="./images/mobile-logo.svg"
+            alt="logo"
+            width="32px"
+            height="32px"
+          />
+        </a>
+      </div>
+      <nav class="mobile-menu-navigator">
+        <ul class="mobile-menu-list list">
+          <li>
+            <a href="./index.html" class="link"
+              ><span class="current js-current-mobile-home">Home</span></a
+            >
+          </li>
+          <li><a href="./catalog.html" class="link">catalogy</a></li>
+          <li><a href="./library.html" class="link">library</a></li>
+        </ul>
+      </nav>
     </div>
   </div>
 </header>

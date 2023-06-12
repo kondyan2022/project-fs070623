@@ -22,18 +22,18 @@ export default class TMDBApiService {
     });
   }
 
-  get SearchQuery() {
+  get searchQuery() {
     return this.searchString;
   }
-  set SearchQuery(newSearchQuery) {
+  set searchQuery(newSearchQuery) {
     this.searchString = String(newSearchQuery).split(/ {1,}/).join('+');
     this.currentPage = 1;
   }
-  get SearchYear() {
-    return this.searchYear;
+  get searchYear() {
+    return this.releaseYear;
   }
-  set SearchYear(newSearchYear) {
-    this.searchYear = String(newSearchYear);
+  set searchYear(newSearchYear) {
+    this.releaseYear = String(newSearchYear);
     this.currentPage = 1;
   }
 
@@ -90,10 +90,10 @@ export default class TMDBApiService {
     });
   }
 }
-// HOW TO USE
+// // HOW TO USE
 // const myService = new TMDBApiService(key);
 // console.log(myService);
-
+// //
 // myService
 //   .fetchGenres()
 //   .then((resp) => console.log("Genres", resp))
@@ -102,10 +102,12 @@ export default class TMDBApiService {
 //   .fetchTrendingDayMovies()
 //   .then((resp) => console.log("Day", resp))
 //   .catch((e) => console.error(e));
+
 // myService
 //   .fetchTrendingWeekMovies()
 //   .then((resp) => console.log("Week", resp))
 //   .catch((e) => console.error(e));
+
 // myService
 //   .fetchMovieById(569094)
 //   .then((resp) => console.log("MoveId", resp))
@@ -127,3 +129,20 @@ export default class TMDBApiService {
 //   .catch((e) => console.error(e));
 
 // setTimeout(() => console.log(myService), 5000);
+
+// Приклад використання для пошуку
+// myService.searchString = 'john';
+// myService
+//   .fetchSearchMovies() // як параметр можно передати сторінку по замовченню перша
+//   .then(resp => console.log('search', resp))
+//   .catch(e => console.error(e));
+// myService
+//   .fetchSearchMovies(3)
+//   .then(resp => console.log('search', resp))
+//   .catch(e => console.error(e));
+// myService.searchYear = 2023;
+// console.log(myService);
+// myService
+//   .fetchSearchMovies()
+//   .then(resp => console.log('search', resp))
+//   .catch(e => console.error(e));
