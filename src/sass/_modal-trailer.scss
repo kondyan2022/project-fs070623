@@ -101,3 +101,19 @@
 .modal__close:focus-visible {
   outline-color: green;
 }
+
+.error-message {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 1.17;
+
+  /* Background */
+
+  color: #111111;
+}
+
+.error-image {
+  width: 363px;
+  height: 318px;
+}

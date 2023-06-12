@@ -67,6 +67,7 @@ const modalController = ({ modal, btnOpen, btnClose, time = 300 }) => {
       .fetchMovieVideoById(id)
       .then(resp => {
         if (resp) {
+          trailerKey = getTrailerKey(resp); // Сохранение ключа видео в переменную trailerKey
           // Если трейлер найден, показываем плеер
           console.log('это мое', resp);
         } else {
@@ -74,24 +75,40 @@ const modalController = ({ modal, btnOpen, btnClose, time = 300 }) => {
           const errorModalElem = document.createElement('div');
           errorModalElem.classList.add('modal__error');
           errorModalElem.innerHTML = `
-          <p>
+          <p class="error-message">
             OOPS... <br />
             We are very sorry! <br />
             But we couldn’t find the trailer.
           </p>
-          <img src="../images/oops.jpg" alt="error" />
+          <img class="error-image" src="../images/oops.jpg" alt="error" />
         `;
+
           modalElem.appendChild(errorModalElem);
         }
       })
       .catch(e => console.log(e));
   }
 
+  let trailerKey;
+
+  function getTrailerKey({ data: { results } }) {
+    const trailerList = results
+      .filter(({ type }) => {
+        return type === 'Trailer';
+      })
+      .sort(({ published_at: a }, { published_at: b }) => {
+        return a - b;
+      });
+    if (trailerList) {
+      return trailerList[0].key;
+    }
+  }
+
   function createPlayer() {
     player = new window.YT.Player('youtube-player', {
-      width: '600', // Укажите требуемую ширину
-      height: '350', // Укажите требуемую высоту
-      videoId: 'rdyoLs85dO0', // Идентификатор воспроизведения
+      width: '600',
+      height: '350',
+      videoId: trailerKey, // Использование переменной trailerKey в качестве значения videoId
       playerVars: {
         autoplay: 0,
         controls: 1,
