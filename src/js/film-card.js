@@ -46,4 +46,3 @@ export default function getFilmCard(
   <div class="film-card-cover"></div>
   </div>`;
 }
-// <div class="film-card-cover></div>
