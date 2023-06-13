@@ -57,14 +57,12 @@ myService.fetchTrendingWeekMovies()
 ref.input.addEventListener('input', onInput);
 
    function onInput (element) {
-        ref.deleteBtnInput.classList.remove('cataloge-btn-delete')
+        ref.deleteBtnInput.classList.remove('btn-hide')
         const valueInp = element.target.value.trim();
         console.log(valueInp);
         if(valueInp === '') {
        Notiflix.Notify.info('Please, enter the name of the movie');
        ref.deleteBtnInput.classList.add('btn-hide');
-       ref.oopsNotFind.classList.add('oops-not-find-hide');
-       ref.choseMovie.classList.remove('choose-movie-hide');
        refs.paginationElem.classList.add('tui-pagination');
        newElement.innerHTML = "";
         }
@@ -78,6 +76,8 @@ ref.input.addEventListener('input', onInput);
 
     function onSubmit(e) {
       e.preventDefault();
+
+      
       searchInput = e.target.elements.SearchQuery.value.trim();
       searchYear = e.target.elements.selectYear.value;
       if (searchInput === '') {
@@ -95,14 +95,13 @@ ref.input.addEventListener('input', onInput);
               const movies = res.data.results;
               if (movies.length === 0) {
                   Notiflix.Notify.failure('Фільми не знайдені');
-                  ref.choseMovie.classList.add('choose-movie-hide');
-                  ref.oopsNotFind.classList.add('oops-not-find-hide');
-                  ref.deleteBtnInput.classList.add('cataloge-bnt-delete');
+                  ref.deleteBtnInput.classList.add('btn-hide');
               } else {
                   displayMovies(movies);
-                  currentPage;
-                  totalPages = res.data.total_pages;
-                  pagination.reset(totalPages)
+                  currentPage = res.data.page;
+                  const totalPages = res.data.total_pages;
+                  pagination.reset({
+                    })
 
                   console.log(`Total pages: ${totalPages}`)
               }
@@ -118,14 +117,8 @@ ref.deleteBtnInput.addEventListener('click', deleteValueInput);
 async function deleteValueInput (el) {
 el.preventDefault()
 ref.form.reset()
-ref.deleteBtnInput.classList.add('cataloge-btn-delete');
-ref.choseMovie.classList.add('choose-movie-hide');
-ref.oopsNotFind.classList.add('oops-not-find-hide');
-// const  catalogTrend = 'https://api.themoviedb.org/3/trending/all/week?page=1';
-// newElement.innerHTML = results
-//         .map(a => getFilmCard(a,x=>
-//             String(Math.round(x * 2) / 2)))
-//             .join('')
+ref.deleteBtnInput.classList.add('btn-hide');
+
 try {
     const response = await myService.fetchTrendingWeekMovies()
     const trendingMovies = response.data.results;

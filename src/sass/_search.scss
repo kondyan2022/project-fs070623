@@ -98,49 +98,60 @@ box-sizing: border-box;
 }
 
 .cataloge-btn-delete {
+    
     width: 20px;
     height: 20px;
     position: absolute;
     border: none;
-    // left: 220px;
     top: 11%;
-    left: 55%;
+    left: 50%;
     transform: translateY(-50%);
     background-color:  transparent;
     cursor: pointer;
+    font-weight:500;
+    font-size: medium;
 }
 
 @media screen and (min-width:320px) {
     .cataloge-btn-delete {
-        top: 50%;
-        left: 53%;
+        top: 20%;
+        left: 65%;
     }
 }
 
 @media screen and (min-width:768px) {
     .cataloge-btn-delete {
-        left: 28%
+        left: 49%;
+        top: 45%;
     }
 }
 
 @media screen and (min-width:1280px) {
     .cataloge-btn-delete {
-       left: 35%;
+      left: 50%;
     right: 74px; 
     }
     
 }
 
+body.js-light-theme .icon-btn-delete {
+    stroke: #282828;
+}
+
+body.js-light-theme .icon-btn-delete:hover {
+    stroke: #F87719;
+}
 .btn-hide {
     display: none;
 }
 
 .icon-btn-delete {
-    stroke: #f8f8f8;
+   color: #FFFFFF;
+  
 }
 
 .icon-btn-delete:hover {
-    stroke: #f87719;
+    color: #f87719;
 }
 
 .cataloge-btn-search{
@@ -350,6 +361,7 @@ box-sizing: border-box;
     background-color: transparent;
 
 }
+
 .tui-page-btn:hover{
 border: none;
 background: linear-gradient(141.22deg, #FFC226 9.4%, #F84119 91.91%);
