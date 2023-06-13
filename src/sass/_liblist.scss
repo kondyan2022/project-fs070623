@@ -73,32 +73,74 @@
   padding-top: 44px;
 }
 
-.lib-load-more,
-.lib-btn-search-movie {
-  font-weight: 500;
-  font-size: 12px;
-  line-height: calc(14 / 12);
-  color: var(--color-background);
+// .lib-load-more,
+// .lib-btn-search-movie {
+//   font-weight: 500;
+//   font-size: 12px;
+//   line-height: calc(14 / 12);
+//   color: var(--color-background);
 
-  margin-top: 24px;
-  // display: block;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 12px 24px;
-  border-color: transparent;
+//   margin-top: 24px;
+//   // display: block;
+//   margin-left: auto;
+//   margin-right: auto;
+//   padding: 12px 24px;
+//   border-color: transparent;
+//   border-radius: 74px;
+//   background: var(--color-linear-one);
+//   transition: bagckround linear 400ms, color linear 400ms,
+//     borler-color linear 400ms, box-shadow linear 400ms;
+// }
+
+// .lib-load-more:is(:hover, :focus),
+// .lib-btn-search-movie:is(:hover, :focus) {
+//   background: var(--color-white);
+//   color: var(--color-orange);
+//   border-color: var(--color-orange);
+//   box-shadow: 1px 1px 14px 4px #ff6b086b;
+// }
+
+//----------------------------buttons--------------------
+.lib-wrap-btn {
+  margin-top: 40px;
+
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+
+  // margin-left: auto;
+  // margin-right: auto;
+
+  ////// :TODO =>  LOAD MORE BTN NOT CENTRED????????????????????????????????????????????????
+
   border-radius: 74px;
   background: var(--color-linear-one);
   transition: bagckround linear 400ms, color linear 400ms,
-    borler-color linear 400ms, box-shadow linear 400ms;
-}
+    bordler-color linear 400ms, box-shadow linear 400ms;
 
-.lib-load-more:is(:hover, :focus),
-.lib-btn-search-movie:is(:hover, :focus) {
-  background: var(--color-white);
-  color: var(--color-orange);
-  border-color: var(--color-orange);
-  box-shadow: 1px 1px 14px 4px #ff6b086b;
-}
+  .lib-load-more,
+  .lib-btn-search-movie {
+    padding: 12px 24px;
+
+    border-radius: 74px;
+    border-width: 2px;
+    border-color: transparent;
+    border-width: 1px;
+    background-clip: padding-box;
+    outline: none;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: calc(14 / 12);
+    background-color: transparent;
+    &:is(:hover, :focus) {
+      background-color: white;
+      color: var(--color-orange);
+    }
+  }
+  &:is(:hover, :focus) {
+    box-shadow: 1px 1px 14px 4px #ff6b086b;
+  }
+} //----------------------------------------------
 
 .js-lib-content-wrap {
   display: flex;
@@ -142,7 +184,8 @@
   .lib-btn-search-movie {
     font-size: 14px;
     line-height: calc(16 / 14);
-
+  }
+  .lib-wrap-btn {
     margin-top: 40px;
   }
   .lib-wrap-list {
