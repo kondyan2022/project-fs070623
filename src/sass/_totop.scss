@@ -12,8 +12,30 @@
   font-size: 12px;
   line-height: 1.17;
   font-weight: 500;
-  color: var(--);
+
   border-radius: 60px;
+
   background: var(--color-linear-one);
-  color: var(--color-white);
+  color: var(--color-background);
+  border-color: transparent;
+  transition: bagckround linear 400ms, color linear 400ms,
+    bordler-color linear 400ms, box-shadow linear 400ms;
+
+  & .totop-text {
+    text-align: center;
+    line-height: 28px;
+
+    height: 28px;
+    width: 78px;
+    border-radius: 56px;
+    color: inherit;
+    background-color: transparent;
+  }
+  &:hover {
+    box-shadow: 1px 1px 14px 4px #ff6b086b;
+    .totop-text {
+      background: var(--color-white);
+      color: var(--color-orange);
+    }
+  }
 }

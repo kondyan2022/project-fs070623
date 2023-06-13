@@ -8,18 +8,19 @@ const refs = {
 function setTheme(theme) {
   if (theme === 'light') {
     refs.body.classList.add('js-light-theme');
-    refs.checkbox.checked = true;
     setTimeout(() => {
       refs.slider.style.transition =
         'transform 400ms cubic-bezier(0.4, 0, 0.2, 1)';
     }, 500);
+    refs.checkbox.checked = true;
   } else {
     refs.body.classList.remove('js-light-theme');
     refs.checkbox.checked = false;
+    refs.slider.style.transition = '';
   }
 }
 
-function handleToggle() {
+function onChangeToggle() {
   if (refs.checkbox.checked) {
     setTheme('light');
     localStorage.setItem('theme', 'light');
@@ -31,11 +32,9 @@ function handleToggle() {
 
 const savedTheme = localStorage.getItem('theme');
 if (savedTheme) {
-  // Set initial state based on saved theme
   setTheme(savedTheme);
 } else {
-  // Set initial state based on default theme
   setTheme('dark');
 }
 
-refs.toggleSwitch.addEventListener('change', handleToggle);
+refs.toggleSwitch.addEventListener('click', onChangeToggle);
