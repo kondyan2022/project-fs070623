@@ -10,63 +10,6 @@ import {
 const wrapperForRender = document.querySelector('.js-upcoming-wrapper');
 const serviceUpcoming = new TMDBApiService();
 
-// console.log(serviceUpcoming);
-
-serviceUpcoming
-    .fetchUpcomingMovies()
-    .then((resp) => {
-        // console.log("Upcoming", resp);
-
-        const data = resp.data;
-        // console.log(data);
-
-        const datasUpcoming = {
-            pageCurrent: data.page,
-            totalResults: data.total_results,
-            results: data.results
-        }
-        // console.log(datasUpcoming)
-
-        const arrayResults = datasUpcoming.results;
-
-        if (arrayResults.length > 0) {
-            renderToMarkup(arrayResults);
-
-            const btnSaveToLocalStorage = document.querySelector('.up-btn');
-            // btnSaveToLocalStorage.addEventListener('click', buttonHandler);
-            btnSaveToLocalStorage.addEventListener('click', (event) => {
-                const button = event.target;
-                const movieId = event.target.dataset.movieId;
-                const getMovie = arrayResults.find((movie) => movie.id == movieId);
-                // console.log(getMovie)
-                if (isInLibrary(movieId)) {
-                    removeFromLibrary(movieId);
-                    button.textContent = "Add to my library";
-                    // console.log("remove")
-                } else {
-                    saveToLibrary(getMovie);
-                    button.textContent = "Remove from my library"
-                    // console.log("save")
-                }
-            });
-
-            // movieIsInLibrary(movieId)
-
-        } else if (arrayResults.length === 0) {
-            wrapperForRender.innerHTML = '<p class="upcoming-error">OOPS... We are very sorry! Upcoming this month not found.</p>'
-        }
-    })
-    .catch((e) => console.error(e));
-
-// function movieIsInLibrary(movieId) {
-//     const arrLibrary = getLibraryList();
-//     // arrLibrary.some((movie) => movie.id == movieId);
-//     // if (arrLibrary.some((movie) => movie.id == movieId)) {
-//     //     button.textContent = "Remove from my library";
-//     //     removeFromLibrary(movieId);
-//     // }
-// }
-
 function creatMarkup(movie) {
     return `
     <div class="upcoming-left-wrap">
@@ -124,50 +67,66 @@ function creatMarkup(movie) {
 }
 
 
+serviceUpcoming
+    .fetchUpcomingMovies()
+    .then((resp) => {
+        const data = resp.data;
+        const datasUpcoming = {
+            pageCurrent: data.page,
+            totalResults: data.total_results,
+            results: data.results
+        }
+        const arrayResults = datasUpcoming.results;//array with results
+        if (arrayResults.length > 0) {
+            renderToMarkup(arrayResults);
+            wrapperForRender.addEventListener('click', (e) => {
+                console.log(e.currentTarget, e.target)
+                console.log(e.currentTarget)
+                if (e.target === document.querySelector('.up-btn')) {
+                    // console.log("buuuuuton")
+                    const button = e.target;
+                    const movieId = e.target.dataset.movieId;
+                    const getMovie = arrayResults.find((movie) => movie.id == movieId);
+                    if (isInLibrary(movieId)) {
+                        removeFromLibrary(movieId);
+                        button.textContent = "Add to my library";
+                        // console.log("remove");
+                    } else {
+                        saveToLibrary(getMovie);
+                        button.textContent = "Remove from my library";
+                        // console.log("save");
+                    }
+                }
+            })
+        } else if (arrayResults.length === 0) {
+            wrapperForRender.innerHTML = '<p class="upcoming-error">OOPS... We are very sorry! Upcoming this month not found.</p>'
+        }
+    })
+    .catch((e) => console.error(e));
+
 function renderToMarkup(array) {
     const randomIndex = getRandomIndex();
     const randomMovie = array
         .filter(movie => movie.backdrop_path !== null)
-        .map(movie => creatMarkup(movie))[randomIndex];
-
-    // console.log(randomIndex);
-
-    wrapperForRender.innerHTML = randomMovie;
-
+        .map(movie => {
+            const movieMarkup = creatMarkup(movie);
+            return {
+                id: movie.id,
+                markup: movieMarkup
+            }
+        })[randomIndex];
+    console.log(randomMovie)
+    const { id, markup } = randomMovie;
+    wrapperForRender.innerHTML = markup;
+    const btnSaveToLocalStorage = document.querySelector('.up-btn');
+    if (isInLibrary(id)) {
+        console.log(isInLibrary(id))
+        btnSaveToLocalStorage.textContent = "Remove from my library";
+    } else {
+        console.log("not")
+        btnSaveToLocalStorage.textContent = "Add to my library";
+    }
 }
-
 function getRandomIndex() {
     return Math.floor(Math.random() * 15);
 }
-
-//-------------------handlerBTN
-
-// function buttonHandler(event) {
-//     const { results } = dataFromApi;
-
-//     results.forEach(saveToLibrary)
-//     console.log(results)
-
-//     // const { results } = dataFromApi;
-//     // results.forEach(saveToLibrary);
-
-//     const button = event.target;
-//     console.log(button)
-//     const movieId = event.target.dataset.movieId;
-//     console.log(movieId);
-//     getMovie = getMovieById(movieId);
-
-//     if (isInLibrary(movieId)) {
-//         removeFromLibrary(movieId);
-//         button.textContent = "Add to my library";
-//         console.log("remove")
-//     } else {
-//         saveToLibrary(getMovie);
-//         button.textContent = "Remove from my library"
-//         console.log("save")
-//     }
-// }
-
-// function getMovieById(movieId) {
-//     return arrayResults.find(movie => movie.id === movieId);
-// }
