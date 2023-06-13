@@ -61,8 +61,10 @@ function creatMarkup(movie) {
         </table>
         <p class="upcoming-about">About</p>
         <p class="upcoming-about-descr">${movie.overview}</p>
-        <button type="button" class="up-btn" data-movie-id="${movie.id}">Add to my library</button>
-    </div>
+        <div class="up-wrap-btn">
+            <button type="button" class="up-btn" data-movie-id="${movie.id}">Add to my library</button>
+        </div>
+        </div>
     `
 }
 
