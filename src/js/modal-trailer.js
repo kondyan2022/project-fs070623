@@ -31,6 +31,7 @@ const modalController = ({ modal, btnOpen, btnClose, time = 300 }) => {
 
       window.removeEventListener('keydown', closeModal);
     }
+    document.body.classList.remove('modal-open');
   };
 
   const openModal = async () => {
@@ -43,6 +44,7 @@ const modalController = ({ modal, btnOpen, btnClose, time = 300 }) => {
       if (player) {
         player.loadVideoById(trailerKey);
       }
+      document.body.classList.add('modal-open');
     } catch (error) {
       console.log(error);
     }
@@ -72,7 +74,7 @@ const modalController = ({ modal, btnOpen, btnClose, time = 300 }) => {
         .fetchMovieVideoById(id)
         .then(resp => {
           if (resp) {
-            console.log('это мое', resp);
+            console.log(resp);
             const trailerKey = getTrailerKey(resp); // Получение ключа видео
             resolve(trailerKey); // Возвращение ключа видео в промисе
           } else {
