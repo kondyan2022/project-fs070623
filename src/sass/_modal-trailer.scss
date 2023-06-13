@@ -36,24 +36,55 @@
   background-color: rgba(0, 0, 0, 0.5);
   cursor: pointer;
   padding: 30px;
-  overflow-y: auto;
+  overflow-y: none;
   display: none;
 }
 
-.modal__main {
-  position: relative;
+@media screen and (max-width: 767px) {
+  .modal__main {
+    position: relative;
 
-  background-color: #fff;
-  margin: auto;
-  color: #000;
-  border-radius: 16px;
-
-  width: 700px;
-  height: 400px;
-
-  cursor: default;
-  .js-light-theme {
     background-color: #fff;
+    margin: auto;
+    color: #000;
+    border-radius: 16px;
+
+    width: 280px;
+    height: 289px;
+
+    cursor: default;
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1199px) {
+  .modal__main {
+    position: relative;
+
+    background-color: #fff;
+    margin: auto;
+    color: #000;
+    border-radius: 16px;
+
+    width: 609px;
+    height: 400px;
+
+    cursor: default;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .modal__main {
+    position: relative;
+
+    background-color: #fff;
+    margin: auto;
+    color: #000;
+    border-radius: 16px;
+
+    width: 700px;
+    height: 400px;
+
+    cursor: default;
   }
 }
 
@@ -62,11 +93,37 @@
   margin-bottom: 30px;
 }
 
-.modal__player {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+@media screen and (max-width: 767px) {
+  .modal__player {
+    position: absolute;
+    width: 85%;
+    height: 90%;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1199px) {
+  .modal__player {
+    position: absolute;
+    width: 85%;
+    height: 90%;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .modal__player {
+    position: absolute;
+    width: 90%;
+    height: 85%;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
 }
 
 .modal__btn {
