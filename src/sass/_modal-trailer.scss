@@ -19,7 +19,7 @@ body.modal-open {
     box-shadow: 1px 1px 14px 4px rgba(0, 0, 0, 0.22);
   }
   margin: auto;
-  color: #000;
+  color: var(--color-background);
   border-radius: 16px;
   cursor: default;
   box-shadow: 1px 1px 14px 4px rgba(255, 107, 8, 0.42);
