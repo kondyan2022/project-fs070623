@@ -120,6 +120,8 @@
   border: 0.1px solid transparent;
   border-radius: 5px;
   overflow: hidden;
+
+  box-shadow: 1px 1px 14px 4px #00000038;
 }
 .upcoming-image {
   display: block;
@@ -258,12 +260,13 @@
   }
 
   .upcoming-data,
-  .upcom-data-release,
   .upcoming-about,
   .upcoming-data-average {
     color: var(--color-grey-white-theme);
   }
-
+  .upcom-data-release {
+    color: var(--color-orange);
+  }
   .upcoming-title,
   .upcoming-movie-title,
   .upcoming-data-get,
@@ -273,6 +276,6 @@
   .up-count,
   .up-average {
     color: var(--color-background);
-    background: var(--color-white);
+    background: var(--color-grey);
   }
 }
