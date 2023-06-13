@@ -23,16 +23,6 @@
 // ---------------------------------------------- CONTAINER -------------------------------------------------------
 
 .modal-film {
-  z-index: 10;
-  background-color: var(--color-background);
-  box-shadow: 1px 1px 14px 4px rgba(255, 107, 8, 0.42);
-  text-align: left;
-
-  position: fixed;
-
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) scale(0.7);
 
   width: 280px;
   min-height: 847px;
@@ -59,9 +49,21 @@
 }
 
 .modal-film-container {
-  padding: 0;
+  padding: 52px 16px 64px 16px;
   box-sizing: border-box;
-  width: 248px;
+  border-radius: 16px;
+  width: 280px;
+
+  z-index: 10;
+  background-color: var(--color-background);
+  box-shadow: 1px 1px 14px 4px rgba(255, 107, 8, 0.42);
+  text-align: left;
+
+  position: fixed;
+
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.7);
 
   @media screen and (min-width: 768px) {
     width: 616px;
@@ -77,6 +79,7 @@
 }
 
 .modal-card-table {
+  margin: 22px, 16px, 64px, 16px;
 }
 
 .modal-card-tab-row {
@@ -88,6 +91,7 @@
   width: 248px;
   height: 315px;
   margin-bottom: 22px;
+  border-radius: 5px;
 
   @media screen and (min-width: 768px) {
     width: 294px;
