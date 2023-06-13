@@ -100,8 +100,8 @@
   padding: 12px 24px;
   border-color: var(--color-orange);
   border-radius: 74px;
-  transition: color linear 500ms, background linear 500ms,
-    border-color linear 500ms, box-shadow linear 400ms;
+  transition: color linear 250ms, background linear 250ms,
+    border-color linear 250ms, box-shadow linear 2500ms;
 }
 .up-btn:is(:hover, :focus) {
   color: var(--color-orange);
@@ -109,6 +109,10 @@
   border-color: transparent;
   box-shadow: 1px 1px 14px 4px #ff6b086b;
 }
+
+// .up-btn:active {
+//   background: initial;
+// }
 
 .up-thumb {
   max-width: 280px;
