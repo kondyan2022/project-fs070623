@@ -8,6 +8,12 @@
    padding-top: 40px;
   }
 
+  .js-light-theme {
+   .weekly-title {
+     color: var(--color-background);
+   }
+ }
+
   .weekly-gallery{
    margin-top: 24px;
   }
@@ -40,6 +46,11 @@ text-transform: uppercase;
       font-weight: 500;
       font-size: 16px;
       line-height: 1.9;
+   }
+
+   .weekly-link:hover,
+   .weekly-link:focus{
+      transform: scale(1.1);
    }
 
 }
