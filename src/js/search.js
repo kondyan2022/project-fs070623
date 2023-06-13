@@ -1,13 +1,10 @@
-import getFilmCard from './film-card.js';  // розмітку HTML для відображення карточки фільму.
-import TMDBApiService from './tmdb-api.js' // пошук фільмів 
-
+import getFilmCard from './film-card.js';  
+import TMDBApiService from './tmdb-api.js' 
 import dataFormApi from '../testcatalog.json';
 const {results} = dataFormApi;
-
 import Notiflix from 'notiflix';
-
 import Pagination from 'tui-pagination';
-import 'tui-pagination/dist/tui-pagination.css';
+// import 'tui-pagination/dist/tui-pagination.css';
 
 const ref = {
     form: document.querySelector('.cataloge-search-form'),
@@ -15,12 +12,26 @@ const ref = {
     selectYear: document.getElementById('selectYear'),
     deleteBtnInput: document.querySelector('.cataloge-btn-delete'),
     searchBtn: document.getElementById('searchBtn'),
-    oopsNotFind: document.querySelector('.oops-not-find'),
-    choseMovie: document.querySelector('.choose-movie'),
+    // oopsNotFind: document.querySelector('.oops-not-find'),
+    // choseMovie: document.querySelector('.choose-movie'),
     }
 
    const newElement = document.querySelector('.catalog-list-gallery');
    const myService = new TMDBApiService();
+   
+
+//    слухач на блок з картинками
+newElement.addEventListener('click', handleFilmCardClick);
+
+function handleFilmCardClick(event) {
+  const clickedFilmCard = event.target.closest('.film-card');
+  
+  if (clickedFilmCard) {
+    // Обробка кліку на блок "film-card"
+    console.log(clickedFilmCard.getAttribute('.film-card'))
+  }
+}
+
 
 //Фільми тижня
 myService.fetchTrendingWeekMovies()
@@ -35,7 +46,6 @@ myService.fetchTrendingWeekMovies()
 
   function displayMovies(movies) {
     if (movies.length === 0) {
-      // Показати повідомлення, що трендові фільми тижня не знайдено
       Notiflix.Notify.info('No trending movies found');
     } else {
       newElement.innerHTML = movies
@@ -64,7 +74,7 @@ ref.input.addEventListener('input', onInput);
 
     let searchInput = '';
     let searchYear = '';
-  let currentPage = 1;
+    let currentPage = 1;
 
     function onSubmit(e) {
       e.preventDefault();
@@ -80,7 +90,7 @@ ref.input.addEventListener('input', onInput);
           myService.releaseYear = searchYear;
       }
       myService.searchQuery = searchInput;
-      myService.fetchSearchMovies(1)
+      myService.fetchSearchMovies()
           .then((res) => {
               const movies = res.data.results;
               if (movies.length === 0) {
@@ -90,7 +100,7 @@ ref.input.addEventListener('input', onInput);
                   ref.deleteBtnInput.classList.add('cataloge-bnt-delete');
               } else {
                   displayMovies(movies);
-                  currentPage = 1;
+                  currentPage;
                   totalPages = res.data.total_pages;
                   pagination.reset(totalPages)
 
@@ -125,14 +135,9 @@ try {
 }
 
 }
-
-
-
-
-
-
-
 // ПАГІНАЦІЯ
+
+
 const refs = {
     paginationElem: document.querySelector('.tui-pagination'),
 }
@@ -141,44 +146,36 @@ const refs = {
 const options = { 
      totalItems: 1000,
      itemsPerPage: 20,
-     visiblePages: 6,
+     visiblePages: 4,
      page: 1,
      centerAlign: false,
      firstItemClassName: 'tui-first-child',
      lastItemClassName: 'tui-last-child',
-     template: {
-         page: '<a href="#" class="tui-page-btn">{{page}}</a>',
-         currentPage: '<strong class="tui-page-btn tui-is-selected">{{page}}</strong>',
-         moveButton:
-             '<a href="#" class="tui-page-btn tui-{{type}}">' +
-                 '<span class="tui-ico-{{type}}">{{type}}</span>' +
-             '</a>',
-         disabledMoveButton:
-             '<span class="tui-page-btn tui-is-disabled tui-{{type}}">' +
-                 '<span class="tui-ico-{{type}}">{{type}}</span>' +
-             '</span>',
-         moreButton:
-             '<a href="#" class="tui-page-btn tui-{{type}}-is-ellip">' +
-                 '<span class="tui-ico-ellip">...</span>' +
-             '</a>'
-     }
 }
 
 
 const pagination = new Pagination(refs.paginationElem, options);
 
-let pageForPagination = 1;
+let pageForPagination = 0;
 
 pagination.on('afterMove', async (event) => {
     const currentPage = event.page;
    pageForPagination = currentPage;  
    try {
-    const res = await myService.fetchUpcomingMovies(pageForPagination)
+    const res = await myService.fetchSearchMovies(pageForPagination)
     const movies = res.data.results;
     displayMovies(movies);
+    scrollToTop();
    } catch (error){
     console.log(error);
    }
   });
+
+  function scrollToTop(){
+    window.scrollTo({
+        top:0,
+        behavior: 'smooth'
+    });
+  }
 
 

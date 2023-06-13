@@ -65,6 +65,7 @@ export default class TMDBApiService {
     });
     this.totalPages = response.data.total_pages;
     this.currentPage = response.data.page;
+    this.totalItems = response.data.total_results;
     return response;
   }
 
