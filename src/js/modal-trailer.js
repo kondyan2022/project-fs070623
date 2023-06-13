@@ -33,14 +33,18 @@ const modalController = ({ modal, btnOpen, btnClose, time = 300 }) => {
     }
   };
 
-  const openModal = () => {
-    getListMovie(569094);
-    modalElem.style.visibility = 'visible';
-    modalElem.style.opacity = 1;
-    window.addEventListener('keydown', closeModal);
+  const openModal = async () => {
+    try {
+      const trailerKey = await getListMovie(569094);
+      modalElem.style.visibility = 'visible';
+      modalElem.style.opacity = 1;
+      window.addEventListener('keydown', closeModal);
 
-    if (player) {
-      player.playVideo();
+      if (player) {
+        player.loadVideoById(trailerKey);
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
 
