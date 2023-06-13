@@ -1,6 +1,7 @@
 import getGenres from './get-genres';
 import getFilmCard from './film-card';
 import SlimSelect from 'slim-select';
+import '../sass/_upcoming.scss'
 import 'slim-select/dist/slimselect.css';
 import { getLibraryList } from './local-storage';
 import getFiveStar from './fivezerostar.js';
@@ -9,6 +10,7 @@ import '../sass/_fivestar.scss';
 const refs = {
     listCards: document.querySelector('.js-liblist'),
     selectWrapper: document.querySelector('#library-filter'),
+    generalWrapperSelect: document.querySelector('.js-lib-wrap-select'),
     wrapperForMessage: document.querySelector('.js-lib-content-wrap'),
     btnLoadMore: document.querySelector('.js-load-more')
 };
@@ -17,6 +19,13 @@ let arrayFilter = [];
 let currentCard = 0;
 const getMovies = getLibraryList(); //list from local storage
 
+//------------------------------------------------------------------------
+refs.listCards.addEventListener('click', hendlerOpenModalWindow);
+
+function hendlerOpenModalWindow(evt) {
+    console.log(evt.target.getAttribute('film-id'), 'Це id фільму');
+}
+
 /**-----------------------------------------------------------------------
  * function by create markup for function renderMarkUpInSelect()
  * @param {*object} item
@@ -24,7 +33,7 @@ const getMovies = getLibraryList(); //list from local storage
  */
 function createMarkupInSelect(item) {
     return `
-    <option class="lib-option" value="${item.id}">${item.name}</option>
+    <option class="lib-option lib-spec" value="${item.id}">${item.name}</option>
     `;
 }
 /**-----------------------------------------------------------------------
@@ -59,37 +68,34 @@ let select = new SlimSelect({
 });
 
 //---------------------------------------------------------------------
+renderSavedFilm()
+
 function renderSavedFilm() {
     if (getMovies.length > 0) {
         createPaginationMarkUp(getMovies, currentCard);
     } else {
-        refs.wrapperForMessage.innerHTML = '<p class="lib-error">OOPS... We are very sorry! You dont have any movies at your library.</p >  <a href="./catalog.html" class="lib-btn-search-movie">Search movie</a>';
+        refs.wrapperForMessage.innerHTML = '<p class="lib-error">OOPS... <br>We are very sorry!</br> You dont have any movies at your library.</p >  <a href="./catalog.html" class="lib-btn-search-movie">Search movie</a>';
         refs.btnLoadMore.style.display = 'none';
-        // select.destroy()
-        // refs.selectWrapper.display = 'none';
+
+        refs.generalWrapperSelect.innerHTML = '';
     }
 }
-renderSavedFilm()
-// createPaginationMarkUp(getMovies, currentCard);
-
 
 refs.btnLoadMore.addEventListener('click', onLoadMore);
 
 function onLoadMore() {
-    console.log(select.getSelected()[0], currentCard);
+    renderSavedFilm()
     if (select.getSelected()[0] === 'all') {
         createPaginationMarkUp(getMovies, currentCard);
     } else {
         createPaginationMarkUp(arrayFilter, currentCard);
     }
 }
-console.log(arrayFilter)
+
 function paginationSavedCards(array, firstPosition, quantityCard) {
-    // const sliceMovies = firstPosition + quantityCard;
     const shownMovies = array.slice(firstPosition, firstPosition + quantityCard);
     currentCard = firstPosition + shownMovies.length;
-    const isMore = array.length > currentCard; //false ar true
-    console.log(currentCard, array.length);
+    const isMore = array.length > currentCard; //false or true
     return {
         listHTML: shownMovies
             .map(film => {
@@ -110,15 +116,7 @@ function createPaginationMarkUp(array, lastCard) {
 function onNewSelect(genreId) {
     currentCard = 0;
     refs.listCards.innerHTML = '';
-    // if (String(genreId[0].value) === 'all') {
-    //     arrayFilter = [];
-    //     createPaginationMarkUp(getMovies, currentCard);
-    // } else {
-    //     arrayFilter = getMovies.filter(({ genre_ids }) =>
-    //         genre_ids.includes(Number(genreId[0].value))
-    //     );
-    //     createPaginationMarkUp(arrayFilter, currentCard);
-    // }
+
     if (String(genreId[0].value) === 'all') {
         arrayFilter = [];
         createPaginationMarkUp(getMovies, currentCard);
@@ -141,16 +139,9 @@ function showMessage() {
     refs.selectWrapper.style.visibility = 'hidden';
 
     const messageMarkup =
-        '<p class="lib-error">No movies in the selected genre!</p> <a href="./catalog.html" class="lib-btn-search-movie">Search movie</a>';
+        '<li class="lib-item-message"><p class="lib-error">No movies in the selected genre!</p> <a href="./catalog.html" class="lib-btn-search-movie">Search movie</a></li>';
     refs.listCards.innerHTML = messageMarkup;
     // refs.wrapperForMessage.insertAdjacentHTML('beforeend', messageMarkup)
     refs.btnLoadMore.style.display = 'none';
 }
 
-if (body.classList.contains(js - light - theme)) {
-    selectWrapper.style.bagckroundColor = "black";
-    selectWrapper.style.color = "white";
-} else {
-    selectWrapper.style.bagckroundColor = "white";
-    selectWrapper.style.color = "black";
-}
