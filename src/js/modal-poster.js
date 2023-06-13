@@ -1,6 +1,7 @@
 //  -------------------------------------------- IMPORTS -------------------------------------------------
 
 import TMDBApiService from './tmdb-api';
+// import getGenres from './get-genres';
 // import dataFromApi from '../testcatalog.json';
 // import {
 //   saveToLibrary,
@@ -43,18 +44,28 @@ const refs = {
 
 const myService = new TMDBApiService();
 
-function openModalCard(id) {
-  refs.Backdrop.classList.remove('is-hidden');
-  refs.ModalCont.classList.remove('is-hidden');
-  document.body.style.overflow = 'hidden';
-  document.addEventListener('keydown', onEscBtnPress);
-  document.addEventListener('click', onBackdropClick);
-  myService.fetchMovieById(id).then(movie => createMarkup(movie));
+async function openModalCard(id) {
+  try {
+    const { data } = await myService.fetchMovieById(id);
+    console.log('modal', data);
+    document.querySelector('.modal-poster').innerHTML = createMarkup(data);
+    document.querySelector('.backdrop').classList.remove('is-hidden');
+    document.querySelector('.modal-poster').classList.remove('is-hidden');
+    document.body.style.overflow = 'hidden';
+    document.addEventListener('keydown', onEscBtnPress);
+    document.addEventListener('click', onBackdropClick);
+    document.getElementById('modal-close-btn').addEventListener('click', () => {
+      closeModal();
+    });
+  } catch (error) {
+    console.error(error);
+  }
 }
 
 // ------------------------------------------- CREATING MARKUP ---------------------------------------------
 
 function createMarkup(movie) {
+  console.log(movie);
   return `
   <div class="modal-film-container">
   <button id="modal-close-btn" class="close-button">
@@ -98,20 +109,22 @@ function createMarkup(movie) {
             </tr>
             <tr class="modal-card-tab-row">
                 <td class="modal-card-data">Genre</td>
-                <td class="modal-card-data-get">${getGenres()
-                  .filter(({ id }) => movie.genre_ids.includes(id))
-                  .map(({ name }) => name)
-                  .slice(0, 2)
-                  .join(', ')}</td>
+                <td class="modal-card-data-get"> убрал </td>
             </tr>
         </table>
         <p class="modal-card-about">About</p>
         <p class="modal-card-about-descr">${movie.overview}</p>
-        <button type="button" class="modal-card-btn" data-movie-id="${id}">Add to my library</button>
+        <button type="button" class="modal-card-btn" data-movie-id="${
+          movie.id
+        }">Add to my library</button>
     </div>
     `;
 }
-
+// ${getGenres()
+//                   .filter(({ id }) => movie.genre_ids.includes(id))
+//                   .map(({ name }) => name)
+//                   .slice(0, 2)
+//                   .join(', ')}
 //   ------------------------------ ADDING & REMOVING FROM LIBRARY --------------------------------------
 
 function AddFilmToLibrary() {
@@ -134,10 +147,6 @@ function changeBtnLibrary(filmsId, filmBtn) {
 }
 
 //  --------------------------------------- CLOSING MODAL ---------------------------------------------
-
-document.getElementById('modal-close-btn').addEventListener('click', () => {
-  closeModal();
-});
 
 function closeModal() {
   refs.Backdrop.classList.add('is-hidden');
@@ -185,8 +194,6 @@ function closeModal() {
 
 //   --------------------------------------- NOTES ------------------------------------------------------
 
-
-
 // ------------------------------------------ CLOSE MODAL -----------------------------------------------
 
 // document.getElementById('modal-close-btn').addEventListener('click', () => {
@@ -231,3 +238,4 @@ function closeModal() {
 // // ref.innerHTML = results
 // //   .map(a => getFilmCard(a, x => String(Math.round(x * 2) / 2)))
 // //   .join('');
+// openModalCard(603692);
