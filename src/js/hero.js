@@ -1,11 +1,14 @@
 
 import TMDBApiService from './tmdb-api';
 import generateMarkup from './hero-render';
-
+import { Buffer } from 'buffer'
 import Swiper from 'swiper';
+
 // import Swiper and modules styles
-import 'swiper/swiper.min.css'
-//import 'swiper/modules/pagination/pagination.min.css'
+import 'swiper/swiper.min.css';
+import 'swiper/modules/pagination/pagination.min.css';
+import 'swiper/modules/navigation/navigation.min.css';
+import 'swiper/modules/autoplay/autoplay.min.css';
 
 
 const myApiService = new TMDBApiService();
@@ -46,8 +49,10 @@ async function createMarkupFilms() {
   }
 }
 
-
 createMarkupFilms();
+
+
+
 
 const swiper = new Swiper('.swiper-container', {
   loop: true,                         //loop
@@ -55,18 +60,12 @@ const swiper = new Swiper('.swiper-container', {
       el: '.swiper-pagination',
   },
   autoplay: {                         
-    delay: 2000,  
+    delay: 500,  
 },
   navigation: {                       //navigation（arrows）
       nextEl: ".swiper-button-next",
       prevEl: ".swiper-button-prev",
   },
 });
-
-
-
-
-
-
 
 
