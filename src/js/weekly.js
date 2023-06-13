@@ -9,7 +9,10 @@ const weeklyGallery = document.querySelector('.weekly-gallery');
 weeklyGallery.addEventListener('click', hendlerOpenModalWindow);
 
 function hendlerOpenModalWindow(evt) {
-  console.log(evt.target.getAttribute('film-id'), 'Це id фільму');
+  const el = evt.target.closest('[film-id]');
+  if (el) {
+    console.log(el.getAttribute('film-id'));
+  }
 }
 
 renderGalleryWeekly();
@@ -19,11 +22,8 @@ function renderGalleryWeekly() {
     .fetchTrendingWeekMovies()
     .then(resp => {
       const movies = resp.data.results;
-      console.log(movies); //отримуємо першу сторінку трендов тижня (20шт)
 
-      // отримуємо масив з 3х рендомних індексів
       const indexes = rendomIndx(movies.length - 1);
-      // отримуємо масив з 3х фильмів.
       const weeklyMovies = [];
 
       indexes.forEach(index => {
@@ -36,19 +36,9 @@ function renderGalleryWeekly() {
       }
 
       weeklyGallery.innerHTML = createMarkup(weeklyMovies);
-      console.log(weeklyMovies);
     })
     .catch(e => console.error(e));
 }
-
-// function rendomIndex(x) {
-//   const rendomIndexes = [];
-//   for (let i = 0; i < 3; i++) {
-//     rendomIndexes.push(Math.floor(Math.random() * x));
-//   }
-
-//   return rendomIndexes;
-// }
 
 function rendomIndx(x) {
   const moviesIndx = [];
@@ -60,7 +50,6 @@ function rendomIndx(x) {
       continue;
     } else {
       moviesIndx.push(num);
-      console.log(moviesIndx);
     }
   }
   return moviesIndx;
