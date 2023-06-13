@@ -11,7 +11,7 @@ let options = {
 let observer = new IntersectionObserver((entieres, observer) => {
   entieres.forEach(ent => {
     if (ent.target === refs.switch) {
-      refs.totop.style.display = ent.isIntersecting ? 'none' : 'inline-block';
+      refs.totop.style.display = ent.isIntersecting ? 'none' : 'flex';
     }
   });
 }, options);
@@ -22,7 +22,20 @@ export function totopOn() {
 
 export function totopOff() {
   observer.unobserve(refs.switch);
-  refs.totop.style.display = 'none';
+  refs.totop.style.display = 'flex';
 }
+refs.totop.addEventListener('click', e => {
+  window.scroll({
+    top: 0,
+    left: 0,
+    behavior: 'smooth',
+  });
+
+  // window.scrollBy({
+
+  //   top: cardHeight * 2,
+  //   behavior: 'smooth',
+  // });
+});
 
 totopOn();

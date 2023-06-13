@@ -1,6 +1,19 @@
 .totop {
   position: fixed;
-  bottom: 5px;
-  right: 5px;
-  background-color: tomato;
+  bottom: 40px;
+  right: 25px;
+  z-index: 1001;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  height: 30px;
+  width: 80px;
+  font-size: 12px;
+  line-height: 1.17;
+  font-weight: 500;
+  color: var(--);
+  border-radius: 60px;
+  background: var(--color-linear-one);
+  color: var(--color-white);
 }
