@@ -38,53 +38,41 @@
   padding: 30px;
   overflow-y: none;
   display: none;
+  // pointer-events: none;
+  z-index: 20;
+}
+.modal__main {
+  position: relative;
+  background-color: var(--color-background);
+
+  .js-light-theme & {
+    background-color: #fff;
+  }
+  margin: auto;
+  color: #000;
+  cursor: default;
+  border-radius: 16px;
+  z-index: 25;
 }
 
 @media screen and (max-width: 767px) {
   .modal__main {
-    position: relative;
-
-    background-color: #fff;
-    margin: auto;
-    color: #000;
-    border-radius: 16px;
-
     width: 280px;
     height: 289px;
-
-    cursor: default;
   }
 }
 
 @media screen and (min-width: 768px) and (max-width: 1199px) {
   .modal__main {
-    position: relative;
-
-    background-color: #fff;
-    margin: auto;
-    color: #000;
-    border-radius: 16px;
-
     width: 609px;
     height: 400px;
-
-    cursor: default;
   }
 }
 
 @media screen and (min-width: 1200px) {
   .modal__main {
-    position: relative;
-
-    background-color: #fff;
-    margin: auto;
-    color: #000;
-    border-radius: 16px;
-
     width: 700px;
     height: 400px;
-
-    cursor: default;
   }
 }
 
