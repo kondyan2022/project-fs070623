@@ -36,7 +36,7 @@ myService.fetchTrendingWeekMovies()
   function displayMovies(movies) {
     if (movies.length === 0) {
       // Показати повідомлення, що трендові фільми тижня не знайдено
-      Notiflix.Notify.failure('No trending movies found');
+      Notiflix.Notify.info('No trending movies found');
     } else {
       newElement.innerHTML = movies
         .map((movie) => getFilmCard(movie, (x) => String(Math.round(x * 2) / 2)))
@@ -52,9 +52,11 @@ ref.input.addEventListener('input', onInput);
         console.log(valueInp);
         if(valueInp === '') {
        Notiflix.Notify.info('Please, enter the name of the movie');
-       ref.deleteBtnInput.classList.add('cataloge-bnt-delete');
+       ref.deleteBtnInput.classList.add('btn-hide');
        ref.oopsNotFind.classList.add('oops-not-find-hide');
        ref.choseMovie.classList.remove('choose-movie-hide');
+       refs.paginationElem.classList.add('tui-pagination');
+       newElement.innerHTML = "";
         }
     }
 
@@ -62,40 +64,43 @@ ref.input.addEventListener('input', onInput);
 
     let searchInput = '';
     let searchYear = '';
- 
+  let currentPage = 1;
 
-function onSubmit(e) {
-    e.preventDefault();
-    searchInput = e.currentTarget.elements.SearchQuery.value.trim();
-    searchYear = e.currentTarget.elements.selectYear.value;
-    if(searchInput == '') {
-        Notiflix.Notify.info('введіть ключове слово для пошуку фільму')
-        return;
-    }  if (searchYear === '') {
-    // Якщо рік не вибрано, проводимо пошук без року
-    myService.releaseYear = null;
-  } else {
-    // Якщо рік вибрано, проводимо пошук з вказаним роком
-    myService.releaseYear = searchYear;
+    function onSubmit(e) {
+      e.preventDefault();
+      searchInput = e.target.elements.SearchQuery.value.trim();
+      searchYear = e.target.elements.selectYear.value;
+      if (searchInput === '') {
+          Notiflix.Notify.info('Введіть ключове слово для пошуку фільму');
+          return;
+      }
+      if (searchYear === '') {
+          myService.releaseYear = null;
+      } else {
+          myService.releaseYear = searchYear;
+      }
+      myService.searchQuery = searchInput;
+      myService.fetchSearchMovies(1)
+          .then((res) => {
+              const movies = res.data.results;
+              if (movies.length === 0) {
+                  Notiflix.Notify.failure('Фільми не знайдені');
+                  ref.choseMovie.classList.add('choose-movie-hide');
+                  ref.oopsNotFind.classList.add('oops-not-find-hide');
+                  ref.deleteBtnInput.classList.add('cataloge-bnt-delete');
+              } else {
+                  displayMovies(movies);
+                  currentPage = 1;
+                  totalPages = res.data.total_pages;
+                  pagination.reset(totalPages)
+
+                  console.log(`Total pages: ${totalPages}`)
+              }
+          })
+          .catch((error) => {
+              console.error(error);
+          });
   }
-
-myService.SearchQuery = ref.input.value.trim(); // Встановлюємо значення пошукового запиту
-myService.fetchSearchMovies(1) // Передаємо номер сторінки (наприклад, 1)
-  .then((res) => {
-    const movies = res.data.results;
-    if (movies.length === 0) {
-      Notiflix.Notify.failure('No movies found');
-      ref.choseMovie.classList.add('choose-movie-hide');
-        ref.oopsNotFind.classList.add('oops-not-find-hide');
-        ref.deleteBtnInput.classList.add('cataloge-bnt-delete');
-    } else {
-      displayMovies(movies);
-    }
-  })
-  .catch((error) => {
-    console.error(error);
-  });
-    }
 
 
 ref.deleteBtnInput.addEventListener('click', deleteValueInput);
@@ -111,13 +116,14 @@ ref.oopsNotFind.classList.add('oops-not-find-hide');
 //         .map(a => getFilmCard(a,x=>
 //             String(Math.round(x * 2) / 2)))
 //             .join('')
-// try {
-//     const response = await myService.fetchTrendingWeekMovies()
-//     const trendingMovies = response.data.results;
-//     displayMovies(trendingMovies);
-// } catch (error){
-//     console.error(error)
-// }
+try {
+    const response = await myService.fetchTrendingWeekMovies()
+    const trendingMovies = response.data.results;
+    displayMovies(trendingMovies);
+} catch (error){
+    console.error(error)
+}
+
 }
 
 
