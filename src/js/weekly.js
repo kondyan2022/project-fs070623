@@ -1,5 +1,6 @@
 import TMDBApiService from './tmdb-api';
 import getFilmCard from './film-card';
+import getFiveStar from './fivezerostar';
 //import getGenres from './get-genres';
 
 const myService = new TMDBApiService();
@@ -8,7 +9,10 @@ const weeklyGallery = document.querySelector('.weekly-gallery');
 weeklyGallery.addEventListener('click', hendlerOpenModalWindow);
 
 function hendlerOpenModalWindow(evt) {
-  console.log(evt.target.getAttribute('film-id'), 'Це id фільму');
+  const el = evt.target.closest('[film-id]');
+  if (el) {
+    console.log(el.getAttribute('film-id'));
+  }
 }
 
 renderGalleryWeekly();
@@ -18,11 +22,8 @@ function renderGalleryWeekly() {
     .fetchTrendingWeekMovies()
     .then(resp => {
       const movies = resp.data.results;
-      console.log(movies); //отримуємо першу сторінку трендов тижня (20шт)
 
-      // отримуємо масив з 3х рендомних індексів
-      const indexes = rendomIndex(movies.length - 1);
-      // отримуємо масив з 3х фильмів.
+      const indexes = rendomIndx(movies.length - 1);
       const weeklyMovies = [];
 
       indexes.forEach(index => {
@@ -31,22 +32,25 @@ function renderGalleryWeekly() {
       });
 
       function createMarkup(arr) {
-        return weeklyMovies
-          .map(a => getFilmCard(a, x => String(Math.round(x * 2) / 2)))
-          .join('');
+        return weeklyMovies.map(a => getFilmCard(a, getFiveStar)).join('');
       }
 
       weeklyGallery.innerHTML = createMarkup(weeklyMovies);
-      console.log(weeklyMovies);
     })
     .catch(e => console.error(e));
 }
 
-function rendomIndex(x) {
-  const rendomIndexes = [];
-  for (let i = 0; i < 3; i++) {
-    rendomIndexes.push(Math.floor(Math.random() * x));
-  }
+function rendomIndx(x) {
+  const moviesIndx = [];
 
-  return rendomIndexes;
+  while (moviesIndx.length < 3) {
+    const num = Math.floor(Math.random() * x);
+
+    if (moviesIndx.includes(num)) {
+      continue;
+    } else {
+      moviesIndx.push(num);
+    }
+  }
+  return moviesIndx;
 }

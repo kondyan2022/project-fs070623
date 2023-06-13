@@ -2,37 +2,39 @@ const refs = {
   toggleSwitch: document.querySelector('.toggle-switch'),
   checkbox: document.querySelector('.checkbox'),
   body: document.querySelector('body'),
-  logo: document.querySelector('.logo-title'),
-  navigation: document.querySelector('.header-nav'),
+  slider: document.querySelector('.slider'),
 };
 
 function setTheme(theme) {
-  if (theme === 'dark') {
+  if (theme === 'light') {
     refs.body.classList.add('js-light-theme');
-    refs.logo.classList.add('js-light-theme-logo');
-    refs.navigation.classList.add('js-light-theme-logo');
+    setTimeout(() => {
+      refs.slider.style.transition =
+        'transform 400ms cubic-bezier(0.4, 0, 0.2, 1)';
+    }, 500);
     refs.checkbox.checked = true;
   } else {
     refs.body.classList.remove('js-light-theme');
-    refs.logo.classList.remove('js-light-theme-logo');
-    refs.navigation.classList.remove('js-light-theme-logo');
     refs.checkbox.checked = false;
+    refs.slider.style.transition = '';
   }
 }
 
-function handleToggle() {
+function onChangeToggle() {
   if (refs.checkbox.checked) {
-    setTheme('dark');
-    localStorage.setItem('theme', 'dark');
-  } else {
     setTheme('light');
     localStorage.setItem('theme', 'light');
+  } else {
+    setTheme('dark');
+    localStorage.setItem('theme', 'dark');
   }
 }
 
 const savedTheme = localStorage.getItem('theme');
 if (savedTheme) {
   setTheme(savedTheme);
+} else {
+  setTheme('dark');
 }
 
-refs.toggleSwitch.addEventListener('change', handleToggle);
+refs.toggleSwitch.addEventListener('click', onChangeToggle);
