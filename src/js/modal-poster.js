@@ -1,13 +1,13 @@
 //  -------------------------------------------- IMPORTS -------------------------------------------------
 
 import TMDBApiService from './tmdb-api';
-import dataFromApi from '../testcatalog.json';
-import {
-  saveToLibrary,
-  removeFromLibrary,
-  getLibraryList,
-  isInLibrary,
-} from './local-storage';
+// import dataFromApi from '../testcatalog.json';
+// import {
+//   saveToLibrary,
+//   removeFromLibrary,
+//   getLibraryList,
+//   isInLibrary,
+// } from './local-storage';
 
 //  ------------------------------------------ VARIABLES --------------------------------------------------
 
@@ -17,85 +17,67 @@ const refs = {
   Backdrop: document.querySelector('.backdrop'),
   ModalCont: document.querySelector('.modal-poster-container'),
   // cardsfilm: document.querySelector(''),
-  FilmBtn: document.querySelector('.film__button'),
+  FilmBtn: document.querySelector('.modal-card-btn'),
   libraryList: document.querySelector('.library-list'),
   // cardList: document.querySelector(''),
 };
 
 // ------------------------------------------ OPENING MODAL --------------------------------------------------
 
-if (refs.openModal) {
-  refs.openModal.addEventListener('click', createModal);
-}
+// if (refs.openModal) {
+//   refs.openModal.addEventListener('click', createModal);
+// }
 
-//   Для того, щоб все це спрацьовувало, треба на сторінках (HOME, CATALOG)
-//   додати в розмітці карточкам клас "film-card" як у відповідному файлі
+// //   Для того, щоб все це спрацьовувало, треба на сторінках (HOME, CATALOG)
+// //   додати в розмітці карточкам клас "film-card" як у відповідному файлі
 
-function createModal(event) {
-  const selectedMovie = event.target.closest('li');
-  selectedMovieId = Number(selectedMovie.getAttribute('data-id'));
-  refs.closeModal.addEventListener('click', closeModalDescr);
+// function createModal(event) {
+//   const selectedMovie = event.target.closest('li');
+//   selectedMovieId = Number(selectedMovie.getAttribute('data-id'));
+//   refs.closeModal.addEventListener('click', closeModalDescr);
 
-  createMarkup(selectedMovieId);
+//   createMarkup(selectedMovieId);
 
-  openModalCard();
-}
+//   openModalCard();
+// }
 
-function openModalCard(event) {
+const myService = new TMDBApiService();
+
+function openModalCard(id) {
   refs.Backdrop.classList.remove('is-hidden');
   refs.ModalCont.classList.remove('is-hidden');
   document.body.style.overflow = 'hidden';
   document.addEventListener('keydown', onEscBtnPress);
   document.addEventListener('click', onBackdropClick);
-}
-
-//   ------------------------------ ADDING & REMOVING FROM LIBRARY --------------------------------------
-
-function AddFilmToLibrary() {
-  const filmsId2 = filmBtn.dataset.id;
-  if (getMovieFromLibrary(selectedMovieId)) {
-    removeMovieFromLibrary(selectedMovieId);
-    filmBtn.innerHTML = 'Add to Library';
-  } else {
-    addMovieToLibrary(selectedMovieId);
-    filmBtn.innerHTML = 'Remove from Library';
-  }
-}
-
-function changeBtnLibrary(filmsId, filmBtn) {
-  if (getMovieFromLibrary(filmsId)) {
-    filmBtn.innerHTML = 'Remove from Library';
-  } else {
-    filmBtn.innerHTML = 'Add to Library';
-  }
+  myService.fetchMovieById(id).then(movie => createMarkup(movie));
 }
 
 // ------------------------------------------- CREATING MARKUP ---------------------------------------------
 
 function createMarkup(movie) {
   return `
-    <div class="modal-card-left-wrap">
-        <div class="modal-card-thumb">
-            <img
+  <div class="modal-film-container">
+  <button id="modal-close-btn" class="close-button">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="close-icon">
+    <path d="M18 6L6 18M6 6l12 12"></path>
+  </svg>
+</button>
+            <img class= "modal-img"
                 srcset="
                     https:/image.tmdb.org/t/p/w342/${movie.poster_path} 342w,
-                    https:/image.tmdb.org/t/p/w500/${movie.backdrop_path} 500w,
-                    https:/image.tmdb.org/t/p/w780/${movie.backdrop_path} 780w,
+                    https:/image.tmdb.org/t/p/w500/${movie.poster_path} 500w,
+                    https:/image.tmdb.org/t/p/w780/${movie.poster_path} 780w,
                     https:/image.tmdb.org/t/p/original/${
-                      movie.backdrop_path
+                      movie.poster_path
                     } 2000w
                 "
-                sizes="(min-width: 320px),
-                    (min-width: 768px),
-                    (min-width: 1280px),
+                sizes="(min-width:1280px) 375px,
+                (min-width:768px) 294px,
+                (min-width:320px) 248px,
                 "
-                src="https:/image.tmdb.org/t/p/original/${movie.backdrop_path}"
+                src="https:/image.tmdb.org/t/p/original/${movie.poster_path}"
                 alt="${movie.title}"
-                class="modal-card-image"
             />
-        </div>
-    </div>
-    <div class="umodal-card-right-wrap">
         <h2 class="modal-card-movie-title">${movie.title}</h2>
         <table class="modal-card-table">
             <tr class="modal-card-tab-row">
@@ -125,11 +107,30 @@ function createMarkup(movie) {
         </table>
         <p class="modal-card-about">About</p>
         <p class="modal-card-about-descr">${movie.overview}</p>
-        <button type="button" class="modal-card-btn" data-movie-id="${
-          movie.id
-        }">Add to my library</button>
+        <button type="button" class="modal-card-btn" data-movie-id="${id}">Add to my library</button>
     </div>
     `;
+}
+
+//   ------------------------------ ADDING & REMOVING FROM LIBRARY --------------------------------------
+
+function AddFilmToLibrary() {
+  const filmsId2 = filmBtn.dataset.id;
+  if (getMovieFromLibrary(selectedMovieId)) {
+    removeMovieFromLibrary(selectedMovieId);
+    filmBtn.innerHTML = 'Add to Library';
+  } else {
+    addMovieToLibrary(selectedMovieId);
+    filmBtn.innerHTML = 'Remove from Library';
+  }
+}
+
+function changeBtnLibrary(filmsId, filmBtn) {
+  if (getMovieFromLibrary(filmsId)) {
+    filmBtn.innerHTML = 'Remove from Library';
+  } else {
+    filmBtn.innerHTML = 'Add to Library';
+  }
 }
 
 //  --------------------------------------- CLOSING MODAL ---------------------------------------------

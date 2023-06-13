@@ -20,28 +20,148 @@
   }
 }
 
+// ---------------------------------------------- CONTAINER -------------------------------------------------------
 
+.modal-film {
+  z-index: 10;
+  background-color: var(--color-background);
+  box-shadow: 1px 1px 14px 4px rgba(255, 107, 8, 0.42);
+  text-align: left;
 
+  position: fixed;
 
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.7);
 
+  width: 280px;
+  min-height: 847px;
+  padding: 52px 16px;
+  border-radius: 16px;
 
+  @media screen and (min-width: 768px) {
+    transform: translate(-50%, -50%) scale(0.9);
+    top: 50%;
+    left: 50%;
+    min-width: 704px;
+    min-height: 488px;
+    padding: 44px;
+  }
+  @media screen and (min-width: 1200px) {
+    transform: translate(-50%, -50%) scale(0.9);
+    top: 50%;
+    left: 50%;
+    min-width: 846px;
+    min-height: 598px;
+    padding: 60px;
+    border-radius: 20px;
+  }
+}
 
+.modal-film-container {
+  padding: 0;
+  box-sizing: border-box;
+  width: 248px;
+
+  @media screen and (min-width: 768px) {
+    width: 616px;
+    height: 400px;
+    display: flex;
+  }
+
+  @media screen and (min-width: 1200px) {
+    width: 726px;
+    height: 478px;
+    display: flex;
+  }
+}
+
+.modal-card-table {
+}
+
+.modal-card-tab-row {
+}
+
+//  ---------------------------------------------- IMAGE ---------------------------------------------------------
+
+.modal-img {
+  width: 248px;
+  height: 315px;
+  margin-bottom: 22px;
+
+  @media screen and (min-width: 768px) {
+    width: 294px;
+    height: 400px;
+    margin: 0 16px 0 0;
+  }
+
+  @media screen and (min-width: 1200px) {
+    width: 375px;
+    height: 478px;
+    margin: 0 20px 0 0;
+  }
+}
+
+//  -------------------------------------------------- TEXT -------------------------------------------------------
+
+.modal-card-movie-title {
+  color: var(--color-white);
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 1.15;
+  margin-bottom: 29px;
+  @media screen and (min-width: 768px) {
+    font-size: 24px;
+    line-height: calc(28 / 24);
+    margin-bottom: 26px;
+  }
+
+  @media screen and (min-width: 1200px) {
+    margin-bottom: 28px;
+    font-size: 24px;
+    line-height: calc(32 / 24);
+  }
+}
 
 // ------------------------------------------------ BUTTONS -------------------------------------------------------
 
 .close-button {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    width: 30px;
-    height: 30px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    color: #fff;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 30px;
+  height: 30px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.close-icon {
+  stroke: var(--color-secondary-text);
+  &:hover,
+  &:focus {
+    stroke: (--color-orange);
+  }
+}
+
+//  ------------------------------------------- LIGHT THEME -----------------------------------------------------------
+
+.js-light-theme {
+  .modal-film-container {
+    z-index: 10;
+    background-color: var(--color-white);
+    box-shadow: px 1px 14px 4px rgba(0, 0, 0, 0.22);
   }
 
-  
+  .close-icon {
+    stroke: var(--color-secondary-black);
+  }
+
+  .modal-card-movie-title {
+    color: var(--color-background);
+  }
+}
