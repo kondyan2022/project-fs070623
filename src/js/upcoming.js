@@ -1,6 +1,5 @@
 import TMDBApiService from './tmdb-api';
 import getGenres from './get-genres';
-import dataFromApi from '../testcatalog.json';
 import {
     saveToLibrary,
     getLibraryList,
@@ -11,22 +10,22 @@ import {
 const wrapperForRender = document.querySelector('.js-upcoming-wrapper');
 const serviceUpcoming = new TMDBApiService();
 
-console.log(serviceUpcoming);
+// console.log(serviceUpcoming);
 
 serviceUpcoming
     .fetchUpcomingMovies()
     .then((resp) => {
-        console.log("Upcoming", resp);
+        // console.log("Upcoming", resp);
 
         const data = resp.data;
-        console.log(data);
+        // console.log(data);
 
         const datasUpcoming = {
             pageCurrent: data.page,
             totalResults: data.total_results,
             results: data.results
         }
-        console.log(datasUpcoming)
+        // console.log(datasUpcoming)
 
         const arrayResults = datasUpcoming.results;
 
@@ -39,17 +38,19 @@ serviceUpcoming
                 const button = event.target;
                 const movieId = event.target.dataset.movieId;
                 const getMovie = arrayResults.find((movie) => movie.id == movieId);
-                console.log(getMovie)
+                // console.log(getMovie)
                 if (isInLibrary(movieId)) {
                     removeFromLibrary(movieId);
                     button.textContent = "Add to my library";
-                    console.log("remove")
+                    // console.log("remove")
                 } else {
                     saveToLibrary(getMovie);
                     button.textContent = "Remove from my library"
-                    console.log("save")
+                    // console.log("save")
                 }
             });
+
+            // movieIsInLibrary(movieId)
 
         } else if (arrayResults.length === 0) {
             wrapperForRender.innerHTML = '<p class="upcoming-error">OOPS... We are very sorry! Upcoming this month not found.</p>'
@@ -57,6 +58,14 @@ serviceUpcoming
     })
     .catch((e) => console.error(e));
 
+// function movieIsInLibrary(movieId) {
+//     const arrLibrary = getLibraryList();
+//     // arrLibrary.some((movie) => movie.id == movieId);
+//     // if (arrLibrary.some((movie) => movie.id == movieId)) {
+//     //     button.textContent = "Remove from my library";
+//     //     removeFromLibrary(movieId);
+//     // }
+// }
 
 function creatMarkup(movie) {
     return `
@@ -69,13 +78,15 @@ function creatMarkup(movie) {
                     https://image.tmdb.org/t/p/w1280/${movie.backdrop_path}      1280w,
                     https://image.tmdb.org/t/p/original/${movie.backdrop_path}  3840w
                 "
-                sizes="(min-width: 320px) 280px,
+                sizes="(min-width: 320px) 498px,
                         (min-width: 768px) 704px,
                         (min-width: 1280px) 805px,
                         100vw"
                 src="https://image.tmdb.org/t/p/w300/${movie.backdrop_path}"
                 alt="${movie.title}"
                 class="upcoming-image"
+                width="1280"
+                height="720"
             />
         </div>
     </div>
@@ -119,7 +130,7 @@ function renderToMarkup(array) {
         .filter(movie => movie.backdrop_path !== null)
         .map(movie => creatMarkup(movie))[randomIndex];
 
-    console.log(randomIndex);
+    // console.log(randomIndex);
 
     wrapperForRender.innerHTML = randomMovie;
 

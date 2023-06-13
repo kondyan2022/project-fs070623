@@ -101,12 +101,13 @@
   border-color: var(--color-orange);
   border-radius: 74px;
   transition: color linear 500ms, background linear 500ms,
-    border-color linear 500ms;
+    border-color linear 500ms, box-shadow linear 400ms;
 }
 .up-btn:is(:hover, :focus) {
   color: var(--color-orange);
   background: var(--color-white);
   border-color: transparent;
+  box-shadow: 1px 1px 14px 4px #ff6b086b;
 }
 
 .up-thumb {
