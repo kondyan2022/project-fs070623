@@ -4,14 +4,14 @@ const refs = {
   body: document.querySelector('body'),
   slider: document.querySelector('.slider'),
 };
+setTimeout(() => {
+  refs.toggleSwitch.style.opacity = 1;
+}, 500);
 
 function setTheme(theme) {
   if (theme === 'light') {
     refs.body.classList.add('js-light-theme');
-    setTimeout(() => {
-      refs.slider.style.transition =
-        'transform 400ms cubic-bezier(0.4, 0, 0.2, 1)';
-    }, 500);
+
     refs.checkbox.checked = true;
   } else {
     refs.body.classList.remove('js-light-theme');
