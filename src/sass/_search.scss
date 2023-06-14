@@ -62,6 +62,15 @@
   }
 }
 
+body.js-light-theme .cataloge-search-input {
+    border: 1px solid #595959;
+    color: #595959;
+}
+
+body.js-light-theme .cataloge-search-years {
+    border: 1px solid #595959;
+    color: #595959;
+}
 .cataloge-search-years {
     outline: none;
     display: block;
@@ -96,6 +105,16 @@ box-sizing: border-box;
         line-height: 1.5;
         height: 48px;
   }
+}
+
+.year {
+    background-color: #111;
+    color: white;
+}
+
+body.js-light-theme .year {
+    background-color: white;
+    color: black;
 }
 
 .cataloge-btn-delete {
@@ -135,6 +154,10 @@ box-sizing: border-box;
     
 }
 
+.btn-hide {
+    display: none;
+}
+
 body.js-light-theme .icon-btn-delete {
     stroke: #282828;
 }
@@ -142,17 +165,23 @@ body.js-light-theme .icon-btn-delete {
 body.js-light-theme .icon-btn-delete:hover {
     stroke: #F87719;
 }
-.btn-hide {
-    display: none;
-}
+
 
 .icon-btn-delete {
-   color: #FFFFFF;
+   stroke: #f8f8f8;
   
 }
 
 .icon-btn-delete:hover {
-    color: #f87719;
+    stroke: #f87719;
+}
+
+body.js-light-theme .icon-btn-delete {
+    stroke: #282828;
+}
+
+body.js-light-theme .icon-btn-delete:hover {
+    stroke: #F87719;
 }
 
 .cataloge-btn-search{
@@ -164,6 +193,11 @@ body.js-light-theme .icon-btn-delete:hover {
     height: 40px;
     background: linear-gradient(141.22deg, #FFC226 9.4%, #F84119 91.91%);
     border-radius: 50%;
+}
+
+body.js-light-theme .cataloge-btn-search:hover {
+    background-color: #F5F5F5;
+
 }
 
 @media screen and (min-width:768px) {
@@ -178,12 +212,29 @@ body.js-light-theme .icon-btn-delete:hover {
       width: 48px;
       height: 48px;
     }
-    
+   
 }
 
-// .cataloge-btn-search:hover{
-//     background: #FFFFFF;
-// }
+.cataloge-btn-search:hover {
+    background: #fff;
+    border: 1px solid #f87719;
+}
+ .icon-search {
+    stroke: #fff;
+ }
+
+ body.js-light-theme .icon-search {
+    stroke: #111;
+ }
+ body.js-light-theme .cataloge-btn-search:hover{
+    background: #fff;
+ }
+ 
+ .cataloge-btn-search:hover .icon-search,
+ .cataloge-btn-search:focus .icon-search {
+    stroke: #f87719;
+    
+ }
 
 .warning {
     display: none;
@@ -220,9 +271,33 @@ body.js-light-theme .icon-btn-delete:hover {
  .film-card:hover {
       box-shadow: 1px 1px 14px 4px rgba(255, 107, 8, 0.42);
     }
+
+    body.js-light-theme .film-card:hover {
+        box-shadow: 2px 2px 10px 8px rgba(107, 104, 104, 0.42);
+    }
+    
+    // body.js-light-theme .film-card:hover {
+    //     box-shadow: 1px 1px 14px 4px rgba(255, 155, 5, 0.61);
+    // }
+
+//курсор миші на картках з фільмами
 .film-card {
     border-radius: 5%;
-}
+    cursor: url('../images/tablet-logo.svg'), auto;
+    }
+    //анімація на картках
+      .film-card {
+        display: inline-block;
+        overflow: hidden;
+      }
+      
+      .film-card img {
+        transition: transform 0.3s ease;
+      }
+      
+      .film-card:hover img {
+        transform: scale(1.05);
+      }
 
 .catalog-list-gallery {
     width: 280px;
@@ -293,10 +368,10 @@ body.js-light-theme .icon-btn-delete:hover {
     border-radius: 50%;
 }
 
-// .js-light-theme.tui-pagination .tui-page-btn {
-//     border: 1px solid  #f87719 ;
-//     color: #282828; ;
-// }
+body.js-light-theme .tui-pagination .tui-page-btn {
+    border: 1px solid  #f87719 ;
+    color: #282828; ;
+}
 
 .tui-pagination .tui-is-selected, .tui-pagination strong {
     color: #f8f8f8;
@@ -311,9 +386,9 @@ body.js-light-theme .icon-btn-delete:hover {
     border: none;
 }
 
-// .js-light-theme.tui-pagination .tui-page-btn:hover {
-//  color: #f8f8f8;
-// }
+body.js-light-theme .tui-pagination .tui-page-btn:hover {
+ color: #f8f8f8;
+}
 
 .tui-pagination .tui-prev, .tui-pagination .tui-next {
     overflow: hidden;
@@ -324,7 +399,7 @@ body.js-light-theme .icon-btn-delete:hover {
     line-height: 26px;
     white-space: nowrap;
     font-weight: normal;
-   border:  none;
+//    border:  none;
    
 }
 

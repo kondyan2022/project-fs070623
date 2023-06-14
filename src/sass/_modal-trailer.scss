@@ -3,6 +3,7 @@ body.modal-open {
 }
 
 .modal {
+  visibility: hidden;
   z-index: 20;
   position: fixed;
   inset: 0;
