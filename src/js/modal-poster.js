@@ -1,6 +1,7 @@
 //  -------------------------------------------- IMPORTS -------------------------------------------------
-
+import createMarkupModalPoster from './modal-card';
 import TMDBApiService from './tmdb-api';
+import testData from '../testcatalog.json';
 // import getGenres from './get-genres';
 // import dataFromApi from '../testcatalog.json';
 // import {
@@ -44,16 +45,23 @@ const refs = {
 
 const myService = new TMDBApiService();
 
-async function openModalCard(id) {
+function showModal() {
+  document.querySelector('.backdrop').classList.remove('is-hidden');
+}
+
+export async function openModalCard(id) {
   try {
     const { data } = await myService.fetchMovieById(id);
     console.log('modal', data);
-    document.querySelector('.modal-poster').innerHTML = createMarkup(data);
+
+    document.querySelector('.modal-poster').innerHTML =
+      createMarkupModalPoster(data);
+    document.querySelector('.backdrop').classList.remove('is-hidden');
     document.querySelector('.backdrop').classList.remove('is-hidden');
     document.querySelector('.modal-poster').classList.remove('is-hidden');
-    document.body.style.overflow = 'hidden';
-    document.addEventListener('keydown', onEscBtnPress);
-    document.addEventListener('click', onBackdropClick);
+    // document.body.style.overflow = 'hidden';
+    // document.addEventListener('keydown', onEscBtnPress);
+    // document.addEventListener('click', onBackdropClick);
     document.getElementById('modal-close-btn').addEventListener('click', () => {
       closeModal();
     });
@@ -64,62 +72,62 @@ async function openModalCard(id) {
 
 // ------------------------------------------- CREATING MARKUP ---------------------------------------------
 
-function createMarkup(movie) {
-  console.log(movie);
-  return `
-  <div class="modal-film-container">
-  <button id="modal-close-btn" class="close-button">
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="close-icon">
-    <path d="M18 6L6 18M6 6l12 12"></path>
-  </svg>
-</button>
-            <img class= "modal-img"
-                srcset="
-                    https:/image.tmdb.org/t/p/w342/${movie.poster_path} 342w,
-                    https:/image.tmdb.org/t/p/w500/${movie.poster_path} 500w,
-                    https:/image.tmdb.org/t/p/w780/${movie.poster_path} 780w,
-                    https:/image.tmdb.org/t/p/original/${
-                      movie.poster_path
-                    } 2000w
-                "
-                sizes="(min-width:1280px) 375px,
-                (min-width:768px) 294px,
-                (min-width:320px) 248px,
-                "
-                src="https:/image.tmdb.org/t/p/original/${movie.poster_path}"
-                alt="${movie.title}"
-            />
-        <h2 class="modal-card-movie-title">${movie.title}</h2>
-        <table class="modal-card-table">
-            <tr class="modal-card-tab-row">
-                <td class="modal-card-data">Vote / Votes</td>
-                <td class="modal-card-data-average">
-                    <span class="modal-card-average">${
-                      movie.vote_average
-                    }</span>/<span class="modal-card-count">${
-    movie.vote_count
-  }</span>
-                </td>
-            </tr>
-            <tr class="modal-card-tab-row">
-                <td class="modal-card-data">Popularity</td>
-                <td class="modal-card-data-get">${movie.popularity.toFixed(
-                  1
-                )}</td>
-            </tr>
-            <tr class="modal-card-tab-row">
-                <td class="modal-card-data">Genre</td>
-                <td class="modal-card-data-get"> убрал </td>
-            </tr>
-        </table>
-        <p class="modal-card-about">About</p>
-        <p class="modal-card-about-descr">${movie.overview}</p>
-        <button type="button" class="modal-card-btn" data-movie-id="${
-          movie.id
-        }">Add to my library</button>
-    </div>
-    `;
-}
+// function createMarkup(movie) {
+//   console.log(movie);
+//   return `
+//   <div class="modal-film-container">
+//   <button id="modal-close-btn" class="close-button">
+//   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="close-icon">
+//     <path d="M18 6L6 18M6 6l12 12"></path>
+//   </svg>
+// </button>
+//             <img class= "modal-img"
+//                 srcset="
+//                     https:/image.tmdb.org/t/p/w342/${movie.poster_path} 342w,
+//                     https:/image.tmdb.org/t/p/w500/${movie.poster_path} 500w,
+//                     https:/image.tmdb.org/t/p/w780/${movie.poster_path} 780w,
+//                     https:/image.tmdb.org/t/p/original/${
+//                       movie.poster_path
+//                     } 2000w
+//                 "
+//                 sizes="(min-width:1280px) 375px,
+//                 (min-width:768px) 294px,
+//                 (min-width:320px) 248px,
+//                 "
+//                 src="https:/image.tmdb.org/t/p/original/${movie.poster_path}"
+//                 alt="${movie.title}"
+//             />
+//         <h2 class="modal-card-movie-title">${movie.title}</h2>
+//         <table class="modal-card-table">
+//             <tr class="modal-card-tab-row">
+//                 <td class="modal-card-data">Vote / Votes</td>
+//                 <td class="modal-card-data-average">
+//                     <span class="modal-card-average">${
+//                       movie.vote_average
+//                     }</span>/<span class="modal-card-count">${
+//     movie.vote_count
+//   }</span>
+//                 </td>
+//             </tr>
+//             <tr class="modal-card-tab-row">
+//                 <td class="modal-card-data">Popularity</td>
+//                 <td class="modal-card-data-get">${movie.popularity.toFixed(
+//                   1
+//                 )}</td>
+//             </tr>
+//             <tr class="modal-card-tab-row">
+//                 <td class="modal-card-data">Genre</td>
+//                 <td class="modal-card-data-get"> убрал </td>
+//             </tr>
+//         </table>
+//         <p class="modal-card-about">About</p>
+//         <p class="modal-card-about-descr">${movie.overview}</p>
+//         <button type="button" class="modal-card-btn" data-movie-id="${
+//           movie.id
+//         }">Add to my library</button>
+//     </div>
+//     `;
+// }
 // ${getGenres()
 //                   .filter(({ id }) => movie.genre_ids.includes(id))
 //                   .map(({ name }) => name)
@@ -156,6 +164,18 @@ function closeModal() {
   document.removeEventListener('click', onBackdropClick);
 }
 
+// function onEscKeyPress(event) {
+//   if (event.code === 'Escape') {
+//     closeModal();
+//   }
+// }
+
+// function onBackdropClick(event) {
+//   if (event.target === refs.backdrop) {
+//     closeModal();
+//   }
+// }
+
 //  on escape ----------------------
 
 // function onEscBtnPress(e) {
@@ -166,11 +186,11 @@ function closeModal() {
 
 //   //  on clicking elsewhere ---------
 
-//   function onBackdropClick(e) {
-//     if (e.target === refs.Backdrop) {
-//       closeModalDescr();
-//     }
-//   }
+  // function onBackdropClick(e) {
+  //   if (e.target === refs.Backdrop) {
+  //     closeModalDescr();
+  //   }
+  // }
 
 //   //  on button -------------------
 
@@ -239,3 +259,6 @@ function closeModal() {
 // //   .map(a => getFilmCard(a, x => String(Math.round(x * 2) / 2)))
 // //   .join('');
 // openModalCard(603692);
+// const { results } = testData;
+
+// console.log(createMarkupModalPoster(results[1]));

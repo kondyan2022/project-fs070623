@@ -5,10 +5,80 @@
 <div class="overlay"></div> -->
 
 <div class="backdrop is-hidden">
-  <div class="modal-poster is-hidden"></div>
+  <div class="modal-poster"></div>
 </div>
 
 <!-- ------------------------------------------- FULL HTML --------------------------------------------------- -->
+
+<!-- <div class="backdrop">
+  <div class="modal-poster">
+    <div class="modal-film-container">
+      <button id="modal-close-btn" class="close-button">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="close-icon"
+        >
+          <path d="M18 6L6 18M6 6l12 12"></path>
+        </svg>
+      </button>
+      <img
+        class="modal-img"
+        srcset="
+          https://image.tmdb.org/t/p/w342/vZloFAK7NmvMGKE7VkF5UHaz0I.jpg      342w,
+          https://image.tmdb.org/t/p/w500/vZloFAK7NmvMGKE7VkF5UHaz0I.jpg      500w,
+          https://image.tmdb.org/t/p/w780/vZloFAK7NmvMGKE7VkF5UHaz0I.jpg      780w,
+          https://image.tmdb.org/t/p/original/vZloFAK7NmvMGKE7VkF5UHaz0I.jpg 2000w
+        "
+        sizes="(min-width:1280px) 375px,
+                      (min-width:768px) 294px,
+                      (min-width:320px) 248px, 100vw
+                      "
+        src="https://image.tmdb.org/t/p/w342/vZloFAK7NmvMGKE7VkF5UHaz0I.jpg"
+        alt="${movie.title}"
+      />
+
+      <div class="modal-card">
+        <h2 class="modal-card-movie-title">JOHN WICK: CHAPTER 4</h2>
+        <div class="modal-attributes">
+          <ul class="modal-attributes-list">
+            <li class="modal-card-data">Vote / Votes</li>
+            <li class="modal-card-data-average">
+              <span class="modal-card-average">7.3</span>/<span
+                class="modal-card-count"
+                >1260</span
+              >
+            </li>
+            <li class="modal-card-data">Popularity</li>
+            <li class="modal-card-data-get">100.2</li>
+            <li class="modal-card-data">Thriller</li>
+            <li class="modal-card-data-get">Action Thriller Crime</li>
+          </ul>
+        </div>
+      </div>
+
+      <p class="modal-card-about">About</p>
+      <p class="modal-card-about-descr">
+        John Wick (Keanu Reeves) takes on his most lethal adversaries yet in the
+        upcoming fourth instalment of the series. With the price on his head
+        ever increasing, John Wick uncovers a path to defeating The High Table.
+        But before he can earn his freedom, Wick must face off against a new
+        enemy with powerful alliances across the globe and forces that turn old
+        friends into foes.
+      </p>
+      <button type="button" class="modal-card-btn" data-movie-id="${id}">
+        Add to my library
+      </button>
+    </div>
+  </div>
+</div> -->
+
+<!-- ---------------------------------------- ANOTHER VARIANT ------------------------------------------ -->
 
 <!-- <div class="backdrop ">
   <div class ="modal-poster ">
@@ -54,53 +124,4 @@
                 <button type="button" class="modal-card-btn" data-movie-id="${id}">Add to my library</button>
             </div>
   </div>
-</div>
- -->
-
-<!-- ---------------------------------------- ANOTHER VARIANT ------------------------------------------ -->
-
-<!-- <div class="backdrop ">
-    <div class ="modal-poster ">
-        <div class="modal-film-container">
-            <button id="modal-close-btn" class="close-button">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="close-icon">
-              <path d="M18 6L6 18M6 6l12 12"></path>
-            </svg>
-          </button>
-                      <img class= "modal-img"
-                      srcset="
-                      https://image.tmdb.org/t/p/w342/vZloFAK7NmvMGKE7VkF5UHaz0I.jpg      342w,
-                      https://image.tmdb.org/t/p/w500/vZloFAK7NmvMGKE7VkF5UHaz0I.jpg      500w,
-                      https://image.tmdb.org/t/p/w780/vZloFAK7NmvMGKE7VkF5UHaz0I.jpg      780w,
-                      https://image.tmdb.org/t/p/original/vZloFAK7NmvMGKE7VkF5UHaz0I.jpg 2000w
-                    "
-                          sizes="(min-width:1280px) 375px,
-                          (min-width:768px) 294px,
-                          (min-width:320px) 248px,
-                          "
-                          src="https://image.tmdb.org/t/p/w342/vZloFAK7NmvMGKE7VkF5UHaz0I.jpg"
-                          alt="${movie.title}"
-                      />
-                  <h2 class="modal-card-movie-title">JOHN WICK: CHAPTER 4</h2>
-                  <table class="modal-card-table">
-                      <tr class="modal-card-tab-row">
-                          <td class="modal-card-data">Vote / Votes</td>
-                          <td class="modal-card-data-average">
-                              <span class="modal-card-average">7.3</span>/<span class="modal-card-count">1260</span>
-                          </td>
-                      </tr>
-                      <tr class="modal-card-tab-row">
-                          <td class="modal-card-data">Popularity</td>
-                          <td class="modal-card-data-get">100.2</td>
-                      </tr>
-                      <tr class="modal-card-tab-row">
-                          <td class="modal-card-data">Thriller</td>
-                          <td class="modal-card-data-get">Action Thriller Crime</tr>
-                  </table>
-                  <p class="modal-card-about">About</p>
-                  <p class="modal-card-about-descr">John Wick (Keanu Reeves) takes on his most lethal adversaries yet in the upcoming fourth instalment of the series. With the price on his head ever increasing, John Wick uncovers a path to defeating The High Table. But before he can earn his freedom, Wick must face off against a new enemy with powerful alliances across the globe and forces that turn old friends into foes. 
-                  </p>
-                  <button type="button" class="modal-card-btn" data-movie-id="${id}">Add to my library</button>
-              </div>
-    </div>
 </div> -->
