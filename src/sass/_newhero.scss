@@ -2,18 +2,18 @@
 //   background: rgba(17, 17, 17, 0);
 // }
 
-// .swiper {
-//   width: 600px;
-//   height: 300px;
-//   .swiper-wrapper {
-//     width: 100%;
-//     height: 100%;
-//   }
-//   .swiper-slide {
-//     width: 100%;
-//     height: 100%;
-//   }
-// }
+.swiper {
+  width: 600px;
+  height: 300px;
+  .swiper-wrapper {
+    width: 100%;
+    height: 100%;
+  }
+  .swiper-slide {
+    width: 100%;
+    height: 100%;
+  }
+}
 
 // .newhero-render-wrapper {
 //   //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -28,12 +28,13 @@
 }
 
 .newh-gradient {
+  ///////==================  GRADIENT
   position: absolute;
   width: 320px;
   height: 380px;
   z-index: 1;
   background: linear-gradient(to left, #00000000 -10%, #000000e6 92.16%);
-  top: -2px;
+  top: 0px;
   @media screen and (min-width: 320px) {
     .container {
       width: 320px;

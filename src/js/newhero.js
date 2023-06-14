@@ -2,8 +2,8 @@ import TMDBApiService from './tmdb-api';
 import { modalController } from './modal-trailer';
 import getFiveStar from './fivezerostar.js';
 import '../sass/_fivestar.scss';
-// import Swiper from 'swiper';
-// import 'swiper/swiper.min.css';
+import Swiper from 'swiper';
+import 'swiper/swiper.min.css';
 // import 'swiper/swiper.css';
 
 
@@ -139,14 +139,15 @@ function getRandomIndex() {
 //     setTimeout(() => {
 //         wrapperForRender.innerHTML = randomMovie;
 //         console.log('timeout');
-//         // modalController({
-//         //     modal: '.modal1',
-//         //     btnOpen: '.js-newhero-open-modal-tr',
-//         //     btnClose: '.modalclose',
-//         // });
+//         modalController({
+//             modal: '.modal1',
+//             btnOpen: '.js-newhero-open-modal-tr',
+//             btnClose: '.modalclose',
+//         });
 
 //     }, 3000);
 // }
+
 
 // const swiper = new Swiper('.swiper', {
 //     // Optional parameters
