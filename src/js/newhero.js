@@ -1,25 +1,19 @@
 import TMDBApiService from './tmdb-api';
-// import { modalController } from './modal-trailer';
+import { modalController } from './modal-trailer';
 import getFiveStar from './fivezerostar.js';
 import '../sass/_fivestar.scss';
 // import Swiper from 'swiper';
 // import 'swiper/swiper.min.css';
 // import 'swiper/swiper.css';
 
-// //=================swiper
-// const swiper = new Swiper('.swiper', {
-//     // Optional parameters
-//     direction: 'horizontal',
-//     loop: true
-// });
 
-console.log(swiper)
+
 
 function createMarkup(movie) {
     return `
-        <div class="swiper">
-            <div class="swiper-wrapper newhero-content-wrapper">
-                <div class="swiper-slide">
+    <div class="swiper">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide newhero-content-wrapper">
                     <div class="newhero-thumb">
                         <img
                             srcset="
@@ -47,12 +41,12 @@ function createMarkup(movie) {
                         <div class="newhero-wrap-btn newh-wrap-trailer">
                             <button type="button" class="newhero-btn js-newhero-open-modal-tr">Watch trailer</button>
                         </div>
-                        <div class="newhero-wrap-btn">
+                        <div class="newhero-wrap-btn newh-wrap-detail">
                             <button type="button" class="newhero-btn js-newhero-open-mod-det">More details</button>
                         </div>
                     </div>
-                </div>
             </div>
+        </div>
         </div>
     `
 }
@@ -72,8 +66,6 @@ const serviceTrendingDaysMovies = new TMDBApiService();
 serviceTrendingDaysMovies
     .fetchTrendingDayMovies()
     .then((resp) => {
-        console.log("Day", resp)
-
         const data = resp.data;
         const datasTrendDay = {
             pageCurrent: data.page,
@@ -81,25 +73,16 @@ serviceTrendingDaysMovies
             results: data.results
         }
         const arrayResults = datasTrendDay.results; //array with results
-        //------------------------
         if (arrayResults.length > 0) {
-            // setTimeout(renderToMarkup(arrayResults), 6000);
-
             renderToMarkup(arrayResults);
-
             wrapperForRender.addEventListener('click', (e) => {
                 console.log(e.currentTarget, e.target)
                 console.log(e.currentTarget)
                 if (e.target === document.querySelector('.js-newhero-open-mod-det')) {
                     /// open modal with details 
                     console.log('button DETAILS')
-                    wrapperContent.addEventListener('click', () => {
-                        console.log(evt.target.getAttribute('film-id'), 'Це id фільму')
-                    });
+                    wrapperContent.addEventListener('click', hendlerOpenModalWindow);
                 }
-                // else if (e.target === document.querySelector('.js-newhero-open-modal-tr')) {
-                //     wrapperContent.addEventListener('click', hendlerOpenModalWindow);
-                // }
             })
             return
         }
@@ -107,7 +90,7 @@ serviceTrendingDaysMovies
     .catch((e) => console.error(e));
 
 function renderToMarkup(array) {
-    // const randomIndex = getRandomIndex();
+    const randomIndex = getRandomIndex();
     const randomMovie = array
         .filter(movie => movie.backdrop_path !== null)
         .map(movie => {
@@ -116,27 +99,60 @@ function renderToMarkup(array) {
                 id: movie.id,
                 markup: movieMarkup
             }
-        }); //[randomIndex]
-
-    console.log(randomMovie)
-
+        })[randomIndex];
     const { id, markup } = randomMovie;
     // wrapperForRender.innerHTML = markup;
-
     setTimeout(() => {
+        // wrapperForRender.innerHTML = randomMovie;
         wrapperForRender.innerHTML = markup;
-        console.log('timeout');
-        // modalController({
-        //     modal: '.modal1',
-        //     btnOpen: '.js-newhero-open-modal-tr',
-        //     btnClose: '.modalclose',
-        // });
+        modalController({
+            modal: '.modal1',
+            btnOpen: '.js-newhero-open-modal-tr',
+            btnClose: '.modalclose',
+        });
 
     }, 3000);
 }
 
-// function getRandomIndex() {
-//     return Math.floor(Math.random() * 15);
+function getRandomIndex() {
+    return Math.floor(Math.random() * 15);
+}
+
+
+//=================swiper
+
+// function renderToMarkup(array) {
+//     // const randomIndex = getRandomIndex();
+//     const randomMovie = array
+//         .filter(movie => movie.backdrop_path !== null)
+//         .map(movie => {
+//             return createMarkup(movie);
+//         }); //[randomIndex]
+
+//     // console.log(randomMovie)
+
+//     // const { id, markup } = randomMovie;
+//     // wrapperForRender.innerHTML = markup;
+
+//     setTimeout(() => {
+//         wrapperForRender.innerHTML = randomMovie;
+//         console.log('timeout');
+//         // modalController({
+//         //     modal: '.modal1',
+//         //     btnOpen: '.js-newhero-open-modal-tr',
+//         //     btnClose: '.modalclose',
+//         // });
+
+//     }, 3000);
 // }
 
+// const swiper = new Swiper('.swiper', {
+//     // Optional parameters
+//     direction: 'horizontal',
+//     loop: true,
+//     autoplay: {
+//         delay: 5000,
+//         disableOnInteraction: false, //cont after click
+//     }
+// });
 

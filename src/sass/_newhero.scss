@@ -1,14 +1,18 @@
-// .newhero-title {
-//   max-width: 464px;
-//   font-weight: 700;
-//   font-size: 64px;
-//   line-height: 75px;
-// }
-// .newhero-subtitle {
-//   max-width: 464px;
-//   font-weight: 400;
-//   font-size: 16px;
-//   line-height: calc(19 / 16);
+.newhero {
+  background-image: rgba(17, 17, 17, 0);
+}
+
+// .swiper {
+//   width: 600px;
+//   height: 300px;
+//   .swiper-wrapper {
+//     width: 100%;
+//     height: 100%;
+//   }
+//   .swiper-slide {
+//     width: 100%;
+//     height: 100%;
+//   }
 // }
 
 .newhero-wrap-btn {
@@ -45,6 +49,11 @@
     box-shadow: 1px 1px 14px 4px #ff6b086b;
   }
 }
+
+.newhero-wrap-btn .js-newhero-open-mod-det {
+  background: transparent;
+}
+
 .newh-wrap-trailer {
   margin-right: 8px;
 }
@@ -105,10 +114,22 @@
   }
 }
 .newhero-subtitle {
-  margin-bottom: 16px;
+  margin-bottom: 12px;
+  @media screen and (min-width: 768px) {
+    //
+  }
+  @media screen and (min-width: 1280px) {
+    margin-bottom: 16px;
+  }
 }
 .newhero-about-descr {
-  margin-top: 28px;
+  margin-bottom: 16px;
+  @media screen and (min-width: 768px) {
+    margin-bottom: 20px;
+  }
+  @media screen and (min-width: 1280px) {
+    margin-top: 28px;
+  }
 }
 .newhero-subtitle,
 .newhero-about-descr {
@@ -120,39 +141,22 @@
   }
 }
 
-// .newhero-content-wrapper {
-// }
-// .newhero-thumb {
-// //   overflow: hidden;
-//   //   max-width: 320px;
-//   //   height: 380px;
-// }
 .newhero-image {
   display: block;
   max-width: 100%;
   height: 100%;
+}
+
+@media (max-width: 767px) {
   .newhero-thumb {
     max-width: 320px;
     height: 380px;
   }
-  @media (max-width: 767px) {
-    .newhero-image {
-      display: block;
-      min-width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-  }
-
-  @media screen and (min-width: 768px) {
-    .newhero-thumb {
-      .newhero-image {
-        // position: absolute;
-        // max-width: 802;
-        // height: 720px;
-        // top: -100%;
-      }
-    }
+  .newhero-image {
+    display: block;
+    min-width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 }
 
@@ -175,7 +179,23 @@
   .star,
   .star-half,
   .star-outline {
-    width: 24px;
-    height: 24px;
+    width: 16px;
+    height: 16px;
+  }
+  @media screen and (min-width: 768px) {
+    .star,
+    .star-half,
+    .star-outline {
+      width: 20px;
+      height: 20px;
+    }
+  }
+  @media screen and (min-width: 1280px) {
+    .star,
+    .star-half,
+    .star-outline {
+      width: 24px;
+      height: 24px;
+    }
   }
 }
