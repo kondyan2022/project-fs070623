@@ -2,16 +2,12 @@ import TMDBApiService from './tmdb-api';
 import { modalController } from './modal-trailer';
 import getFiveStar from './fivezerostar.js';
 import '../sass/_fivestar.scss';
-// import Swiper from 'swiper';
-// import 'swiper/swiper.min.css';
+import Swiper from 'swiper';
+import 'swiper/swiper.min.css';
 // import 'swiper/swiper.css';
-
-
-
 
 function createMarkup(movie) {
     return `
-    <div class="swiper">
         <div class="swiper-wrapper">
             <div class="swiper-slide newhero-content-wrapper">
                     <div class="newhero-thumb">
@@ -49,7 +45,6 @@ function createMarkup(movie) {
                     </div>
             </div>
         </div>
-        </div>
     `
 }
 
@@ -57,10 +52,9 @@ const wrapperContent = document.querySelector('.newhero-content-wrapper');
 const wrapperForRender = document.querySelector('.newhero-render-wrapper')
 //----------------- modal-------------------------------------------------------
 
-
-function hendlerOpenModalWindow(evt) {
-    console.log(evt.target.getAttribute('film-id'), 'Це id фільму');
-}
+// function hendlerOpenModalWindow(evt) {
+//     console.log(evt.target.getAttribute('film-id'), 'Це id фільму');
+// }
 //------------------------------------------------------------------------
 
 const serviceTrendingDaysMovies = new TMDBApiService();
@@ -83,7 +77,12 @@ serviceTrendingDaysMovies
                 if (e.target === document.querySelector('.js-newhero-open-mod-det')) {
                     /// open modal with details 
                     console.log('button DETAILS')
-                    wrapperContent.addEventListener('click', hendlerOpenModalWindow);
+                    wrapperForRender.addEventListener('click', (e) => {
+                        const el = evt.target.closest('[film-id]');
+                        if (el) {
+                            openModalCard(el.getAttribute('film-id'));
+                        }
+                    });
                 }
             })
             return
@@ -91,6 +90,7 @@ serviceTrendingDaysMovies
     })
     .catch((e) => console.error(e));
 
+//---------------------------------changes this function for slider 
 function renderToMarkup(array) {
     const randomIndex = getRandomIndex();
     const randomMovie = array
@@ -121,40 +121,34 @@ function getRandomIndex() {
 }
 
 
-//=================swiper
+//=================swiper======================================
 
 // function renderToMarkup(array) {
 //     // const randomIndex = getRandomIndex();
-//     const randomMovie = array
+//     const slides = array
 //         .filter(movie => movie.backdrop_path !== null)
-//         .map(movie => {
-//             return createMarkup(movie);
-//         }); //[randomIndex]
+//         .map(movie => createMarkup(movie))
+//         .join('');
 
-//     // console.log(randomMovie)
+//     // setTimeout(() => {
+//     wrapperForRender.innerHTML = slides;
+//     // console.log('timeout');
+//     modalController({
+//         modal: '.modal1',
+//         btnOpen: '.js-newhero-open-modal-tr',
+//         btnClose: '.modalclose',
+//     });
 
-//     // const { id, markup } = randomMovie;
-//     // wrapperForRender.innerHTML = markup;
-
-//     setTimeout(() => {
-//         wrapperForRender.innerHTML = randomMovie;
-//         console.log('timeout');
-//         // modalController({
-//         //     modal: '.modal1',
-//         //     btnOpen: '.js-newhero-open-modal-tr',
-//         //     btnClose: '.modalclose',
-//         // });
-
-//     }, 3000);
+//     // }, 3000);
 // }
 
-// const swiper = new Swiper('.swiper', {
+// const swiper = new Swiper('.swiper-wrapper', {
 //     // Optional parameters
 //     direction: 'horizontal',
 //     loop: true,
 //     autoplay: {
 //         delay: 5000,
-//         disableOnInteraction: false, //cont after click
+//         disableOnInteraction: false //cont after click
 //     }
 // });
-
+// console.log(swiper)
