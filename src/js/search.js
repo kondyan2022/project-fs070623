@@ -129,8 +129,6 @@ try {
 
 }
 // ПАГІНАЦІЯ
-
-
 const refs = {
     paginationElem: document.querySelector('.tui-pagination'),
 }
