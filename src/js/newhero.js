@@ -1,12 +1,4 @@
 import TMDBApiService from './tmdb-api';
-// import getGenres from './get-genres';
-// import {
-//     saveToLibrary,
-//     getLibraryList,
-//     isInLibrary,
-//     removeFromLibrary,
-// } from './local-storage';
-
 
 function createMarkup(movie) {
     return `
