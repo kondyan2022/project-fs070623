@@ -1,6 +1,6 @@
 import TMDBApiService from './tmdb-api.js';
 
-const modalController = ({ modal, btnOpen, btnClose, time = 300 }) => {
+export const modalController = ({ modal, btnOpen, btnClose, time = 300 }) => {
   const buttonElems = document.querySelectorAll(btnOpen);
   const modalElem = document.querySelector(modal);
   let player;
@@ -34,9 +34,10 @@ const modalController = ({ modal, btnOpen, btnClose, time = 300 }) => {
     document.body.classList.remove('modal-open');
   };
 
-  const openModal = async () => {
+  const openModal = async evt => {
+    el = evt.target.closest('[film-id]');
     try {
-      const trailerKey = await getListMovie(569094);
+      const trailerKey = await getListMovie(el.getAttribute('film-id'));
       modalElem.style.visibility = 'visible';
       modalElem.style.opacity = 1;
       window.addEventListener('keydown', closeModal);
@@ -138,8 +139,8 @@ const modalController = ({ modal, btnOpen, btnClose, time = 300 }) => {
   loadYoutubePlayerAPI();
 };
 
-modalController({
-  modal: '.modal1',
-  btnOpen: '.section__button1',
-  btnClose: '.modal__close',
-});
+// modalController({
+//   modal: '.modal1',
+//   btnOpen: '.section__button1',
+//   btnClose: '.modal__close',
+// });

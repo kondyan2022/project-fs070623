@@ -22,7 +22,7 @@ export default function getFilmCard(
     `
     : '';
 
-  return `<div class="film-card" film-id="${id}">
+  return `<div class="film-card" film-id="${id} film-video-id="${id}">
   <img
    ${imgScrSet}
     
