@@ -69,6 +69,8 @@ serviceTrendingDaysMovies
         const arrayResults = datasTrendDay.results; //array with results
         //------------------------
         if (arrayResults.length > 0) {
+            // setTimeout(renderToMarkup(arrayResults), 6000);
+
             renderToMarkup(arrayResults);
 
             wrapperForRender.addEventListener('click', (e) => {
@@ -88,6 +90,7 @@ serviceTrendingDaysMovies
                     //?????????????????????????????
                 }
             })
+            return
         }
         // else if (arrayResults.length === 0) {
         //     wrapperForRender.innerHTML = '<p class="upcoming-error">OOPS... We are very sorry! Upcoming this month not found.</p>'
@@ -110,18 +113,16 @@ function renderToMarkup(array) {
     console.log(randomMovie)
 
     const { id, markup } = randomMovie;
-    // const btnSaveToLocalStorage = document.querySelector('.up-btn');
-    // if (isInLibrary(id)) {
-    //     console.log(isInLibrary(id))
-    //     btnSaveToLocalStorage.textContent = "Remove from my library";
-    // } else {
-    //     console.log("not")
-    //     btnSaveToLocalStorage.textContent = "Add to my library";
+    // wrapperForRender.innerHTML = markup;
+    // if (arrayResults.length > 0) {
+    //     wrapperForRender.innerHTML = markup;
+    //     return
     // }
-    if (arrayResults.length > 0) {
+
+    setTimeout(() => {
         wrapperForRender.innerHTML = markup;
-        return
-    }
+        console.log('timeout')
+    }, 3000);
 }
 
 function getRandomIndex() {
