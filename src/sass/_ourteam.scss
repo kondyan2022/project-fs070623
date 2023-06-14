@@ -27,41 +27,23 @@ body {
   left: 50%;
   transform: translate(-50%, -50%);
   min-width: 95%;
-  height: 80%;
+  height: 90%;
   overflow: auto;
 
-  padding: 40px 20px 40px 20px;
+  padding: 20px 10px 20px 10px;
   text-align: center;
   color: var(--color-background);
   background-color: var(--color-background);
   border-radius: 5%;
   box-shadow: 0 0 15px 2px #f84119f8;
 
-  &::-webkit-scrollbar-track {
-      border-radius: 8px;
-      background-color: #e7e7e7;
-      border: 1px solid #cacaca;
-    }
-
     &::-webkit-scrollbar {
-      width: 10px;
-      background-color: #F5F5F5;
-    }
-
-    &::-webkit-scrollbar-thumb {
-      border-radius: 10px;
-      background-image: -webkit-gradient(linear,
-          left bottom,
-          left top,
-          color-stop(0.1, #ffc226ff),
-          color-stop(0.6, #ffc226ff));
+      display: none;
     }
 
   &-title {
     font-size: 40px;
-
-    margin-bottom: 40px;
-
+    margin-bottom: 20px;
     color: var(--color-white);
   }
 
@@ -75,8 +57,7 @@ body {
 
   &-item {
     width: 176px;
-    min-height: 0px;
-    height: auto;
+    height: 300px;
     padding-top: 10px;
     padding-bottom: 10px;
 
@@ -87,28 +68,21 @@ body {
     &-img {
       margin-left: auto;
       margin-right: auto;
-      margin-bottom: 20px;
-      width: 150px;
-      height: 150px;
+      margin-bottom: 10px;
+      width: 130px;
+      height: 130px;
 
       border: 2px solid #000000;
       border-radius: 50%;
       box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     }
-
-    &-title {
-      margin-bottom: 10px;
-    }
-
-    &-descr {
-      margin-bottom: 20px;
-    }
   }
 
   &-soc-list {
+    margin-top: auto;
     display: flex;
     justify-content: center;
-    gap: 30px;
+    gap: 20px;
   }
 
   &-soc-link {
@@ -145,6 +119,19 @@ body {
         stroke: var(--color-white);
       }
     }
+}
+
+.team-card-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: calc(100% - 150px);
+}
+
+.team-card-name {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
 @media screen and (min-width: 768px) {
