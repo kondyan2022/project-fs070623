@@ -35,7 +35,7 @@ export const modalController = ({ modal, btnOpen, btnClose, time = 300 }) => {
   };
 
   const openModal = async evt => {
-    el = evt.target.closest('[film-id]');
+    const el = evt.target.closest('[film-id]');
     try {
       const trailerKey = await getListMovie(el.getAttribute('film-id'));
       modalElem.style.visibility = 'visible';
