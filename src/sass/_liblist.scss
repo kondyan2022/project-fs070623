@@ -33,20 +33,17 @@
   //-------hover on options
   &.ss-content .ss-list .ss-option:hover {
     color: var(--color-orange);
-    &.ss-content .ss-list .ss-option:not(.ss-disabled).ss-selected {
-      color: transparent;
-      background-color: transparent;
-    }
+    background-color: transparent;
   }
   //-------on body option's
   &.ss-content.ss-open-below {
     border-bottom-right-radius: 8px;
     border-bottom-left-radius: 8px;
   }
-  // &.ss-content .ss-list .ss-option:not(.ss-disabled).ss-selected {
-  //   color: transparent;
-  //   background-color: transparent;
-  // }
+  &.ss-content .ss-list .ss-option:not(.ss-disabled).ss-selected {
+    color: transparent;
+    background-color: transparent;
+  }
 }
 //----------------------select / light theme------------
 .js-light-theme {
