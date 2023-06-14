@@ -39,6 +39,10 @@
     border-bottom-right-radius: 8px;
     border-bottom-left-radius: 8px;
   }
+  &.ss-content .ss-list .ss-option:not(.ss-disabled).ss-selected {
+    color: transparent;
+    background-color: transparent;
+  }
 }
 //----------------------select / light theme------------
 .js-light-theme {
@@ -84,9 +88,6 @@
   display: inline-flex;
   justify-content: center;
   align-items: center;
-
-  ////// :TODO =>  LOAD MORE BTN NOT CENTRED  ????????????????????????????????????????????????
-
   border-radius: 74px;
   background: var(--color-linear-one);
   transition: bagckround linear 400ms, color linear 400ms,
@@ -117,12 +118,23 @@
   }
 } //----------------------------------------------
 
-.lib-wrap-btn {
+.lib-relative {
   position: relative;
+  padding-bottom: 62px;
 }
-.lib-load-more {
+.lib-wrap-btn {
   position: absolute;
+  // display: block;
+  bottom: 0px;
+  right: 85px;
+  z-index: 10;
 }
+// .lib-wrap-btn {
+//   .lib-btn-search-movie {
+//     ///
+//   }
+// }
+
 //-----------------------------------------------
 .js-lib-content-wrap {
   display: flex;
@@ -185,6 +197,16 @@
 
     width: 439px;
   }
+
+  .lib-relative {
+    padding-bottom: 92px;
+  }
+  .lib-wrap-btn {
+    // position: absolute;
+    bottom: 0px;
+    right: 296px;
+    z-index: 10;
+  }
 }
 
 //---------------- style for desktop--------------------------
@@ -214,25 +236,18 @@
 
     width: 584px;
   }
+
+  .lib-wrap-btn {
+    // position: absolute;
+    bottom: 0px;
+    right: 557px;
+    z-index: 10;
+  }
 }
 
 //  --------------------------------light theme--------------------------------------
 
 .js-light-theme {
-  // .lib-select.js-lib-select {
-  //   background-color: var(--color-white);
-  //   color: var(--color-secondary-black);
-  //   border-color: var(--color-orange);
-  //   box-shadow: 1px 1px 24px 2px #01010173;
-  // }
-  // .lib-option.lib-spec {
-  //   color: var(--color-background);
-  //   // color: var(--color-secondary-text);
-  // }
-  // #library-filter.ss-arrow {
-  //   stroke: black;
-  //   fill: black;
-  // }
   .lib-error {
     color: var(--color-background);
   }
