@@ -1,5 +1,5 @@
 module.exports = {
-    // інші налаштування Parcel
+    // налаштування Parcel
     module: {
       rules: [
         {
