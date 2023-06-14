@@ -39,6 +39,10 @@
     border-bottom-right-radius: 8px;
     border-bottom-left-radius: 8px;
   }
+  &.ss-content .ss-list .ss-option:not(.ss-disabled).ss-selected {
+    color: transparent;
+    background-color: transparent;
+  }
 }
 //----------------------select / light theme------------
 .js-light-theme {
@@ -117,7 +121,7 @@
   }
 } //----------------------------------------------
 
-.lib-wrap-btn {
+.lib-relative {
   position: relative;
 }
 .lib-load-more {
