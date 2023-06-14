@@ -1,4 +1,6 @@
 import getGenres from './get-genres';
+import '../sass/_film-card.scss';
+import '../sass/_fivestar.scss';
 export default function getFilmCard(
   { id, title, poster_path, genre_ids, release_date, vote_average },
   getStatrs
@@ -41,7 +43,6 @@ export default function getFilmCard(
       .join(', ')} | ${release_date.slice(0, 4)}</p>
   </div>
   <div class="film-card-stars">${stars}</div>
-  <div class="film-card-cover" film-id="${id}"></div>
+  <div class="film-card-cover"></div>
   </div>`;
 }
-// <div class="film-card-cover></div>
