@@ -58,8 +58,7 @@ body {
   &-item {
     width: 176px;
     height: 300px;
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding: 10px;
 
     background-color: var(--color-white);
     border-radius: 5%;
@@ -148,7 +147,7 @@ body {
 @media screen and (min-width: 1280px) {
   .team-modal {
     width: 70%;
-    height: 90%;
+    height: 660px;
 
     &-list {
       gap: 10px;
@@ -156,6 +155,7 @@ body {
 
     &-item {
       flex-basis: calc((100% - 40px) / 5);
+      height: auto;
     }
 
   }
@@ -163,7 +163,6 @@ body {
 
 @media screen and (min-width: 1450px) {
   .team-modal {
-    height: 90%;
 
     &-list {
         gap: 20px;
