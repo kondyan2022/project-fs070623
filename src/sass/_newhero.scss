@@ -19,17 +19,13 @@
 //   align-items: center;
 // }
 
-.hero-container.container {
-  position: relative;
-}
-
 .newh-gradient {
   position: absolute;
   width: 320px;
   height: 380px;
   z-index: 1;
   background: linear-gradient(to left, #00000000 -10%, #000000e6 92.16%);
-  top: 0.5px;
+  top: 0;
   @media screen and (min-width: 320px) {
     .container {
       width: 320px;
@@ -67,7 +63,7 @@
 .new-hero-text-wrapper,
 .newhero-movie-inform-wrap {
   position: absolute;
-  z-index: 2;
+  z-index: 50;
   top: 40px;
   left: 20px;
   max-width: 249px;
@@ -93,8 +89,8 @@
   font-weight: 700;
   line-height: 1.19;
 
-  display: flex;
-  flex-shrink: 1;
+  // display: flex;
+  // flex-shrink: 2;
 
   color: #ffffff;
   @media screen and (min-width: 768px) {

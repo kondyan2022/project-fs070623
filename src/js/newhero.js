@@ -2,11 +2,12 @@ import TMDBApiService from './tmdb-api';
 import { modalController } from './modal-trailer';
 import getFiveStar from './fivezerostar.js';
 import '../sass/_fivestar.scss';
-import Swiper from 'swiper';
-import 'swiper/swiper.min.css';
+// import Swiper from 'swiper';
+// import 'swiper/swiper.min.css';
 // import 'swiper/swiper.css';
 
 function createMarkup(movie) {
+    console.log(movie.overview)
     return `
         <div class="swiper-wrapper">
             <div class="swiper-slide newhero-content-wrapper">
@@ -33,7 +34,7 @@ function createMarkup(movie) {
                     <div class="newhero-movie-inform-wrap">
                         <h1 class="newhero-movie-title">${movie.title}</h1>
                         <div class="newhero-stars">${getFiveStar(movie.vote_average)}</div>
-                        <p class="newhero-about-descr">${movie.overview}</p>
+                        <p class="newhero-about-descr">${movie.overview.substring(0, 190)}...</p>
                         <div class="newh-wrap-buttons">
                             <div class="newhero-wrap-btn-api-one newh-wrap-trailer">
                                 <button type="button" class="newhero-btn-api-one js-newhero-open-modal-tr">Watch trailer</button>
@@ -50,15 +51,8 @@ function createMarkup(movie) {
 
 const wrapperContent = document.querySelector('.newhero-content-wrapper');
 const wrapperForRender = document.querySelector('.newhero-render-wrapper')
-//----------------- modal-------------------------------------------------------
-
-// function hendlerOpenModalWindow(evt) {
-//     console.log(evt.target.getAttribute('film-id'), 'Це id фільму');
-// }
-//------------------------------------------------------------------------
 
 const serviceTrendingDaysMovies = new TMDBApiService();
-
 serviceTrendingDaysMovies
     .fetchTrendingDayMovies()
     .then((resp) => {
@@ -98,29 +92,24 @@ function renderToMarkup(array) {
         .map(movie => {
             const movieMarkup = createMarkup(movie);
             return {
-                id: movie.id,
+                overview: movie.overview,
+                // id: movie.id,
                 markup: movieMarkup
             }
         })[randomIndex];
-    const { id, markup } = randomMovie;
-    // wrapperForRender.innerHTML = markup;
+    const { overview, markup } = randomMovie;
     setTimeout(() => {
-        // wrapperForRender.innerHTML = randomMovie;
         wrapperForRender.innerHTML = markup;
         modalController({
             modal: '.modal1',
             btnOpen: '.js-newhero-open-modal-tr',
             btnClose: '.modalclose',
         });
-
     }, 3000);
 }
-
 function getRandomIndex() {
     return Math.floor(Math.random() * 15);
 }
-
-
 //=================swiper======================================
 
 // function renderToMarkup(array) {
