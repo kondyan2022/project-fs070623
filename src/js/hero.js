@@ -10,14 +10,12 @@ import 'swiper/modules/pagination/pagination.min.css';
 import 'swiper/modules/navigation/navigation.min.css';
 import 'swiper/modules/scrollbar/scrollbar.min.css';
 import 'swiper/modules/autoplay/autoplay.min.css';
-
-<<<<<<< HEAD
 Swiper.use([Navigation, Pagination, Scrollbar, Autoplay]);
 
 
-=======
+
 import { modalController } from './modal-trailer';
->>>>>>> main
+
 const myApiService = new TMDBApiService();
 
 const paretteContainer = document.querySelector('.swiper-wrapper');
@@ -63,33 +61,18 @@ async function createMarkupFilms() {
 createMarkupFilms();
 
 const swiper = new Swiper('.swiper-container', {
-<<<<<<< HEAD
   autoplay: {
-    delay: 5000, 
-    disableOnInteraction: false, 
+    delay: 5000,
+    disableOnInteraction: false,
   },
   spaceBetween: 30,
+  loop: true,
   pagination: {
     el: ".swiper-pagination",
     clickable: true,
-=======
-  loop: true, //loop
-  pagination: {
-    //pagination（dots）
-    el: '.swiper-pagination',
-  },
-  autoplay: {
-    delay: 500,
   },
   navigation: {
-    //navigation（arrows）
     nextEl: '.swiper-button-next',
     prevEl: '.swiper-button-prev',
->>>>>>> main
   },
-  // Налаштування Swiper
-  // scrollbar: {
-  //   el: ".swiper-scrollbar",
-  //   hide: false,
-  // },
 });
