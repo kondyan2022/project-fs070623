@@ -1,7 +1,7 @@
 import TMDBApiService from './tmdb-api';
 import getFilmCard from './film-card';
 import getFiveStar from './fivezerostar';
-
+import { modalController } from './modal-trailer';
 import { openModalCard } from './modal-poster';
 //import getGenres from './get-genres';
 
