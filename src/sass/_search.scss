@@ -1,4 +1,5 @@
 .cataloge-search-form {
+    position: relative;
    display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -33,10 +34,12 @@
     padding: 10px 35px 11px 16px;
     border: 1px solid #FFFFFF;
     border-radius: 8px;
-    font-family: 'Roboto Medium';
-    font-size: 14px;
-    line-height: 1.14;
+    font-family: 'Roboto';
+    line-height: 19px;
     color: #B7B7B7;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 14px;
 }
 
 @media screen and (min-width: 768px) {
@@ -45,6 +48,7 @@
         line-height: 1.14;
         padding: 11px 35px 12px 16px;
         height: 44px;
+       
   }
 }
 
@@ -54,6 +58,7 @@
         line-height: 1.5;
         padding: 13px 35px 14px 24px;
         height: 48px;
+        // width: 315px;
   }
 }
 
@@ -61,20 +66,19 @@
     outline: none;
     display: block;
     width: 95px;
-    height: 44px;
+    height: 40px;
     text-align: left;
 margin-right: 12px;
     background-color: transparent;
-    padding: 10px 35px 11px 16px;
+   padding-left: 10px;
     border: 1px solid #FFFFFF;
     border-radius: 8px;
-
-    font-family: 'Roboto Medium';
+box-sizing: border-box;
+    font-family: 'Roboto';
+    font-style: normal;
     font-size: 14px;
     line-height: 1.14;
     color: #B7B7B7;
-
-    cursor: pointer;
 
 }
 
@@ -95,18 +99,60 @@ margin-right: 12px;
 }
 
 .cataloge-btn-delete {
-    // display: none;
-    width: 18px;
-    height: 18px;
+    
+    width: 20px;
+    height: 20px;
     position: absolute;
     border: none;
-    left: 220px;
     top: 11%;
+    left: 50%;
     transform: translateY(-50%);
     background-color:  transparent;
-    font-size: medium;
-    font-weight:  500;
     cursor: pointer;
+    font-weight:500;
+    font-size: medium;
+}
+
+@media screen and (min-width:320px) {
+    .cataloge-btn-delete {
+        top: 20%;
+        left: 65%;
+    }
+}
+
+@media screen and (min-width:768px) {
+    .cataloge-btn-delete {
+        left: 49%;
+        top: 45%;
+    }
+}
+
+@media screen and (min-width:1280px) {
+    .cataloge-btn-delete {
+      left: 50%;
+    right: 74px; 
+    }
+    
+}
+
+body.js-light-theme .icon-btn-delete {
+    stroke: #282828;
+}
+
+body.js-light-theme .icon-btn-delete:hover {
+    stroke: #F87719;
+}
+.btn-hide {
+    display: none;
+}
+
+.icon-btn-delete {
+   color: #FFFFFF;
+  
+}
+
+.icon-btn-delete:hover {
+    color: #f87719;
 }
 
 .cataloge-btn-search{
@@ -120,44 +166,27 @@ margin-right: 12px;
     border-radius: 50%;
 }
 
+@media screen and (min-width:768px) {
+    .cataloge-btn-search {
+       width: 44px;
+       height: 44px;
+    }
+}
+
+@media screen and (min-width:1280px) {
+    .cataloge-btn-search {
+      width: 48px;
+      height: 48px;
+    }
+    
+}
+
 // .cataloge-btn-search:hover{
 //     background: #FFFFFF;
 // }
 
 .warning {
     display: none;
-}
-
-@media screen and (min-width: 320px) {
-    
-    .cataloge-search {
-        padding-top: 40px;
-        padding-bottom: 16px;
-        margin-bottom: 50px;   
-    }
-
-
-
-    .cataloge-search-years {
-       width:  95px; 
-       height:  40px;
-       padding-left:  16px;
-       padding-right: 15px;
-
-    }
-
-    .cataloge-btn-delete {
-        top: 50%;
-        transform: translateY(-50%);
-        left: 53%;
-
-    }
-
-    .cataloge-btn-search {
-        width: 40px;
-        height: 40px;
-    }
-
 }
 
 
@@ -187,3 +216,159 @@ margin-right: 12px;
 .ishidden{
     display: none;
  }
+
+ .film-card:hover {
+      box-shadow: 1px 1px 14px 4px rgba(255, 107, 8, 0.42);
+    }
+.film-card {
+    border-radius: 5%;
+}
+
+.catalog-list-gallery {
+    width: 280px;
+    display: flex;
+    flex-wrap: wrap;
+    row-gap: 16px;
+    margin: 0 auto;
+  
+    @media (min-width: 768px) {
+      width: 704px;
+      column-gap: 16px;
+      row-gap: 28px;
+    }
+  
+    @media (min-width: 1280px) {
+      row-gap: 32px;
+      width: 1217px;
+    }
+  }
+
+  .film-card:before {
+    content: "";
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(rgba(0,0,0,0) 63.48%,rgba(0,0,0,.9) 92.16%);
+    display: block;        
+    top: 0;
+    left: 0; 
+    position: absolute;
+    }
+  
+
+
+
+
+
+    // ПАГІНАЦІЯ
+
+.tui-ico-ellipsis, .tui-ico-first, .tui-ico-last, .tui-ico-next, .tui-ico-prev {
+    overflow: hidden;
+}
+
+.tui-pagination {
+    // height: 40px;
+    line-height: normal;
+    text-align: center;
+    font-size: 0;
+    line-height: normal;
+   margin-top: 60px;
+   margin-bottom: 100px;
+}
+
+.tui-pagination .tui-page-btn {
+    display: inline-block;
+    position: relative;
+    width: 40px;
+    height: 40px;
+    padding: 14px 0 0px;
+    margin-left: 0;
+    margin-right: 16px;
+    color: #f8f8f8; 
+    font-size: 12px;
+    font-weight: normal;
+    line-height: 1;
+    text-decoration: none;
+    vertical-align: middle;
+    border: 1px solid #f8f8f8;
+    border-radius: 50%;
+}
+
+// .js-light-theme.tui-pagination .tui-page-btn {
+//     border: 1px solid  #f87719 ;
+//     color: #282828; ;
+// }
+
+.tui-pagination .tui-is-selected, .tui-pagination strong {
+    color: #f8f8f8;
+    background: linear-gradient(141.22deg,#ffc226 9.4%,#f84119 91.91%);
+    border-radius: 50%;
+    cursor: default;
+    border: none;
+}
+
+.tui-pagination .tui-page-btn:hover {
+    background: linear-gradient(141.22deg,#ffc226 9.4%,#f84119 91.91%);
+    border: none;
+}
+
+// .js-light-theme.tui-pagination .tui-page-btn:hover {
+//  color: #f8f8f8;
+// }
+
+.tui-pagination .tui-prev, .tui-pagination .tui-next {
+    overflow: hidden;
+    width: 40px;
+    height: 40px;
+    padding: 7px;
+    font-size: 0;
+    line-height: 26px;
+    white-space: nowrap;
+    font-weight: normal;
+   border:  none;
+   
+}
+
+.tui-pagination .tui-prev {
+    margin-right: 10px;
+}
+
+.tui-pagination .tui-ico-first {
+    display: none;
+    background: none;
+    border: none;
+  }
+  
+  .tui-pagination .tui-first {
+    display: none;
+    background: none;
+    border: none;
+  }
+  
+  .tui-pagination .tui-ico-last {
+    display: none;
+    background: none;
+    border: none;
+  }
+  
+  .tui-pagination .tui-last {
+    display: none;
+    background: none;
+    border: none;
+  }
+
+.tui-page-btn {
+    border: 1px solid #B7B7B7;
+    border-radius: 50%;
+    background-color: transparent;
+
+}
+
+.tui-page-btn:hover{
+border: none;
+background: linear-gradient(141.22deg, #FFC226 9.4%, #F84119 91.91%);
+color: #FFFFFF;
+
+}
+
+
+
