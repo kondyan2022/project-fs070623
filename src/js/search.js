@@ -98,9 +98,9 @@ function onSubmit(e) {
         displayMovies(movies);
         currentPage = res.data.page;
         const totalPages = res.data.total_pages;
-        pagination.reset({});
+        pagination.reset(totalPages);
 
-        console.log(`Total pages: ${totalPages}`);
+        // console.log(`Total pages: ${totalPages}`);
       }
     })
     .catch(error => {
@@ -128,14 +128,41 @@ const refs = {
   paginationElem: document.querySelector('.tui-pagination'),
 };
 
+// const options = {
+//   totalItems: 1000,
+//   itemsPerPage: 20,
+//   visiblePages: 4,
+//   page: 1,
+//   centerAlign: false,
+//   firstItemClassName: 'tui-first-child',
+//   lastItemClassName: 'tui-last-child',
+// };
+
 const options = {
-  totalItems: 1000,
+  totalItems: 20,
   itemsPerPage: 20,
-  visiblePages: 4,
-  page: 1,
-  centerAlign: false,
+  visiblePages: 3,
+  centerAlign: true,
   firstItemClassName: 'tui-first-child',
   lastItemClassName: 'tui-last-child',
+  //
+  template: {
+    page: '<a href="#" class="tui-page-btn">{{page}}</a>',
+    currentPage:
+      '<strong class="tui-page-btn tui-is-selected">{{page}}</strong>',
+    moveButton:
+      '<a href="#" class="tui-page-btn tui-{{type}} custom-class-{{type}}">' +
+      '<span class="tui-ico-{{type}}">{{type}}</span>' +
+      '</a>',
+    disabledMoveButton:
+      '<span class="tui-page-btn tui-is-disabled tui-{{type}} custom-class-{{type}}">' +
+      '<span class="tui-ico-{{type}}">{{type}}</span>' +
+      '</span>',
+    moreButton:
+      '<a href="#" class="tui-page-btn tui-{{type}}-is-ellip custom-class-{{type}}">' +
+      '<span class="tui-ico-ellip">...</span>' +
+      '</a>',
+  },
 };
 
 const pagination = new Pagination(refs.paginationElem, options);
@@ -149,7 +176,7 @@ pagination.on('afterMove', async event => {
     const res = await myService.fetchSearchMovies(pageForPagination);
     const movies = res.data.results;
     displayMovies(movies);
-    scrollToTop();
+    // scrollToTop();
   } catch (error) {
     console.log(error);
   }
