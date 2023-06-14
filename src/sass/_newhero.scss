@@ -1,15 +1,15 @@
-.newhero-title {
-  max-width: 464px;
-  font-weight: 700;
-  font-size: 64px;
-  line-height: 75px;
-}
-.newhero-subtitle {
-  max-width: 464px;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: calc(19 / 16);
-}
+// .newhero-title {
+//   max-width: 464px;
+//   font-weight: 700;
+//   font-size: 64px;
+//   line-height: 75px;
+// }
+// .newhero-subtitle {
+//   max-width: 464px;
+//   font-weight: 400;
+//   font-size: 16px;
+//   line-height: calc(19 / 16);
+// }
 
 .newhero-wrap-btn {
   margin-top: 32px;
@@ -45,6 +45,9 @@
     box-shadow: 1px 1px 14px 4px #ff6b086b;
   }
 }
+.newh-wrap-trailer {
+  margin-right: 8px;
+}
 //-----------------------------------------------
 
 .newhero {
@@ -58,7 +61,8 @@
     padding-top: 0;
   }
 }
-.new-hero-text-wrapper {
+.new-hero-text-wrapper,
+.newhero-movie-inform-wrap {
   position: absolute;
   top: 40px;
   left: 20px;
@@ -75,7 +79,8 @@
   }
 }
 
-.newhero-title {
+.newhero-title,
+.newhero-movie-title {
   width: 235px;
   margin-bottom: 8px;
 
@@ -100,10 +105,77 @@
   }
 }
 .newhero-subtitle {
+  margin-bottom: 16px;
+}
+.newhero-about-descr {
+  margin-top: 28px;
+}
+.newhero-subtitle,
+.newhero-about-descr {
   font-size: 14px;
   line-height: 1.14;
   @media screen and (min-width: 1280px) {
     font-size: 16px;
     line-height: 1.19;
+  }
+}
+
+// .newhero-content-wrapper {
+// }
+// .newhero-thumb {
+// //   overflow: hidden;
+//   //   max-width: 320px;
+//   //   height: 380px;
+// }
+.newhero-image {
+  display: block;
+  max-width: 100%;
+  height: 100%;
+  .newhero-thumb {
+    max-width: 320px;
+    height: 380px;
+  }
+  @media (max-width: 767px) {
+    .newhero-image {
+      display: block;
+      min-width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  @media screen and (min-width: 768px) {
+    .newhero-thumb {
+      .newhero-image {
+        // position: absolute;
+        // max-width: 802;
+        // height: 720px;
+        // top: -100%;
+      }
+    }
+  }
+}
+
+// .newhero-movie-title {
+// }
+// .newhero-about-descr {
+// }
+
+// .newhero-wrap-btn {
+// }
+// .newhero-btn {
+// }
+// .js-newhero-open-modal-tr {
+// }
+// .js-newhero-open-mod-det {
+// }
+
+.newhero-stars {
+  display: flex;
+  .star,
+  .star-half,
+  .star-outline {
+    width: 24px;
+    height: 24px;
   }
 }
