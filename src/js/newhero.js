@@ -22,9 +22,9 @@ function createMarkup(movie) {
                                 https://image.tmdb.org/t/p/w1280/${movie.backdrop_path}      1280w,
                                 https://image.tmdb.org/t/p/original/${movie.backdrop_path}  3840w
                             "
-                            sizes="(min-width: 320px) 320px,
+                            sizes="(min-width: 320px) 772px,
                                     (min-width: 768px) 768px,
-                                    (min-width: 1280px) 802px,
+                                    (min-width: 1280px) 1280px,
                                     100vw"
                             src="https://image.tmdb.org/t/p/w300/${movie.backdrop_path}"
                             alt="${movie.title}"
@@ -38,11 +38,13 @@ function createMarkup(movie) {
                         <h1 class="newhero-movie-title">${movie.title}</h1>
                         <div class="newhero-stars">${getFiveStar(movie.vote_average)}</div>
                         <p class="newhero-about-descr">${movie.overview}</p>
-                        <div class="newhero-wrap-btn newh-wrap-trailer">
-                            <button type="button" class="newhero-btn js-newhero-open-modal-tr">Watch trailer</button>
-                        </div>
-                        <div class="newhero-wrap-btn newh-wrap-detail">
-                            <button type="button" class="newhero-btn js-newhero-open-mod-det">More details</button>
+                        <div class="newh-wrap-buttons">
+                            <div class="newhero-wrap-btn-api-one newh-wrap-trailer">
+                                <button type="button" class="newhero-btn-api-one js-newhero-open-modal-tr">Watch trailer</button>
+                            </div>
+                            <div class="newhero-wrap-btn-api-two newh-wrap-detail">
+                                <button type="button" class="newhero-btn-api-two js-newhero-open-mod-det">More details</button>
+                            </div>
                         </div>
                     </div>
             </div>
