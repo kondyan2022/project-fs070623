@@ -1,7 +1,7 @@
 import './js/load-genres';
 import './js/totop';
 import './js/header';
-import './js/hero';
+import './js/newhero';
 import './js/weekly';
 import './js/upcoming';
 import './js/modal-poster';

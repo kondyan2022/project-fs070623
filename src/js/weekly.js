@@ -1,6 +1,8 @@
 import TMDBApiService from './tmdb-api';
 import getFilmCard from './film-card';
 import getFiveStar from './fivezerostar';
+import { modalController } from './modal-trailer';
+import { openModalCard } from './modal-poster';
 //import getGenres from './get-genres';
 
 const myService = new TMDBApiService();
@@ -11,7 +13,7 @@ weeklyGallery.addEventListener('click', hendlerOpenModalWindow);
 function hendlerOpenModalWindow(evt) {
   const el = evt.target.closest('[film-id]');
   if (el) {
-    console.log(el.getAttribute('film-id'));
+    openModalCard(el.getAttribute('film-id'));
   }
 }
 

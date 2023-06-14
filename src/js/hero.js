@@ -1,7 +1,6 @@
-
 import TMDBApiService from './tmdb-api';
 import generateMarkup from './hero-render';
-import { Buffer } from 'buffer'
+import { Buffer } from 'buffer';
 import Swiper from 'swiper';
 import Swiper, {  Navigation, Pagination, Scrollbar, Autoplay } from 'swiper';
 
@@ -12,20 +11,23 @@ import 'swiper/modules/navigation/navigation.min.css';
 import 'swiper/modules/scrollbar/scrollbar.min.css';
 import 'swiper/modules/autoplay/autoplay.min.css';
 
+<<<<<<< HEAD
 Swiper.use([Navigation, Pagination, Scrollbar, Autoplay]);
 
 
+=======
+import { modalController } from './modal-trailer';
+>>>>>>> main
 const myApiService = new TMDBApiService();
 
 const paretteContainer = document.querySelector('.swiper-wrapper');
 
 async function createMarkupFilms() {
   try {
-    const response = await myApiService.fetchTrendingDayMovies(); 
+    const response = await myApiService.fetchTrendingDayMovies();
     const movies = response.data.results;
 
     const markup = generateMarkup(movies);
-
 
     // const markup = movies.map(({ original_name, name, original_title, overview, backdrop_path, vote_average, id }) => {
     //   return `
@@ -35,7 +37,7 @@ async function createMarkupFilms() {
     //       <img src="${backdrop_path}" alt="${overview}" loading="lazy" class="hero_img-head">
     //       <div class="hero_title-box-api">
     //         <h1 class="hero_first-title-api">${name || original_name || original_title}</h1>
-    //       </div> 
+    //       </div>
     //       <div class="star-rate--hero">${vote_average} stars</div>
     //       <div class="hero_page-box-api">
     //         <p>${overview}</p>
@@ -48,6 +50,11 @@ async function createMarkupFilms() {
     // }).join('');
 
     paretteContainer.insertAdjacentHTML('beforeend', markup);
+    modalController({
+      modal: '.modal1',
+      btnOpen: '.section__button1',
+      btnClose: '.modal__close',
+    });
   } catch (error) {
     console.error('Error fetching movies:', error);
   }
@@ -56,6 +63,7 @@ async function createMarkupFilms() {
 createMarkupFilms();
 
 const swiper = new Swiper('.swiper-container', {
+<<<<<<< HEAD
   autoplay: {
     delay: 5000, 
     disableOnInteraction: false, 
@@ -64,6 +72,20 @@ const swiper = new Swiper('.swiper-container', {
   pagination: {
     el: ".swiper-pagination",
     clickable: true,
+=======
+  loop: true, //loop
+  pagination: {
+    //pagination（dots）
+    el: '.swiper-pagination',
+  },
+  autoplay: {
+    delay: 500,
+  },
+  navigation: {
+    //navigation（arrows）
+    nextEl: '.swiper-button-next',
+    prevEl: '.swiper-button-prev',
+>>>>>>> main
   },
   // Налаштування Swiper
   // scrollbar: {
@@ -71,5 +93,3 @@ const swiper = new Swiper('.swiper-container', {
   //   hide: false,
   // },
 });
-
-

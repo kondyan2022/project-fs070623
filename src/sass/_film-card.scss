@@ -2,6 +2,10 @@
   display: inline-block;
   position: relative;
   border-radius: 5px;
+  cursor: pointer;
+  &:hover {
+    box-shadow: 1px 1px 14px 4px rgba(255, 107, 8, 0.42);
+  }
 }
 .film-card-poster {
   width: 280px;
