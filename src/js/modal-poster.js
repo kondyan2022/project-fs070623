@@ -164,6 +164,18 @@ function closeModal() {
   document.removeEventListener('click', onBackdropClick);
 }
 
+// function onEscKeyPress(event) {
+//   if (event.code === 'Escape') {
+//     closeModal();
+//   }
+// }
+
+// function onBackdropClick(event) {
+//   if (event.target === refs.backdrop) {
+//     closeModal();
+//   }
+// }
+
 //  on escape ----------------------
 
 // function onEscBtnPress(e) {
@@ -174,11 +186,11 @@ function closeModal() {
 
 //   //  on clicking elsewhere ---------
 
-//   function onBackdropClick(e) {
-//     if (e.target === refs.Backdrop) {
-//       closeModalDescr();
-//     }
-//   }
+  // function onBackdropClick(e) {
+  //   if (e.target === refs.Backdrop) {
+  //     closeModalDescr();
+  //   }
+  // }
 
 //   //  on button -------------------
 
