@@ -1,19 +1,15 @@
-// .newhero {
-//   background: rgba(17, 17, 17, 0);
+// .swiper {
+//   width: 600px;
+//   height: 300px;
+//   .swiper-wrapper {
+//     width: 100%;
+//     height: 100%;
+//   }
+//   .swiper-slide {
+//     width: 100%;
+//     height: 100%;
+//   }
 // }
-
-.swiper {
-  width: 600px;
-  height: 300px;
-  .swiper-wrapper {
-    width: 100%;
-    height: 100%;
-  }
-  .swiper-slide {
-    width: 100%;
-    height: 100%;
-  }
-}
 
 // .newhero-render-wrapper {
 //   //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -28,13 +24,12 @@
 }
 
 .newh-gradient {
-  ///////==================  GRADIENT
   position: absolute;
   width: 320px;
   height: 380px;
   z-index: 1;
   background: linear-gradient(to left, #00000000 -10%, #000000e6 92.16%);
-  top: 0px;
+  top: 0.5px;
   @media screen and (min-width: 320px) {
     .container {
       width: 320px;
@@ -72,7 +67,7 @@
 .new-hero-text-wrapper,
 .newhero-movie-inform-wrap {
   position: absolute;
-  z-index: 50;
+  z-index: 2;
   top: 40px;
   left: 20px;
   max-width: 249px;
@@ -118,10 +113,9 @@
   }
 }
 .newhero-subtitle {
-  margin-top: 8px;
   margin-bottom: 12px;
   @media screen and (min-width: 768px) {
-    //
+    margin-top: 20px;
   }
   @media screen and (min-width: 1280px) {
     margin-bottom: 16px;
@@ -173,7 +167,7 @@
   .newhero-wrap-btn-api-two {
     position: absolute;
     bottom: -80px;
-    left: 141px;
+    left: 135px;
   }
 }
 //=========================================== stars
@@ -205,9 +199,9 @@
 
 //=================================== buttons
 
-.newhero-wrap-btn {
-  margin-top: 32px;
-}
+// .newhero-wrap-btn {
+//   // margin-top: 32px;
+// }
 
 .newhero-wrap-btn,
 .newhero-wrap-btn-api-one {
@@ -222,7 +216,7 @@
 
   .newhero-btn,
   .newhero-btn-api-one {
-    padding: 12px 24px;
+    padding: 12px 20px;
     border-radius: 74px;
     border-width: 2px;
     border-color: transparent;
@@ -241,13 +235,8 @@
   &:is(:hover, :focus) {
     box-shadow: 1px 1px 14px 4px #ff6b086b;
   }
-  @media screen and (min-width: 768px) {
-    .newhero-btn,
-    .newhero-btn-api-one {
-      padding: 12px 18px;
-    }
-  }
 }
+
 .newhero-about-descr {
   margin-bottom: 32px;
 }
@@ -261,6 +250,9 @@
   border: 1px solid #fff;
   transition: bagckround linear 400ms, color linear 400ms,
     bordler-color linear 400ms, box-shadow linear 400ms;
+  &:is(:hover, :focus) {
+    border-color: var(--color-orange);
+  }
 
   .newhero-btn-api-two {
     padding: 12px 24px;
@@ -279,7 +271,6 @@
     background-color: transparent;
     &:is(:hover, :focus) {
       background-color: transparent;
-      border-color: var(--color-orange);
       color: var(--color-orange);
     }
   }
@@ -289,15 +280,16 @@
 }
 
 .newhero-wrap-btn-api-two {
-  /////?????????????????btn mob
   @media screen and (max-width: 767px) {
-    .newhero-wrap-btn-api-two {
-      flex-direction: column;
-    }
     .newhero-wrap-btn-api-one,
     .newhero-wrap-btn-api-two {
-      width: 177px;
+      width: 117px;
       height: 38px;
+      font-size: 10px;
+    }
+    .newhero-wrap-btn-api-two,
+    .newhero-btn-api-two {
+      padding: 12px 12px;
     }
   }
 }

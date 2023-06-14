@@ -2,12 +2,9 @@ import TMDBApiService from './tmdb-api';
 import { modalController } from './modal-trailer';
 import getFiveStar from './fivezerostar.js';
 import '../sass/_fivestar.scss';
-import Swiper from 'swiper';
-import 'swiper/swiper.min.css';
+// import Swiper from 'swiper';
+// import 'swiper/swiper.min.css';
 // import 'swiper/swiper.css';
-
-
-
 
 function createMarkup(movie) {
     return `
@@ -57,10 +54,9 @@ const wrapperContent = document.querySelector('.newhero-content-wrapper');
 const wrapperForRender = document.querySelector('.newhero-render-wrapper')
 //----------------- modal-------------------------------------------------------
 
-
-function hendlerOpenModalWindow(evt) {
-    console.log(evt.target.getAttribute('film-id'), 'Це id фільму');
-}
+// function hendlerOpenModalWindow(evt) {
+//     console.log(evt.target.getAttribute('film-id'), 'Це id фільму');
+// }
 //------------------------------------------------------------------------
 
 const serviceTrendingDaysMovies = new TMDBApiService();
@@ -83,7 +79,12 @@ serviceTrendingDaysMovies
                 if (e.target === document.querySelector('.js-newhero-open-mod-det')) {
                     /// open modal with details 
                     console.log('button DETAILS')
-                    wrapperContent.addEventListener('click', hendlerOpenModalWindow);
+                    wrapperForRender.addEventListener('click', (e) => {
+                        const el = evt.target.closest('[film-id]');
+                        if (el) {
+                            openModalCard(el.getAttribute('film-id'));
+                        }
+                    });
                 }
             })
             return
@@ -139,15 +140,14 @@ function getRandomIndex() {
 //     setTimeout(() => {
 //         wrapperForRender.innerHTML = randomMovie;
 //         console.log('timeout');
-//         modalController({
-//             modal: '.modal1',
-//             btnOpen: '.js-newhero-open-modal-tr',
-//             btnClose: '.modalclose',
-//         });
+//         // modalController({
+//         //     modal: '.modal1',
+//         //     btnOpen: '.js-newhero-open-modal-tr',
+//         //     btnClose: '.modalclose',
+//         // });
 
 //     }, 3000);
 // }
-
 
 // const swiper = new Swiper('.swiper', {
 //     // Optional parameters
@@ -158,4 +158,3 @@ function getRandomIndex() {
 //         disableOnInteraction: false, //cont after click
 //     }
 // });
-
