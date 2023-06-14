@@ -17,7 +17,7 @@ const paretteContainer = document.querySelector('.swiper-wrapper');
 
 async function createMarkupFilms() {
   try {
-    const response = await myApiService.fetchTrendingDayMovies(); 
+    const response = await myApiService.fetchTrendingDayMovies();
     const movies = response.data.results;
 
     const markup = generateMarkup(movies);
@@ -57,14 +57,14 @@ createMarkupFilms();
 const swiper = new Swiper('.swiper-container', {
   loop: true,                         //loop
   pagination: {                       //pagination（dots）
-      el: '.swiper-pagination',
+    el: '.swiper-pagination',
   },
-  autoplay: {                         
-    delay: 500,  
-},
+  autoplay: {
+    delay: 500,
+  },
   navigation: {                       //navigation（arrows）
-      nextEl: ".swiper-button-next",
-      prevEl: ".swiper-button-prev",
+    nextEl: ".swiper-button-next",
+    prevEl: ".swiper-button-prev",
   },
 });
 

@@ -1,0 +1,109 @@
+.newhero-title {
+  max-width: 464px;
+  font-weight: 700;
+  font-size: 64px;
+  line-height: 75px;
+}
+.newhero-subtitle {
+  max-width: 464px;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: calc(19 / 16);
+}
+
+.newhero-wrap-btn {
+  margin-top: 32px;
+
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 74px;
+  background: var(--color-linear-one);
+  transition: bagckround linear 400ms, color linear 400ms,
+    bordler-color linear 400ms, box-shadow linear 400ms;
+
+  .newhero-btn {
+    padding: 12px 24px;
+
+    border-radius: 74px;
+    border-width: 2px;
+    border-color: transparent;
+    border-width: 1px;
+    background-clip: padding-box;
+    outline: none;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: calc(14 / 12);
+    background-color: transparent;
+    &:is(:hover, :focus) {
+      background-color: white;
+      color: var(--color-orange);
+    }
+  }
+  &:is(:hover, :focus) {
+    box-shadow: 1px 1px 14px 4px #ff6b086b;
+  }
+}
+//-----------------------------------------------
+
+.newhero {
+  padding-top: 14px;
+  .container {
+    position: relative;
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+  @media screen and (min-width: 768px) {
+    padding-top: 0;
+  }
+}
+.new-hero-text-wrapper {
+  position: absolute;
+  top: 40px;
+  left: 20px;
+  max-width: 249px;
+  @media screen and (min-width: 768px) {
+    top: 62px;
+    left: 32px;
+    max-width: 357px;
+  }
+  @media screen and (min-width: 1280px) {
+    max-width: 464px;
+    top: 169px;
+    left: 117px;
+  }
+}
+
+.newhero-title {
+  width: 235px;
+  margin-bottom: 8px;
+
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 1.19;
+
+  color: #ffffff;
+  @media screen and (min-width: 768px) {
+    width: 332px;
+
+    font-size: 44px;
+    line-height: 1.18;
+  }
+  @media screen and (min-width: 1280px) {
+    width: 100%;
+    margin-bottom: 16px;
+
+    font-size: 64px;
+    font-weight: 700;
+    line-height: 1.17;
+  }
+}
+.newhero-subtitle {
+  font-size: 14px;
+  line-height: 1.14;
+  @media screen and (min-width: 1280px) {
+    font-size: 16px;
+    line-height: 1.19;
+  }
+}
