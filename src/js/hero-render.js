@@ -1,7 +1,7 @@
 export default function generateMarkup(movies) {
     return movies.map(({ original_name, name, original_title, overview, backdrop_path, vote_average, id }) => {
       return `
-      <div class="swiper-slide">
+      <div class="swiper-slide wiper-pagination">
         <div class="image-overlay"></div> 
           <img src="https://image.tmdb.org/t/p/original/${backdrop_path}" alt="${overview}" loading="lazy" class="hero_img" />
 	          <div class="hero-block">
