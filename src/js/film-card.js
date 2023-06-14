@@ -1,10 +1,13 @@
 import getGenres from './get-genres';
+import '../sass/_film-card.scss';
+import '../sass/_fivestar.scss';
 export default function getFilmCard(
   { id, title, poster_path, genre_ids, release_date, vote_average },
   getStatrs
 ) {
   const stars = getStatrs(vote_average);
   const noPoster = new URL('../images/no-poster.png', import.meta.url);
+
   const imgScrSet = poster_path
     ? `srcset="
       https://image.tmdb.org/t/p/w342/${poster_path}      342w,
@@ -23,7 +26,7 @@ export default function getFilmCard(
   <img
    ${imgScrSet}
     
-    src="${noPoster.href}"
+    src="${noPoster}"
     alt="${title}"
     class="film-card-poster"
     film-id="${id}"
@@ -40,5 +43,6 @@ export default function getFilmCard(
       .join(', ')} | ${release_date.slice(0, 4)}</p>
   </div>
   <div class="film-card-stars">${stars}</div>
-</div>`;
+  <div class="film-card-cover"></div>
+  </div>`;
 }

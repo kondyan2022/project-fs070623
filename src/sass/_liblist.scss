@@ -1,0 +1,239 @@
+//================================ SLIM-SELECT =============================================
+.lib-select {
+  //----color svg
+  &.ss-main .ss-arrow path {
+    stroke: var(--color-white);
+    // border
+  }
+  //---bg
+  &.js-lib-select {
+    background-color: var(--color-background);
+    width: 173px;
+    max-height: 264px;
+
+    border: 1px solid var(--color-white);
+    border-radius: 8px;
+    border-bottom-right-radius: 8px;
+    border-bottom-left-radius: 8px;
+    padding-bottom: 12px;
+    padding-top: 12px;
+    padding-left: 16px;
+    padding-right: 10px;
+  }
+  //-----options
+  &.ss-content .ss-list .ss-option {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: calc(20 / 14);
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 12px;
+    border-bottom: 1px solid #57575758;
+  }
+  //-------hover on options
+  &.ss-content .ss-list .ss-option:hover {
+    color: var(--color-orange);
+  }
+  //-------on body option's
+  &.ss-content.ss-open-below {
+    border-bottom-right-radius: 8px;
+    border-bottom-left-radius: 8px;
+  }
+}
+//----------------------select / light theme------------
+.js-light-theme {
+  .lib-select {
+    &.ss-main .ss-arrow path {
+      stroke: var(--color-background);
+    }
+    //----text option
+    &.ss-content .ss-list .ss-option {
+      color: var(--color-background);
+    }
+    &.js-lib-select {
+      background-color: var(--color-white);
+      border: 1px solid var(--color-background);
+      color: var(--color-secondary-black);
+      box-shadow: 1px 1px 14px 4px #00000038;
+    }
+    //-------hover on options
+    &.ss-content .ss-list .ss-option:hover {
+      color: var(--color-orange);
+    }
+  }
+}
+
+//===============================================================================
+
+.lib-item-message {
+  display: flex;
+  flex-direction: column;
+  // gap: 0px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.liblist {
+  padding-top: 44px;
+}
+
+//----------------------------buttons--------------------
+.lib-wrap-btn {
+  margin-top: 40px;
+
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+
+  ////// :TODO =>  LOAD MORE BTN NOT CENTRED  ????????????????????????????????????????????????
+
+  border-radius: 74px;
+  background: var(--color-linear-one);
+  transition: bagckround linear 400ms, color linear 400ms,
+    bordler-color linear 400ms, box-shadow linear 400ms;
+
+  .lib-load-more,
+  .lib-btn-search-movie {
+    padding: 12px 24px;
+
+    width: 100%;
+    border-radius: 74px;
+    border-width: 2px;
+    border-color: transparent;
+    border-width: 1px;
+    background-clip: padding-box;
+    outline: none;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: calc(14 / 12);
+    background-color: transparent;
+    &:is(:hover, :focus) {
+      background-color: white;
+      color: var(--color-orange);
+    }
+  }
+  &:is(:hover, :focus) {
+    box-shadow: 1px 1px 14px 4px #ff6b086b;
+  }
+} //----------------------------------------------
+
+.lib-wrap-btn {
+  position: relative;
+}
+.lib-load-more {
+  position: absolute;
+}
+//-----------------------------------------------
+.js-lib-content-wrap {
+  display: flex;
+  flex-direction: column;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.lib-wrap-list {
+  margin-top: 16px;
+}
+
+.lib-list {
+  display: flex;
+  flex-direction: column;
+  row-gap: 16px;
+}
+
+.lib-error {
+  font-weight: 400;
+  font-size: 20px;
+  line-height: calc(28 / 20);
+  color: var(--color-white);
+  text-align: center;
+
+  width: 280px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+//----------------- style for tablet -------------------------
+
+@media screen and (min-width: 768px) {
+  .liblist {
+    padding-top: 60px;
+  }
+  .lib-select {
+    min-width: 144px;
+  }
+  .lib-load-more,
+  .lib-btn-search-movie {
+    font-size: 14px;
+    line-height: calc(16 / 14);
+  }
+  .lib-wrap-btn {
+    margin-top: 40px;
+  }
+  .lib-wrap-list {
+    margin-top: 36px;
+  }
+  .lib-list {
+    flex-direction: row;
+    flex-wrap: wrap;
+    column-gap: 16px;
+    row-gap: 28px;
+  }
+  .lib-error {
+    font-size: 20px;
+    line-height: calc(24 / 20);
+
+    width: 439px;
+  }
+}
+
+//---------------- style for desktop--------------------------
+
+@media screen and (min-width: 1280px) {
+  .liblist {
+    padding-top: 80px;
+  }
+  .lib-wrap-list {
+    margin-top: 48px;
+  }
+  .lib-select {
+    visibility: visible;
+  }
+  .lib-list {
+    column-gap: 15px;
+    row-gap: 32px;
+  }
+  .lib-load-more,
+  .lib-btn-search-movie {
+    font-size: 18px;
+    line-height: calc(28 / 18);
+  }
+  .lib-error {
+    font-size: 32px;
+    line-height: calc(36 / 32);
+
+    width: 584px;
+  }
+}
+
+//  --------------------------------light theme--------------------------------------
+
+.js-light-theme {
+  // .lib-select.js-lib-select {
+  //   background-color: var(--color-white);
+  //   color: var(--color-secondary-black);
+  //   border-color: var(--color-orange);
+  //   box-shadow: 1px 1px 24px 2px #01010173;
+  // }
+  // .lib-option.lib-spec {
+  //   color: var(--color-background);
+  //   // color: var(--color-secondary-text);
+  // }
+  // #library-filter.ss-arrow {
+  //   stroke: black;
+  //   fill: black;
+  // }
+  .lib-error {
+    color: var(--color-background);
+  }
+}

@@ -1,0 +1,118 @@
+body.modal-open {
+  overflow: hidden;
+}
+
+.modal {
+  z-index: 20;
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+  padding: 30px;
+}
+
+.modal__main {
+  position: relative;
+  background-color: var(--color-background);
+  .js-light-theme & {
+    background-color: var(--color-white);
+    box-shadow: 1px 1px 14px 4px rgba(0, 0, 0, 0.22);
+  }
+  margin: auto;
+  color: var(--color-background);
+  border-radius: 16px;
+  cursor: default;
+  box-shadow: 1px 1px 14px 4px rgba(255, 107, 8, 0.42);
+}
+
+@media screen and (max-width: 767px) {
+  .modal__main {
+    width: 280px;
+    height: 289px;
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1199px) {
+  .modal__main {
+    width: 609px;
+    height: 400px;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .modal__main {
+    width: 700px;
+    height: 400px;
+  }
+}
+
+.modal__player {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@media screen and (max-width: 767px) {
+  .modal__player {
+    width: 86%;
+    height: 80%;
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1199px) {
+  .modal__player {
+    width: 85%;
+    height: 85%;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .modal__player {
+    width: 90%;
+    height: 85%;
+  }
+}
+
+.modal__close {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 22px;
+  position: absolute;
+  top: 10px;
+  right: 17px;
+  fill: var(--color-secondary-text);
+  .js-light-theme & {
+    fill: var(--color-secondary-black);
+  }
+  padding: 0;
+  text-align: center;
+  display: block;
+}
+
+@media screen and (max-width: 767px) {
+  .modal__close {
+    right: 13px;
+    top: 7px;
+  }
+}
+
+.error-message {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 1.17;
+
+  /* Background */
+
+  color: var(--color-white);
+  .js-light-theme & {
+    color: var(--color-background);
+  }
+}
+
+.error-image {
+  width: 363px;
+  height: 318px;
+}
