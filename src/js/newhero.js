@@ -7,7 +7,14 @@ import '../sass/_fivestar.scss';
 // import 'swiper/swiper.min.css';
 // import 'swiper/swiper.css';
 
+let numberLetters = 200;
+
 function createMarkup(movie) {
+  const title = movie.title.innerText;
+  if (movie.title.length > 25) {
+    numberLetters = 170;
+  }
+  // console.log(numberLetters);
   // console.log(movie.id);
   return `
         <div class="swiper-wrapper">
@@ -39,11 +46,11 @@ function createMarkup(movie) {
             </div>
 
             <div class="newhero-movie-inform-wrap">
-                <h1 class="newhero-movie-title">${movie.title}</h1>
+                <h1 class="newhero-movie-title">${movie.title.substring(0, 25)}</h1>
                 <div class="newhero-stars">${getFiveStar(
       movie.vote_average
     )}</div>
-                <p class="newhero-about-descr">${movie.overview.substring(0, 200)}...</p>
+                <p class="newhero-about-descr">${movie.overview.substring(0, numberLetters)}...</p>
                 <div class="newh-wrap-buttons">
                     <div class="newhero-wrap-btn-api-one newh-wrap-trailer">
                         <button type="button" class="newhero-btn-api-one js-newhero-open-modal-tr">Watch trailer</button>
@@ -57,6 +64,7 @@ function createMarkup(movie) {
       </div>
     `;
 }
+
 const openTrailer = document.querySelector('.js-newhero-open-modal-tr')
 // const wrapperContent = document.querySelector('.newhero-content-wrapper');
 const wrapperForRender = document.querySelector('.newhero-render-wrapper');
@@ -107,6 +115,7 @@ function renderToMarkup(array) {
   const { markup } = randomMovie;
   setTimeout(() => {
     wrapperForRender.innerHTML = markup;
+
     modalController({
       modal: '.modal1',
       btnOpen: '.js-newhero-open-modal-tr',
