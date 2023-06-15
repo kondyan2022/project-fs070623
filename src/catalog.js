@@ -3,8 +3,8 @@ import './js/load-genres';
 import './js/totop';
 import './js/header';
 
-// import './js/newhero';
-import './js/hero';
+import './js/newhero';
+// import './js/hero';
 import './js/search';
 import './js/modal-poster';
 import './js/modal-trailer';
