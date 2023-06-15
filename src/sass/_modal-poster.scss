@@ -22,34 +22,35 @@
 
 // ---------------------------------------------- CONTAINER -------------------------------------------------------
 
-.modal-film {
-  width: 280px;
-  min-height: 847px;
+// .modal-film {
+//   width: 280px;
+//   max-height: 847px;
 
-  @media screen and (min-width: 768px) {
-    transform: translate(-50%, -50%) scale(0.9);
-    top: 50%;
-    left: 50%;
-    min-width: 704px;
-    min-height: 488px;
-    padding: 44px;
-  }
-  @media screen and (min-width: 1200px) {
-    transform: translate(-50%, -50%) scale(0.9);
-    top: 50%;
-    left: 50%;
-    min-width: 846px;
-    min-height: 598px;
-    padding: 60px;
-    border-radius: 20px;
-  }
-}
+//   @media screen and (min-width: 768px) {
+//     transform: translate(-50%, -50%) scale(0.9);
+//     top: 50%;
+//     left: 50%;
+//     min-width: 704px;
+//     min-height: 488px;
+//     padding: 44px;
+//   }
+//   @media screen and (min-width: 1200px) {
+//     transform: translate(-50%, -50%) scale(0.9);
+//     top: 50%;
+//     left: 50%;
+//     min-width: 846px;
+//     min-height: 598px;
+//     padding: 60px;
+//     border-radius: 20px;
+//   }
+// }
 
 .modal-film-container {
   padding: 52px 16px 64px 16px;
   box-sizing: border-box;
   border-radius: 16px;
   width: 280px;
+  height: 847px;
 
   display: flex;
   flex-wrap: wrap;
@@ -71,6 +72,7 @@
   @media screen and (min-width: 768px) {
     width: 704px;
     height: 488px;
+    padding: 44px;
     // display: flex;
 
     justify-content: space-between;
@@ -82,6 +84,7 @@
   @media screen and (min-width: 1200px) {
     width: 846px;
     height: 598px;
+    padding: 60px;
     // display: flex;
   }
 }
@@ -180,6 +183,10 @@
 .modal-card-data-get {
   color: var(--color-white);
   font-size: 14px;
+  @media screen and (max-width: 767px) {
+    max-height: 32px;
+    width: auto;
+  }
   @media screen and (min-width: 1200px) {
     font-size: 16px;
   }
@@ -243,6 +250,13 @@
   line-height: calc(20 / 12);
   color: var(--color-secondary-text);
   margin-bottom: 16px;
+
+  @media screen and (max-width: 767px) {
+    max-height: 180px;
+    overflow: auto;
+    
+  }
+
   @media screen and (min-width: 768px) {
     margin-top: 4px;
     margin-bottom: 24px;
