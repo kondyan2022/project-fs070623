@@ -254,7 +254,6 @@
   @media screen and (max-width: 767px) {
     max-height: 180px;
     overflow: auto;
-    
   }
 
   @media screen and (min-width: 768px) {
@@ -367,8 +366,7 @@
   .modal-card-btn {
     color: var(--color-background);
     background-color: var(--color-white);
-    &:hover,
-    &:focus {
+    &:hover {
       color: var(--color-white);
       background-color: var(--color-background);
       border: 1 px var(--color-background);
