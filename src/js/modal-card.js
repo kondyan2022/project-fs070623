@@ -55,7 +55,9 @@ export default function createMarkupModalPoster({
           </ul>
           <ul class="modal-attributes-data-list">
             <li class="modal-card-data-average">
-              <span class="modal-card-average">${vote_average}</span>/<span
+              <span class="modal-card-average">${Math.round(
+                vote_average
+              )}</span>/<span
                 class="modal-card-count"
                 >${vote_count}</span
               >
