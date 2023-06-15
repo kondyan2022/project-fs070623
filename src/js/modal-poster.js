@@ -32,12 +32,10 @@ export async function openModalCard(id) {
     document.body.style.overflow = 'hidden';
     document.addEventListener('keydown', onEscKeyPress);
     document.addEventListener('click', onBackdropClick);
-    console.log('before', data);
     changeBtnLibrary(id);
     document
       .querySelector('.modal-card-btn')
       .addEventListener('click', function (event) {
-        console.log('есть собітие');
         const el = event.target.closest('[film-id]');
 
         if (el) {
@@ -61,7 +59,6 @@ export async function openModalCard(id) {
 // ------------------------------ ADDING & REMOVING FROM LIBRARY --------------------------------------
 
 function changeBtnLibrary(filmsId) {
-  // console.log('changeBtnLibrary', isInLibrary(filmsId), filmsId);
   if (isInLibrary(filmsId)) {
     document.querySelector('.modal-card-btn').textContent =
       'Remove from Library';
@@ -73,6 +70,14 @@ function changeBtnLibrary(filmsId) {
 //  --------------------------------------- CLOSING MODAL ---------------------------------------------
 
 function closeModal() {
+  const curForm = refs.modalPoster.firstChild;
+  const film_id = refs.modalPoster.firstChild.getAttribute('film-id');
+  const myEvent = new CustomEvent('removeCard', { detail: { film_id } });
+
+  if (!isInLibrary(film_id)) {
+    document.dispatchEvent(myEvent);
+  }
+
   refs.backdrop.classList.add('is-hidden');
   refs.modalPoster.classList.add('is-hidden');
   document.body.style.overflow = 'auto';

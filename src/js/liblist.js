@@ -6,7 +6,7 @@ import 'slim-select/dist/slimselect.css';
 import { getLibraryList } from './local-storage';
 import getFiveStar from './fivezerostar.js';
 import { openModalCard } from './modal-poster.js';
-import { getLibraryList } from './local-storage';
+import { getLibraryList, isInLibrary } from './local-storage';
 import '../sass/_fivestar.scss';
 
 const refs = {
@@ -32,10 +32,27 @@ const getMovies = getLibraryList(); //list from local storage
 //------------------------------------------------------------------------
 refs.listCards.addEventListener('click', hendlerOpenModalWindow);
 
+document.addEventListener('removeCard', event => {
+  const {
+    detail: { film_id },
+  } = event;
+  const cardForDelete = document.querySelector(
+    `.film-card[film-id="${film_id}"]`
+  );
+  cardForDelete.remove();
+});
+
 function hendlerOpenModalWindow(evt) {
   const el = evt.target.closest('[film-id]');
   if (el) {
-    openModalCard(el.getAttribute('film-id'));
+    const id = el.getAttribute('film-id');
+    console.log('before open modal', id);
+    openModalCard(id);
+    console.log('after open modal', id);
+    if (!isInLibrary(id)) {
+      console.log(id);
+      renderSavedFilm();
+    }
   }
 }
 
