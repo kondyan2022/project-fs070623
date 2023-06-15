@@ -90,16 +90,15 @@
 //   margin: 22px, 16px, 64px, 16px;
 // }
 
-// .modal-attributes {
 
-//   @media screen and (min-width: 768px) {
-//   width: 294px;
-//   height: 400px;
-//   }
 
-//   @media screen and (min-width: 1200px) {
-//   width: 375px;
-//   height: 478px;
+// width: 294px;
+// height: 400px;
+// }
+
+// @media screen and (min-width: 1200px) {
+// width: 375px;
+// height: 478px;
 //   }
 // }
 
@@ -107,10 +106,22 @@
 
 .modal-attributes {
   display: flex;
-
   color: var(--color-grey);
   justify-content: space-between;
   margin-bottom: 20px;
+  flex-wrap: nowrap;
+
+  @media screen and (min-width: 768px) {
+    align-items: center;
+  }
+}
+
+.modal-attributes-data-list {
+  @media screen and (min-width: 768px) {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
 }
 
 .modal-card-title,
@@ -138,6 +149,15 @@
   }
 }
 
+.modal-attributes-title-list {
+  white-space: nowrap;
+  margin-right: 62px;
+
+}
+// .modal-attributes-data-list {
+//   margin-left: 62px;
+// }
+
 @media screen and (min-width: 768px) {
   .modal-attributes-title-list li,
   .modal-attributes-data-list li {
@@ -147,9 +167,6 @@
     margin-bottom: 12px;
   }
 
-  .modal-attributes-data-list {
-    margin-left: 62px;
-  }
 }
 
 .modal-card-data-average {
