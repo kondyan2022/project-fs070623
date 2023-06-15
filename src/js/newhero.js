@@ -8,66 +8,57 @@ import '../sass/_fivestar.scss';
 // import 'swiper/swiper.css';
 
 function createMarkup(movie) {
-  console.log(movie.id);
+  // console.log(movie.id);
   return `
         <div class="swiper-wrapper">
-            <div class="swiper-slide newhero-content-wrapper" film-id="${
-              movie.id
-            }">
-                    <div class="newhero-thumb" >
-                        <img
-                            srcset="
-                                https://image.tmdb.org/t/p/w300/${
-                                  movie.backdrop_path
-                                }      300w,
-                                https://image.tmdb.org/t/p/w780/${
-                                  movie.backdrop_path
-                                }      780w,
-                                https://image.tmdb.org/t/p/w1280/${
-                                  movie.backdrop_path
-                                }      1280w,
-                                https://image.tmdb.org/t/p/original/${
-                                  movie.backdrop_path
-                                }  3840w
-                            "
-                            sizes="(min-width: 320px) 772px,
-                                    (min-width: 768px) 768px,
-                                    (min-width: 1280px) 1280px,
-                                    100vw"
-                            src="https://image.tmdb.org/t/p/w300/${
-                              movie.backdrop_path
-                            }"
-                            alt="${movie.title}"
-                            class="newhero-image"
-                            width="1280"
-                            height="720"
-                        />
-                    </div>
-
-                    <div class="newhero-movie-inform-wrap">
-                        <h1 class="newhero-movie-title">${movie.title}</h1>
-                        <div class="newhero-stars">${getFiveStar(
-                          movie.vote_average
-                        )}</div>
-                        <p class="newhero-about-descr">${movie.overview.substring(
-                          0,
-                          190
-                        )}...</p>
-                        <div class="newh-wrap-buttons">
-                            <div class="newhero-wrap-btn-api-one newh-wrap-trailer">
-                                <button type="button" class="newhero-btn-api-one js-newhero-open-modal-tr">Watch trailer</button>
-                            </div>
-                            <div class="newhero-wrap-btn-api-two newh-wrap-detail">
-                                <button type="button" class="newhero-btn-api-two js-newhero-open-mod-det">More details</button>
-                            </div>
-                        </div>
-                    </div>
+          <div class="swiper-slide newhero-content-wrapper" film-id="${movie.id
+    }">
+            <div class="newhero-thumb" >
+                <img
+                    srcset="
+                        https://image.tmdb.org/t/p/w300/${movie.backdrop_path
+    }      300w,
+                        https://image.tmdb.org/t/p/w780/${movie.backdrop_path
+    }      780w,
+                        https://image.tmdb.org/t/p/w1280/${movie.backdrop_path
+    }      1280w,
+                        https://image.tmdb.org/t/p/original/${movie.backdrop_path
+    }  3840w
+                    "
+                    sizes="(min-width: 320px) 772px,
+                            (min-width: 768px) 768px,
+                            (min-width: 1280px) 1280px,
+                            100vw"
+                    src="https://image.tmdb.org/t/p/w300/${movie.backdrop_path
+    }"
+                    alt="${movie.title}"
+                    class="newhero-image"
+                    width="1280"
+                      height="720"
+                />
             </div>
-        </div>
+
+            <div class="newhero-movie-inform-wrap">
+                <h1 class="newhero-movie-title">${movie.title}</h1>
+                <div class="newhero-stars">${getFiveStar(
+      movie.vote_average
+    )}</div>
+                <p class="newhero-about-descr">${movie.overview.substring(0, 200)}...</p>
+                <div class="newh-wrap-buttons">
+                    <div class="newhero-wrap-btn-api-one newh-wrap-trailer">
+                        <button type="button" class="newhero-btn-api-one js-newhero-open-modal-tr">Watch trailer</button>
+                    </div>
+                    <div class="newhero-wrap-btn-api-two newh-wrap-detail">
+                        <button type="button" class="newhero-btn-api-two js-newhero-open-mod-det">More details</button>
+                    </div>
+                  </div>
+              </div>
+          </div>
+      </div>
     `;
 }
-
-const wrapperContent = document.querySelector('.newhero-content-wrapper');
+const openTrailer = document.querySelector('.js-newhero-open-modal-tr')
+// const wrapperContent = document.querySelector('.newhero-content-wrapper');
 const wrapperForRender = document.querySelector('.newhero-render-wrapper');
 
 const serviceTrendingDaysMovies = new TMDBApiService();
@@ -83,25 +74,24 @@ serviceTrendingDaysMovies
     const arrayResults = datasTrendDay.results; //array with results
     if (arrayResults.length > 0) {
       renderToMarkup(arrayResults);
-      wrapperForRender.addEventListener('click', e => {
-        console.log(e.currentTarget, e.target);
-        console.log(e.currentTarget);
-        if (e.target === document.querySelector('.js-newhero-open-mod-det')) {
-          /// open modal with details
-          console.log('button DETAILS');
-          wrapperForRender.addEventListener('click', evt => {
-            const el = evt.target.closest('[film-id]');
-            console.log('found', el);
-            if (el) {
-              openModalCard(el.getAttribute('film-id'));
-            }
-          });
-        }
-      });
+
       return;
     }
   })
   .catch(e => console.error(e));
+
+//------------------------------------------------------------------------
+
+wrapperForRender.addEventListener('click', onBtnDetails)
+
+function onBtnDetails(evt) {
+  if (evt.target === document.querySelector('.js-newhero-open-mod-det')) {
+    const el = evt.target.closest('[film-id]');// console.log('found', el);
+    if (el) {// console.log('button DETAILS');
+      openModalCard(el.getAttribute('film-id'));
+    }
+  }
+}
 
 //---------------------------------changes this function for slider
 function renderToMarkup(array) {
@@ -111,12 +101,10 @@ function renderToMarkup(array) {
     .map(movie => {
       const movieMarkup = createMarkup(movie);
       return {
-        overview: movie.overview,
-        // id: movie.id,
         markup: movieMarkup,
       };
     })[randomIndex];
-  const { overview, markup } = randomMovie;
+  const { markup } = randomMovie;
   setTimeout(() => {
     wrapperForRender.innerHTML = markup;
     modalController({
@@ -160,3 +148,4 @@ function getRandomIndex() {
 //     }
 // });
 // console.log(swiper)
+
