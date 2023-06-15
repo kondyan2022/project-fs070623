@@ -185,7 +185,6 @@
   }
 }
 
-
 //  ---------------------------------------------- IMAGE ---------------------------------------------------------
 
 .modal-img {
@@ -288,8 +287,7 @@
 
 .close-icon {
   stroke: var(--color-secondary-text);
-  &:hover,
-  &:focus {
+  &:hover {
     stroke: (--color-orange);
   }
 }
@@ -314,8 +312,7 @@
     font-size: 12px;
     line-height: calc(16 / 12);
   }
-  &:hover,
-  &:focus {
+  &:hover {
     background-color: var(--color-white);
     color: var(--color-orange);
     border: 1 px var(--color-white);
