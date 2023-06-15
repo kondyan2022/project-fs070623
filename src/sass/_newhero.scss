@@ -250,6 +250,9 @@
 
 .newhero-about-descr {
   margin-bottom: 32px;
+  @media screen and (max-width: 768px) {
+    margin-bottom: 26px;
+  }
 }
 
 .newhero-wrap-btn-api-two {
