@@ -68,7 +68,6 @@ function creatMarkup(movie) {
     `
 }
 
-
 serviceUpcoming
     .fetchUpcomingMovies()
     .then((resp) => {
@@ -82,10 +81,7 @@ serviceUpcoming
         if (arrayResults.length > 0) {
             renderToMarkup(arrayResults);
             wrapperForRender.addEventListener('click', (e) => {
-                console.log(e.currentTarget, e.target)
-                console.log(e.currentTarget)
                 if (e.target === document.querySelector('.up-btn')) {
-                    // console.log("buuuuuton")
                     const button = e.target;
                     const movieId = e.target.dataset.movieId;
                     const getMovie = arrayResults.find((movie) => movie.id == movieId);
@@ -117,15 +113,14 @@ function renderToMarkup(array) {
                 markup: movieMarkup
             }
         })[randomIndex];
-    console.log(randomMovie)
     const { id, markup } = randomMovie;
     wrapperForRender.innerHTML = markup;
     const btnSaveToLocalStorage = document.querySelector('.up-btn');
     if (isInLibrary(id)) {
-        console.log(isInLibrary(id))
+        // console.log(isInLibrary(id))
         btnSaveToLocalStorage.textContent = "Remove from my library";
     } else {
-        console.log("not")
+        // console.log("not")
         btnSaveToLocalStorage.textContent = "Add to my library";
     }
 }
