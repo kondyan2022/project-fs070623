@@ -1,6 +1,7 @@
 import createMarkupModalPoster from './modal-card';
 import TMDBApiService from './tmdb-api';
 import testData from '../testcatalog.json';
+import { totopOn, totopOff } from './totop';
 
 import {
   saveToLibrary,
@@ -22,6 +23,7 @@ const myService = new TMDBApiService();
 
 export async function openModalCard(id) {
   try {
+    totopOff();
     const { data } = await myService.fetchMovieById(id);
     data.genre_ids = data.genres.map(({ id }) => id);
     refs.modalPoster.innerHTML = createMarkupModalPoster(data);
@@ -74,6 +76,7 @@ function closeModal() {
   refs.backdrop.classList.add('is-hidden');
   refs.modalPoster.classList.add('is-hidden');
   document.body.style.overflow = 'auto';
+  totopOn();
   document.removeEventListener('keydown', onEscKeyPress);
   document.removeEventListener('click', onBackdropClick);
 }

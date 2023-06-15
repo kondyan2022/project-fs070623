@@ -1,7 +1,6 @@
 import team from '/developers.json';
-// import imgList from '../images/developers/*.jpg';
-
-const imgList = [];
+import imgList from '../images/developers/*.jpg';
+import { totopOff, totopOn } from './totop';
 
 const refs = {
   list: document.querySelector('.js-team-list'),
@@ -106,6 +105,6 @@ function makeTeamCardsMarkup(arr) {
 
 function onCloseTeamModalBtnClick() {
   refs.teamModal.classList.toggle('is-hidden');
-
+  totopOn();
   document.body.style.overflow = 'auto';
 }

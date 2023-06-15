@@ -1,29 +1,42 @@
 import TMDBApiService from './tmdb-api';
 import { modalController } from './modal-trailer';
 import getFiveStar from './fivezerostar.js';
+import { openModalCard } from './modal-poster';
 import '../sass/_fivestar.scss';
 // import Swiper from 'swiper';
 // import 'swiper/swiper.min.css';
 // import 'swiper/swiper.css';
 
 function createMarkup(movie) {
-    console.log(movie.overview)
-    return `
+  console.log(movie.id);
+  return `
         <div class="swiper-wrapper">
-            <div class="swiper-slide newhero-content-wrapper">
-                    <div class="newhero-thumb">
+            <div class="swiper-slide newhero-content-wrapper" film-id="${
+              movie.id
+            }">
+                    <div class="newhero-thumb" >
                         <img
                             srcset="
-                                https://image.tmdb.org/t/p/w300/${movie.backdrop_path}      300w,
-                                https://image.tmdb.org/t/p/w780/${movie.backdrop_path}      780w,
-                                https://image.tmdb.org/t/p/w1280/${movie.backdrop_path}      1280w,
-                                https://image.tmdb.org/t/p/original/${movie.backdrop_path}  3840w
+                                https://image.tmdb.org/t/p/w300/${
+                                  movie.backdrop_path
+                                }      300w,
+                                https://image.tmdb.org/t/p/w780/${
+                                  movie.backdrop_path
+                                }      780w,
+                                https://image.tmdb.org/t/p/w1280/${
+                                  movie.backdrop_path
+                                }      1280w,
+                                https://image.tmdb.org/t/p/original/${
+                                  movie.backdrop_path
+                                }  3840w
                             "
                             sizes="(min-width: 320px) 772px,
                                     (min-width: 768px) 768px,
                                     (min-width: 1280px) 1280px,
                                     100vw"
-                            src="https://image.tmdb.org/t/p/w300/${movie.backdrop_path}"
+                            src="https://image.tmdb.org/t/p/w300/${
+                              movie.backdrop_path
+                            }"
                             alt="${movie.title}"
                             class="newhero-image"
                             width="1280"
@@ -33,8 +46,13 @@ function createMarkup(movie) {
 
                     <div class="newhero-movie-inform-wrap">
                         <h1 class="newhero-movie-title">${movie.title}</h1>
-                        <div class="newhero-stars">${getFiveStar(movie.vote_average)}</div>
-                        <p class="newhero-about-descr">${movie.overview.substring(0, 190)}...</p>
+                        <div class="newhero-stars">${getFiveStar(
+                          movie.vote_average
+                        )}</div>
+                        <p class="newhero-about-descr">${movie.overview.substring(
+                          0,
+                          190
+                        )}...</p>
                         <div class="newh-wrap-buttons">
                             <div class="newhero-wrap-btn-api-one newh-wrap-trailer">
                                 <button type="button" class="newhero-btn-api-one js-newhero-open-modal-tr">Watch trailer</button>
@@ -46,69 +64,70 @@ function createMarkup(movie) {
                     </div>
             </div>
         </div>
-    `
+    `;
 }
 
 const wrapperContent = document.querySelector('.newhero-content-wrapper');
-const wrapperForRender = document.querySelector('.newhero-render-wrapper')
+const wrapperForRender = document.querySelector('.newhero-render-wrapper');
 
 const serviceTrendingDaysMovies = new TMDBApiService();
 serviceTrendingDaysMovies
-    .fetchTrendingDayMovies()
-    .then((resp) => {
-        const data = resp.data;
-        const datasTrendDay = {
-            pageCurrent: data.page,
-            totalResults: data.total_results,
-            results: data.results
-        }
-        const arrayResults = datasTrendDay.results; //array with results
-        if (arrayResults.length > 0) {
-            renderToMarkup(arrayResults);
-            wrapperForRender.addEventListener('click', (e) => {
-                console.log(e.currentTarget, e.target)
-                console.log(e.currentTarget)
-                if (e.target === document.querySelector('.js-newhero-open-mod-det')) {
-                    /// open modal with details 
-                    console.log('button DETAILS')
-                    wrapperForRender.addEventListener('click', (e) => {
-                        const el = evt.target.closest('[film-id]');
-                        if (el) {
-                            openModalCard(el.getAttribute('film-id'));
-                        }
-                    });
-                }
-            })
-            return
-        }
-    })
-    .catch((e) => console.error(e));
-
-//---------------------------------changes this function for slider 
-function renderToMarkup(array) {
-    const randomIndex = getRandomIndex();
-    const randomMovie = array
-        .filter(movie => movie.backdrop_path !== null)
-        .map(movie => {
-            const movieMarkup = createMarkup(movie);
-            return {
-                overview: movie.overview,
-                // id: movie.id,
-                markup: movieMarkup
+  .fetchTrendingDayMovies()
+  .then(resp => {
+    const data = resp.data;
+    const datasTrendDay = {
+      pageCurrent: data.page,
+      totalResults: data.total_results,
+      results: data.results,
+    };
+    const arrayResults = datasTrendDay.results; //array with results
+    if (arrayResults.length > 0) {
+      renderToMarkup(arrayResults);
+      wrapperForRender.addEventListener('click', e => {
+        console.log(e.currentTarget, e.target);
+        console.log(e.currentTarget);
+        if (e.target === document.querySelector('.js-newhero-open-mod-det')) {
+          /// open modal with details
+          console.log('button DETAILS');
+          wrapperForRender.addEventListener('click', evt => {
+            const el = evt.target.closest('[film-id]');
+            console.log('found', el);
+            if (el) {
+              openModalCard(el.getAttribute('film-id'));
             }
-        })[randomIndex];
-    const { overview, markup } = randomMovie;
-    setTimeout(() => {
-        wrapperForRender.innerHTML = markup;
-        modalController({
-            modal: '.modal1',
-            btnOpen: '.js-newhero-open-modal-tr',
-            btnClose: '.modalclose',
-        });
-    }, 3000);
+          });
+        }
+      });
+      return;
+    }
+  })
+  .catch(e => console.error(e));
+
+//---------------------------------changes this function for slider
+function renderToMarkup(array) {
+  const randomIndex = getRandomIndex();
+  const randomMovie = array
+    .filter(movie => movie.backdrop_path !== null)
+    .map(movie => {
+      const movieMarkup = createMarkup(movie);
+      return {
+        overview: movie.overview,
+        // id: movie.id,
+        markup: movieMarkup,
+      };
+    })[randomIndex];
+  const { overview, markup } = randomMovie;
+  setTimeout(() => {
+    wrapperForRender.innerHTML = markup;
+    modalController({
+      modal: '.modal1',
+      btnOpen: '.js-newhero-open-modal-tr',
+      btnClose: '.modal__close',
+    });
+  }, 3000);
 }
 function getRandomIndex() {
-    return Math.floor(Math.random() * 15);
+  return Math.floor(Math.random() * 15);
 }
 //=================swiper======================================
 

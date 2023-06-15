@@ -239,12 +239,12 @@
     font-size: 14px;
     line-height: calc(14 / 12);
     background-color: transparent;
-    &:is(:hover, :focus) {
+    &:is(:hover) {
       background-color: white;
       color: var(--color-orange);
     }
   }
-  &:is(:hover, :focus) {
+  &:is(:hover) {
     box-shadow: 1px 1px 14px 4px #ff6b086b;
   }
 }
@@ -262,7 +262,7 @@
   border: 1px solid #fff;
   transition: bagckround linear 400ms, color linear 400ms,
     bordler-color linear 400ms, box-shadow linear 400ms;
-  &:is(:hover, :focus) {
+  &:is(:hover) {
     border-color: var(--color-orange);
   }
 
@@ -281,12 +281,12 @@
     font-size: 14px;
     line-height: calc(14 / 12);
     background-color: transparent;
-    &:is(:hover, :focus) {
+    &:is(:hover) {
       background-color: transparent;
       color: var(--color-orange);
     }
   }
-  &:is(:hover, :focus) {
+  &:is(:hover) {
     box-shadow: 1px 1px 14px 4px #ff6b086b;
   }
 }
