@@ -1,3 +1,6 @@
+.newhero {
+  background-color: rgba(0, 0, 0, 0.407);
+}
 // .swiper {
 //   width: 600px;
 //   height: 300px;
@@ -10,19 +13,6 @@
 //     height: 100%;
 //   }
 // }
-
-// .newhero-render-wrapper {
-//   //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-//   display: flex;
-//   flex-direction: column;
-//   justify-content: start;
-//   align-items: center;
-// }
-
-.hero-container.container {
-  position: relative;
-}
-
 .newh-gradient {
   position: absolute;
   width: 320px;
@@ -64,24 +54,34 @@
   }
 }
 
+// .newhero-movie-inform-wrap {
+
+// }
+
 .new-hero-text-wrapper,
 .newhero-movie-inform-wrap {
   position: absolute;
-  z-index: 2;
+  z-index: 50;
   top: 40px;
   left: 20px;
-  max-width: 249px;
+  max-width: 270px;
   @media screen and (min-width: 768px) {
     top: 62px;
     left: 32px;
-    max-width: 357px;
+    max-width: 390px;
   }
   @media screen and (min-width: 1280px) {
-    max-width: 464px;
+    max-width: 490px;
     top: 169px;
     left: 117px;
+    // max-height: 432px;
   }
 }
+// .newhero-movie-title {
+//   white-space: nowrap;
+//   // overflow: hidden;
+//   // text-overflow: ellipsis;
+// }
 
 .newhero-title,
 .newhero-movie-title {
@@ -92,9 +92,6 @@
   font-size: 32px;
   font-weight: 700;
   line-height: 1.19;
-
-  display: flex;
-  flex-shrink: 1;
 
   color: #ffffff;
   @media screen and (min-width: 768px) {
@@ -118,7 +115,7 @@
     margin-top: 20px;
   }
   @media screen and (min-width: 1280px) {
-    margin-bottom: 16px;
+    margin-bottom: 32px;
   }
 }
 .newhero-about-descr {
@@ -140,7 +137,13 @@
   }
 }
 
+.newhero-movie-title {
+  display: flex;
+  flex-shrink: 2;
+}
+
 .newhero-image {
+  //========================== image
   display: block;
   max-width: 100%;
   height: 100%;
@@ -163,11 +166,17 @@
   .newhero-wrap-btn-api-one {
     position: absolute;
     bottom: -80px;
+    @media screen and (max-width: 767px) {
+      bottom: -40px;
+    }
   }
   .newhero-wrap-btn-api-two {
     position: absolute;
     bottom: -80px;
     left: 135px;
+    @media screen and (max-width: 767px) {
+      bottom: -40px;
+    }
   }
 }
 //=========================================== stars
@@ -179,6 +188,7 @@
     width: 16px;
     height: 16px;
   }
+  margin-bottom: 20px;
   @media screen and (min-width: 768px) {
     .star,
     .star-half,
@@ -186,6 +196,7 @@
       width: 20px;
       height: 20px;
     }
+    margin-bottom: 20px;
   }
   @media screen and (min-width: 1280px) {
     .star,
@@ -199,9 +210,9 @@
 
 //=================================== buttons
 
-// .newhero-wrap-btn {
-//   // margin-top: 32px;
-// }
+.newhero-wrap-btn {
+  // margin-top: 32px;
+}
 
 .newhero-wrap-btn,
 .newhero-wrap-btn-api-one {
@@ -216,6 +227,7 @@
 
   .newhero-btn,
   .newhero-btn-api-one {
+    color: var(--color-background);
     padding: 12px 20px;
     border-radius: 74px;
     border-width: 2px;
