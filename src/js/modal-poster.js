@@ -23,26 +23,24 @@ const myService = new TMDBApiService();
 export async function openModalCard(id) {
   try {
     const { data } = await myService.fetchMovieById(id);
-
+    data.genre_ids = data.genres.map(({ id }) => id);
     refs.modalPoster.innerHTML = createMarkupModalPoster(data);
     refs.backdrop.classList.remove('is-hidden');
     refs.modalPoster.classList.remove('is-hidden');
     document.body.style.overflow = 'hidden';
     document.addEventListener('keydown', onEscKeyPress);
     document.addEventListener('click', onBackdropClick);
-    console.log('before', id);
+    console.log('before', data);
     changeBtnLibrary(id);
     document
       .querySelector('.modal-card-btn')
-      .addEventListener('click', event => {
+      .addEventListener('click', function (event) {
         console.log('есть собітие');
         const el = event.target.closest('[film-id]');
-        console.log(el);
+
         if (el) {
           id = Number(el.getAttribute('film-id'));
-          console.log('>>>>', id);
           if (isInLibrary(id)) {
-            console.log('remove', id);
             removeFromLibrary(id);
           } else {
             saveToLibrary(data);
@@ -61,9 +59,8 @@ export async function openModalCard(id) {
 // ------------------------------ ADDING & REMOVING FROM LIBRARY --------------------------------------
 
 function changeBtnLibrary(filmsId) {
-  console.log('changeBtnLibrary', isInLibrary(filmsId), filmsId);
+  // console.log('changeBtnLibrary', isInLibrary(filmsId), filmsId);
   if (isInLibrary(filmsId)) {
-    console.log('Remove from Library');
     document.querySelector('.modal-card-btn').textContent =
       'Remove from Library';
   } else {

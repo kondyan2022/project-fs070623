@@ -10,6 +10,19 @@ export default function createMarkupModalPoster({
   genres,
 }) {
   const noPoster = new URL('../images/no-poster.png', import.meta.url);
+  const imgScrSet = poster_path
+    ? `srcset="
+          https://image.tmdb.org/t/p/w342/${poster_path}      342w,
+          https://image.tmdb.org/t/p/w500/${poster_path}      500w,
+          https://image.tmdb.org/t/p/w780/${poster_path}      780w,
+          https://image.tmdb.org/t/p/original/${poster_path} 2000w
+        "
+        sizes="(min-width:1280px) 375px,
+                      (min-width:768px) 294px,
+                      (min-width:320px) 248px, 100vw
+                      "`
+    : '';
+
   return `<div class="modal-film-container" film-id="${id}">
       <button id="modal-close-btn" class="close-button">
         <svg
@@ -27,17 +40,8 @@ export default function createMarkupModalPoster({
       </button>
       <img
         class="modal-img"
-        srcset="
-          https://image.tmdb.org/t/p/w342/${poster_path}      342w,
-          https://image.tmdb.org/t/p/w500/${poster_path}      500w,
-          https://image.tmdb.org/t/p/w780/${poster_path}      780w,
-          https://image.tmdb.org/t/p/original/${poster_path} 2000w
-        "
-        sizes="(min-width:1280px) 375px,
-                      (min-width:768px) 294px,
-                      (min-width:320px) 248px, 100vw
-                      "
-        src="${noPoster}"
+        ${imgScrSet}
+         src="${noPoster}"
         alt="${title}"
       />
 
