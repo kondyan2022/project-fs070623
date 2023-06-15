@@ -10,7 +10,6 @@ refs.closeMenu.addEventListener('click', closeMenu);
 
 function openMenu() {
   refs.menu.classList.add('is-open');
-  refs.body.classList.toggle('no-scroll');
 }
 
 function closeMenu(e) {
