@@ -6,6 +6,7 @@ import 'slim-select/dist/slimselect.css';
 import { getLibraryList } from './local-storage';
 import getFiveStar from './fivezerostar.js';
 import { openModalCard } from './modal-poster.js';
+import { getLibraryList } from './local-storage';
 import '../sass/_fivestar.scss';
 
 const refs = {
@@ -15,7 +16,15 @@ const refs = {
   wrapperForMessage: document.querySelector('.js-lib-content-wrap'),
   btnLoadMore: document.querySelector('.js-load-more'),
 };
-const arrayGenres = getGenres(); // console.log(arrayGenres)
+
+const libraryList = Array.from(
+  new Set(
+    getLibraryList()
+      .map(({ genre_ids }) => genre_ids)
+      .flat()
+  )
+);
+const arrayGenres = getGenres().filter(({ id }) => libraryList.includes(id));
 let arrayFilter = [];
 let currentCard = 0;
 const getMovies = getLibraryList(); //list from local storage

@@ -17,18 +17,19 @@
     border-bottom-left-radius: 8px;
     padding-bottom: 12px;
     padding-top: 12px;
-    padding-left: 16px;
+    padding-left: 0px;
     padding-right: 10px;
   }
   //-----options
   &.ss-content .ss-list .ss-option {
-    font-weight: 500;
+    font-weight: 400;
     font-size: 14px;
     line-height: calc(20 / 14);
     padding-top: 10px;
     padding-bottom: 10px;
-    padding-left: 12px;
+    padding-left: 20px;
     border-bottom: 1px solid #57575758;
+    color: var(--color-secondary-text);
   }
   //-------hover on options
   &.ss-content .ss-list .ss-option:hover {
@@ -41,9 +42,21 @@
     border-bottom-left-radius: 8px;
   }
   &.ss-content .ss-list .ss-option:not(.ss-disabled).ss-selected {
-    color: transparent;
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--color-orange);
     background-color: transparent;
   }
+}
+// .ss-content.lib-select.js-lib-select.lib-selector.ss-open-belowss-list {
+//   overflow: auto;
+//   scrollbar-width: thin;
+//   scrollbar-color: hsl(0 0% 50%);
+// }
+.ss-main.lib-select.js-lib-select.lib-selector {
+  padding-left: 20px;
+  font-size: 14px;
+  color: var(--color-grey);
 }
 //----------------------select / light theme------------
 .js-light-theme {
@@ -67,7 +80,7 @@
     }
   }
 }
-
+// ss-option lib-option lib-spec ss-selected
 //===============================================================================
 
 .lib-item-message {

@@ -32,15 +32,18 @@ function handleFilmCardClick(event) {
 }
 
 //Фільми тижня
-myService
-  .fetchTrendingWeekMovies()
-  .then(response => {
-    const trendingMovies = response.data.results;
-    displayMovies(trendingMovies);
-  })
-  .catch(error => {
-    console.error(error);
-  });
+function showTrendingMovies() {
+  myService
+    .fetchTrendingWeekMovies()
+    .then(response => {
+      const trendingMovies = response.data.results;
+      displayMovies(trendingMovies);
+    })
+    .catch(error => {
+      console.error(error);
+    });
+}
+showTrendingMovies();
 
 function displayMovies(movies) {
   if (movies.length === 0) {
@@ -57,9 +60,9 @@ ref.input.addEventListener('input', onInput);
 function onInput(element) {
   ref.deleteBtnInput.classList.remove('btn-hide');
   const valueInp = element.target.value.trim();
-  console.log(valueInp);
+
   if (valueInp === '') {
-    Notiflix.Notify.info('Please, enter the name of the movie');
+    showTrendingMovies();
     ref.deleteBtnInput.classList.add('btn-hide');
     refs.paginationElem.classList.add('tui-pagination');
     newElement.innerHTML = '';
@@ -96,9 +99,13 @@ function onSubmit(e) {
         ref.deleteBtnInput.classList.add('btn-hide');
       } else {
         displayMovies(movies);
-        currentPage = res.data.page;
-        const totalPages = res.data.total_pages;
-        pagination.reset(totalPages);
+        const {
+          page: currentPage,
+          total_results: totalResults,
+          total_pages: totalPages,
+        } = res.data;
+
+        pagination.myReset(totalResults);
 
         // console.log(`Total pages: ${totalPages}`);
       }
@@ -128,16 +135,6 @@ const refs = {
   paginationElem: document.querySelector('.tui-pagination'),
 };
 
-// const options = {
-//   totalItems: 1000,
-//   itemsPerPage: 20,
-//   visiblePages: 4,
-//   page: 1,
-//   centerAlign: false,
-//   firstItemClassName: 'tui-first-child',
-//   lastItemClassName: 'tui-last-child',
-// };
-
 const options = {
   totalItems: 20,
   itemsPerPage: 20,
@@ -166,6 +163,18 @@ const options = {
 };
 
 const pagination = new Pagination(refs.paginationElem, options);
+pagination.tuiRefs = {
+  first: refs.paginationElem.querySelector('.tui-first'),
+  last: refs.paginationElem.querySelector('.tui-last'),
+  next: refs.paginationElem.querySelector('.tui-next'),
+  prev: refs.paginationElem.querySelector('.tui-prev'),
+  start: refs.paginationElem.querySelector('.tui-first-child'),
+  end: refs.paginationElem.querySelector('.tui-last-child'),
+};
+pagination.myReset = async function (totalItems) {
+  this.reset(totalItems);
+  console.log(totalItems, this);
+};
 
 let pageForPagination = 0;
 
@@ -176,15 +185,7 @@ pagination.on('afterMove', async event => {
     const res = await myService.fetchSearchMovies(pageForPagination);
     const movies = res.data.results;
     displayMovies(movies);
-    // scrollToTop();
   } catch (error) {
     console.log(error);
   }
 });
-
-function scrollToTop() {
-  window.scrollTo({
-    top: 0,
-    behavior: 'smooth',
-  });
-}
