@@ -63,7 +63,7 @@ export default function createMarkupModalPoster({
               >
             </li>
             <li class="modal-card-data-get">
-              ${Number(popularity).toFixed(1)}
+              ${Number(popularity).toFixed()}
             </li>
             <li class="modal-card-data-get">
               ${genres
