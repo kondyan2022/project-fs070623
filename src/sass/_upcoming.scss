@@ -202,13 +202,6 @@
     width: 312px;
     float: left;
   }
-  // .up-btn {
-  //   font-size: 14px;
-  //   line-height: calc(16 / 14);
-  // }
-  // .up-wrap-btn {
-  //   //
-  // }
 
   @media screen and (max-width: 1279px) {
     .upcoming-data {
@@ -274,9 +267,10 @@
     float: none;
   }
   .up-wrap-btn {
+    display: flex;
     flex: 0 0 auto;
     max-width: 205px;
-    margin-left: auto;
+    // margin-left: auto;
     margin-right: auto;
   }
 }
