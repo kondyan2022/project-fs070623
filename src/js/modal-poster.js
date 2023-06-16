@@ -72,6 +72,7 @@ function changeBtnLibrary(filmsId) {
 function closeModal() {
   const curForm = refs.modalPoster.firstChild;
   const film_id = refs.modalPoster.firstChild.getAttribute('film-id');
+
   const myEvent = new CustomEvent('removeCard', { detail: { film_id } });
 
   if (!isInLibrary(film_id)) {
