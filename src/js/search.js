@@ -105,7 +105,7 @@ function onSubmit(e) {
           total_pages: totalPages,
         } = res.data;
 
-        pagination.myReset(totalResults);
+        pagination.reset(totalResults);
 
         // console.log(`Total pages: ${totalPages}`);
       }
@@ -149,11 +149,11 @@ const options = {
       '<strong class="tui-page-btn tui-is-selected">{{page}}</strong>',
     moveButton:
       '<a href="#" class="tui-page-btn tui-{{type}} custom-class-{{type}}">' +
-      '<span class="tui-ico-{{type}}">{{type}}</span>' +
+      '<span class="tui-ico-{{type}}">{{page}}</span>' +
       '</a>',
     disabledMoveButton:
-      '<span class="tui-page-btn tui-is-disabled tui-{{type}} custom-class-{{type}}">' +
-      '<span class="tui-ico-{{type}}">{{type}}</span>' +
+      '<span class="tui-page-btn tui-is-disabled tui-{{type}} custom-class-{{type}}" hidden>' +
+      '<span class="tui-ico-{{type}}">{{type}}d</span>' +
       '</span>',
     moreButton:
       '<a href="#" class="tui-page-btn tui-{{type}}-is-ellip custom-class-{{type}}">' +
@@ -163,29 +163,41 @@ const options = {
 };
 
 const pagination = new Pagination(refs.paginationElem, options);
-pagination.tuiRefs = {
-  first: refs.paginationElem.querySelector('.tui-first'),
-  last: refs.paginationElem.querySelector('.tui-last'),
-  next: refs.paginationElem.querySelector('.tui-next'),
-  prev: refs.paginationElem.querySelector('.tui-prev'),
-  start: refs.paginationElem.querySelector('.tui-first-child'),
-  end: refs.paginationElem.querySelector('.tui-last-child'),
-};
-pagination.myReset = async function (totalItems) {
-  this.reset(totalItems);
-  console.log(totalItems, this);
+pagination.reset = function (totalItems) {
+  this.__proto__.reset.call(this, totalItems);
+  if (this._getLastPage() <= this._options.visiblePages) {
+    this._view._containerElement.lastChild.hidden = true;
+  }
+  console.log(this);
+  this._view._buttons.first.textContent = 1;
+  this._view._buttons.last.textContent = this._getLastPage();
 };
 
 let pageForPagination = 0;
 
-pagination.on('afterMove', async event => {
+pagination.on('afterMove', async function (event) {
   const currentPage = event.page;
   pageForPagination = currentPage;
   try {
     const res = await myService.fetchSearchMovies(pageForPagination);
     const movies = res.data.results;
     displayMovies(movies);
+
+    console.log(pagination._view._buttons.prevMore.hidden);
   } catch (error) {
     console.log(error);
   }
+});
+pagination.on('beforeMove', function (event) {
+  const currentPage = event.page;
+  console.log(pagination._options.itemsPerPage);
+  pagination._view._buttons.prevMore.hidden =
+    currentPage < pagination._options.visiblePages + 1;
+  pagination._view._buttons.first.hidden =
+    currentPage < pagination._options.visiblePages;
+  pagination._view._buttons.last.hidden =
+    pagination._getLastPage() - currentPage <
+    pagination._options.visiblePages - 1;
+  pagination._view._buttons.nextMore.hidden =
+    pagination._getLastPage() - currentPage < pagination._options.visiblePages;
 });
