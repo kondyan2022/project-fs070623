@@ -3,8 +3,8 @@ import { modalController } from './modal-trailer';
 import getFiveStar from './fivezerostar.js';
 import { openModalCard } from './modal-poster';
 import '../sass/_fivestar.scss';
-// import Swiper from 'swiper';
-// import 'swiper/swiper.min.css';
+import Swiper from 'swiper';
+import 'swiper/swiper.min.css';
 // import 'swiper/swiper.css';
 
 let numberLetters = 200;
@@ -14,11 +14,9 @@ function createMarkup(movie) {
   if (movie.title.length > 25) {
     numberLetters = 170;
   }
-  // console.log(numberLetters);
-  // console.log(movie.id);
   return `
-        <div class="swiper-wrapper">
-          <div class="swiper-slide newhero-content-wrapper" film-id="${movie.id
+
+          <div class="swiper-slide" film-id="${movie.id
     }">
             <div class="newhero-thumb" >
                 <img
@@ -61,13 +59,12 @@ function createMarkup(movie) {
                   </div>
               </div>
           </div>
-      </div>
     `;
 }
 
-const openTrailer = document.querySelector('.js-newhero-open-modal-tr')
-// const wrapperContent = document.querySelector('.newhero-content-wrapper');
 const wrapperForRender = document.querySelector('.newhero-render-wrapper');
+
+let shouldInitSwiper = false;
 
 const serviceTrendingDaysMovies = new TMDBApiService();
 serviceTrendingDaysMovies
@@ -77,13 +74,45 @@ serviceTrendingDaysMovies
     const datasTrendDay = {
       pageCurrent: data.page,
       totalResults: data.total_results,
-      results: data.results,
+      results: data.results, //this
     };
     const arrayResults = datasTrendDay.results; //array with results
     if (arrayResults.length > 0) {
       renderToMarkup(arrayResults);
-
+      shouldInitSwiper = true;
       return;
+    }
+  })
+  .then(resp => {
+    if (shouldInitSwiper) {
+      setTimeout(() => {
+        const swiper = new Swiper('.swiper', {
+          autoplay: {
+            delay: 1000,
+            disableOnInteraction: false,
+          },
+          // navigation: {
+          //   nextEl: '.swiper-button-next',
+          //   prevEl: '.swiper-button-prev',
+          // },
+          slidesPerView: 1,
+          spaceBetween: 10,
+          // simulateTouch: false,
+          direction: 'horizontal',
+          loop: true,
+          effect: 'fade',
+          fadeEffect: {
+            crossFade: true,
+          },
+          // observer: true
+        });
+
+        swiper.init();
+        // swiper.autoplay.delay = 2000;
+        // swiper.autoplay.start();
+        // swiper.autoplay.start();
+        console.log(swiper, 'swipeeer');
+      }, 1000);
     }
   })
   .catch(e => console.error(e));
@@ -100,61 +129,47 @@ function onBtnDetails(evt) {
     }
   }
 }
+//=================swiper======================================
 
-//---------------------------------changes this function for slider
 function renderToMarkup(array) {
-  const randomIndex = getRandomIndex();
-  const randomMovie = array
+  const slides = array
     .filter(movie => movie.backdrop_path !== null)
-    .map(movie => {
-      const movieMarkup = createMarkup(movie);
-      return {
-        markup: movieMarkup,
-      };
-    })[randomIndex];
-  const { markup } = randomMovie;
+    .map(movie => createMarkup(movie))
+    .join('');
   setTimeout(() => {
-    wrapperForRender.innerHTML = markup;
-
+    wrapperForRender.innerHTML = slides;
     modalController({
       modal: '.modal1',
       btnOpen: '.js-newhero-open-modal-tr',
-      btnClose: '.modal__close',
+      btnClose: '.modalclose',
     });
-  }, 3000);
+  }, 1000);
 }
-function getRandomIndex() {
-  return Math.floor(Math.random() * 15);
-}
-//=================swiper======================================
 
+//==========================================================================
+//---------------------------------changes this render function without slider
 // function renderToMarkup(array) {
-//     // const randomIndex = getRandomIndex();
-//     const slides = array
-//         .filter(movie => movie.backdrop_path !== null)
-//         .map(movie => createMarkup(movie))
-//         .join('');
+//   const randomIndex = getRandomIndex();
+//   const randomMovie = array
+//     .filter(movie => movie.backdrop_path !== null)
+//     .map(movie => {
+//       const movieMarkup = createMarkup(movie);
+//       return {
+//         markup: movieMarkup,
+//       };
+//     })[randomIndex];
+//   const { markup } = randomMovie;
+//   setTimeout(() => {
+//     wrapperForRender.innerHTML = markup;
 
-//     // setTimeout(() => {
-//     wrapperForRender.innerHTML = slides;
-//     // console.log('timeout');
 //     modalController({
-//         modal: '.modal1',
-//         btnOpen: '.js-newhero-open-modal-tr',
-//         btnClose: '.modalclose',
+//       modal: '.modal1',
+//       btnOpen: '.js-newhero-open-modal-tr',
+//       btnClose: '.modal__close',
 //     });
-
-//     // }, 3000);
+//   }, 3000);
 // }
-
-// const swiper = new Swiper('.swiper-wrapper', {
-//     // Optional parameters
-//     direction: 'horizontal',
-//     loop: true,
-//     autoplay: {
-//         delay: 5000,
-//         disableOnInteraction: false //cont after click
-//     }
-// });
-// console.log(swiper)
+// function getRandomIndex() {
+//   return Math.floor(Math.random() * 15);
+// }
 
