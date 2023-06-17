@@ -167,7 +167,7 @@ pagination.reset = function (totalItems) {
   // this._view._buttons.last.hidden = false;
   // this._view._buttons.nextMore.hidden = false;
   this.__proto__.reset.call(this, totalItems);
-  console.log(this._view._containerElement);
+  console.log(this);
   if (this._getLastPage() <= this._options.visiblePages) {
     this._view._containerElement.lastChild.hidden = true;
   }
@@ -177,7 +177,7 @@ pagination.reset = function (totalItems) {
   }
   this._view._buttons.first.textContent = 1;
   this._view._buttons.last.textContent = this._getLastPage();
-  console.log('Установил количество', this._getLastPage());
+  console.log(this);
 };
 
 let pageForPagination = 0;
