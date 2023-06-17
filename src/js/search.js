@@ -106,8 +106,6 @@ function onSubmit(e) {
         } = res.data;
 
         pagination.reset(totalResults);
-
-        // console.log(`Total pages: ${totalPages}`);
       }
     })
     .catch(error => {
@@ -164,13 +162,22 @@ const options = {
 
 const pagination = new Pagination(refs.paginationElem, options);
 pagination.reset = function (totalItems) {
+  // this._view._buttons.prevMore.hidden = false;
+  // this._view._buttons.first.hidden = false;
+  // this._view._buttons.last.hidden = false;
+  // this._view._buttons.nextMore.hidden = false;
   this.__proto__.reset.call(this, totalItems);
+  console.log(this._view._containerElement);
   if (this._getLastPage() <= this._options.visiblePages) {
     this._view._containerElement.lastChild.hidden = true;
   }
-  console.log(this);
+  if (this._getLastPage() === this._options.visiblePages + 1) {
+    this._view._containerElement.lastChild.hidden = false;
+    this._view._containerElement.lastChild.previousSibling.previousSibling.hidden = true;
+  }
   this._view._buttons.first.textContent = 1;
   this._view._buttons.last.textContent = this._getLastPage();
+  console.log('Установил количество', this._getLastPage());
 };
 
 let pageForPagination = 0;
@@ -188,16 +195,34 @@ pagination.on('afterMove', async function (event) {
     console.log(error);
   }
 });
-pagination.on('beforeMove', function (event) {
+pagination.on('afterMove', function (event) {
   const currentPage = event.page;
   console.log(pagination._options.itemsPerPage);
-  pagination._view._buttons.prevMore.hidden =
-    currentPage < pagination._options.visiblePages + 1;
-  pagination._view._buttons.first.hidden =
-    currentPage < pagination._options.visiblePages;
-  pagination._view._buttons.last.hidden =
-    pagination._getLastPage() - currentPage <
-    pagination._options.visiblePages - 1;
-  pagination._view._buttons.nextMore.hidden =
-    pagination._getLastPage() - currentPage < pagination._options.visiblePages;
+  if (pagination._options.visiblePages >= pagination._getLastPage()) {
+    pagination._view._buttons.prevMore.hidden = true;
+    pagination._view._buttons.first.hidden = true;
+    pagination._view._buttons.last.hidden = true;
+    pagination._view._buttons.nextMore.hidden = true;
+  } else if (
+    pagination._options.visiblePages + 1 ===
+    pagination._getLastPage()
+  ) {
+    pagination._view._buttons.prevMore.hidden = true;
+    pagination._view._buttons.nextMore.hidden = true;
+    pagination._view._buttons.first.hidden = currentPage <= 2;
+    pagination._view._buttons.last.hidden =
+      currentPage >= pagination._getLastPage() - 1;
+    console.log(pagination._view._buttons);
+  } else {
+    pagination._view._buttons.prevMore.hidden =
+      currentPage < pagination._options.visiblePages + 1;
+    pagination._view._buttons.first.hidden =
+      currentPage < pagination._options.visiblePages;
+    pagination._view._buttons.last.hidden =
+      pagination._getLastPage() - currentPage <
+      pagination._options.visiblePages - 1;
+    pagination._view._buttons.nextMore.hidden =
+      pagination._getLastPage() - currentPage <
+      pagination._options.visiblePages;
+  }
 });
