@@ -32,15 +32,18 @@ function handleFilmCardClick(event) {
 }
 
 //Фільми тижня
-myService
-  .fetchTrendingWeekMovies()
-  .then(response => {
-    const trendingMovies = response.data.results;
-    displayMovies(trendingMovies);
-  })
-  .catch(error => {
-    console.error(error);
-  });
+function showTrendingMovies() {
+  myService
+    .fetchTrendingWeekMovies()
+    .then(response => {
+      const trendingMovies = response.data.results;
+      displayMovies(trendingMovies);
+    })
+    .catch(error => {
+      console.error(error);
+    });
+}
+showTrendingMovies();
 
 function displayMovies(movies) {
   if (movies.length === 0) {
@@ -57,9 +60,9 @@ ref.input.addEventListener('input', onInput);
 function onInput(element) {
   ref.deleteBtnInput.classList.remove('btn-hide');
   const valueInp = element.target.value.trim();
-  console.log(valueInp);
+
   if (valueInp === '') {
-    Notiflix.Notify.info('Please, enter the name of the movie');
+    showTrendingMovies();
     ref.deleteBtnInput.classList.add('btn-hide');
     refs.paginationElem.classList.add('tui-pagination');
     newElement.innerHTML = '';
@@ -96,11 +99,13 @@ function onSubmit(e) {
         ref.deleteBtnInput.classList.add('btn-hide');
       } else {
         displayMovies(movies);
-        currentPage = res.data.page;
-        const totalPages = res.data.total_pages;
-        pagination.reset({});
+        const {
+          page: currentPage,
+          total_results: totalResults,
+          total_pages: totalPages,
+        } = res.data;
 
-        console.log(`Total pages: ${totalPages}`);
+        pagination.reset(totalResults);
       }
     })
     .catch(error => {
@@ -129,35 +134,95 @@ const refs = {
 };
 
 const options = {
-  totalItems: 1000,
+  totalItems: 20,
   itemsPerPage: 20,
-  visiblePages: 4,
-  page: 1,
-  centerAlign: false,
+  visiblePages: 3,
+  centerAlign: true,
   firstItemClassName: 'tui-first-child',
   lastItemClassName: 'tui-last-child',
+  //
+  template: {
+    page: '<a href="#" class="tui-page-btn">{{page}}</a>',
+    currentPage:
+      '<strong class="tui-page-btn tui-is-selected">{{page}}</strong>',
+    moveButton:
+      '<a href="#" class="tui-page-btn tui-{{type}} custom-class-{{type}}">' +
+      '<span class="tui-ico-{{type}}">{{page}}</span>' +
+      '</a>',
+    disabledMoveButton:
+      '<span class="tui-page-btn tui-is-disabled tui-{{type}} custom-class-{{type}}" hidden>' +
+      '<span class="tui-ico-{{type}}">{{type}}d</span>' +
+      '</span>',
+    moreButton:
+      '<a href="#" class="tui-page-btn tui-{{type}}-is-ellip custom-class-{{type}}">' +
+      '<span class="tui-ico-ellip">...</span>' +
+      '</a>',
+  },
 };
 
 const pagination = new Pagination(refs.paginationElem, options);
+pagination.reset = function (totalItems) {
+  // this._view._buttons.prevMore.hidden = false;
+  // this._view._buttons.first.hidden = false;
+  // this._view._buttons.last.hidden = false;
+  // this._view._buttons.nextMore.hidden = false;
+  this.__proto__.reset.call(this, totalItems);
+  console.log(this);
+  if (this._getLastPage() <= this._options.visiblePages) {
+    this._view._containerElement.lastChild.hidden = true;
+  }
+  if (this._getLastPage() === this._options.visiblePages + 1) {
+    this._view._containerElement.lastChild.hidden = false;
+    this._view._containerElement.lastChild.previousSibling.previousSibling.hidden = true;
+  }
+  this._view._buttons.first.textContent = 1;
+  this._view._buttons.last.textContent = this._getLastPage();
+  console.log(this);
+};
 
 let pageForPagination = 0;
 
-pagination.on('afterMove', async event => {
+pagination.on('afterMove', async function (event) {
   const currentPage = event.page;
   pageForPagination = currentPage;
   try {
     const res = await myService.fetchSearchMovies(pageForPagination);
     const movies = res.data.results;
     displayMovies(movies);
-    scrollToTop();
+
+    console.log(pagination._view._buttons.prevMore.hidden);
   } catch (error) {
     console.log(error);
   }
 });
-
-function scrollToTop() {
-  window.scrollTo({
-    top: 0,
-    behavior: 'smooth',
-  });
-}
+pagination.on('afterMove', function (event) {
+  const currentPage = event.page;
+  console.log(pagination._options.itemsPerPage);
+  if (pagination._options.visiblePages >= pagination._getLastPage()) {
+    pagination._view._buttons.prevMore.hidden = true;
+    pagination._view._buttons.first.hidden = true;
+    pagination._view._buttons.last.hidden = true;
+    pagination._view._buttons.nextMore.hidden = true;
+  } else if (
+    pagination._options.visiblePages + 1 ===
+    pagination._getLastPage()
+  ) {
+    pagination._view._buttons.prevMore.hidden = true;
+    pagination._view._buttons.nextMore.hidden = true;
+    pagination._view._buttons.first.hidden = currentPage <= 2;
+    pagination._view._buttons.last.hidden =
+      currentPage >= pagination._getLastPage() - 1;
+    console.log(pagination._view._buttons);
+  } else {
+    pagination._view._buttons.prevMore.hidden =
+      currentPage < pagination._options.visiblePages + 1;
+    pagination._view._buttons.first.hidden =
+      currentPage < pagination._options.visiblePages;
+    pagination._view._buttons.last.hidden =
+      pagination._getLastPage() - currentPage <
+      pagination._options.visiblePages - 1;
+    pagination._view._buttons.nextMore.hidden =
+      pagination._getLastPage() - currentPage <
+      pagination._options.visiblePages;
+  }
+});

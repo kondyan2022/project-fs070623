@@ -1,87 +1,86 @@
 <section class="cataloge-search">
-    <div class="container">
-            <form action="" class="cataloge-search-form">
-                <input 
-                class="cataloge-search-input "
-                type="text"
-                id="SearchQuery"
-                name="querys"
-                placeholder="Search"
-                />
-                <select
-                class="cataloge-search-years " 
-                name="selectYear" 
-                id="SearchYear"
-                placeholder=""
-                >
-                <option class="year" value="year">Years</option>
-                <option class="year" value="2023">2023</option>
-                <option class="year" value="2022">2022</option>
-                <option class="year" value="2021">2021</option>
-                <option class="year" value="2020">2020</option>
-                <option class="year" value="2019">2019</option>
-                <option class="year" value="2018">2018</option>
-                <option class="year" value="2017">2017</option>
-                <option class="year" value="2016">2016</option>
-                <option class="year" value="2015">2015</option>
-                <option class="year" value="2014">2014</option>
-                <option class="year" value="2013">2013</option>
-                <option class="year" value="2012">2012</option>
-                <option class="year" value="2011">2011</option>
-                <option class="year" value="2010">2010</option>
-            </select>
+  <div class="container">
+    <form action="" class="cataloge-search-form">
+      <input
+        class="cataloge-search-input"
+        type="text"
+        id="SearchQuery"
+        name="querys"
+        placeholder="Search"
+      />
+      <select class="cataloge-search-years" name="selectYear" id="SearchYear">
+        <option class="year" value="year">Years</option>
+        <option class="year" value="2023">2023</option>
+        <option class="year" value="2022">2022</option>
+        <option class="year" value="2021">2021</option>
+        <option class="year" value="2020">2020</option>
+        <option class="year" value="2019">2019</option>
+        <option class="year" value="2018">2018</option>
+        <option class="year" value="2017">2017</option>
+        <option class="year" value="2016">2016</option>
+        <option class="year" value="2015">2015</option>
+        <option class="year" value="2014">2014</option>
+        <option class="year" value="2013">2013</option>
+        <option class="year" value="2012">2012</option>
+        <option class="year" value="2011">2011</option>
+        <option class="year" value="2010">2010</option>
+        <option class="year" value="2009">2009</option>
+        <option class="year" value="2008">2008</option>
+        <option class="year" value="2007">2007</option>
+        <option class="year" value="2006">2006</option>
+        <option class="year" value="2005">2005</option>
+        <option class="year" value="2004">2004</option>
+        <option class="year" value="2003">2003</option>
+        <option class="year" value="2002">2002</option>
+        <option class="year" value="2001">2001</option>
+        <option class="year" value="2000">2000</option>
+      </select>
 
-        <!-- хрестик у полі пошуку.для очищення -->
-        <button type="button" class="cataloge-btn-delete btn-hide">
-            <svg 
-            xmlns="http://www.w3.org/2000/svg" 
-            width="12" 
-            height="12" 
-            fill="none"
-            class="icon-btn-delete"
-            viewBox="0 0 12 12"
-            >
-            <path 
-            
-            stroke-linecap="round" 
-            stroke-linejoin="round" 
-            d="m13.5 4.5-9 9m0-9 9 9"/>
+      <!-- хрестик у полі пошуку.для очищення -->
+      <button type="button" class="cataloge-btn-delete btn-hide">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="12"
+          height="12"
+          fill="none"
+          class="icon-btn-delete"
+          viewBox="0 0 12 12"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="m13.5 4.5-9 9m0-9 9 9"
+          />
         </svg>
+      </button>
+      <!-- Кнопка пошукy -->
+      <button type="submit" class="cataloge-btn-search" id="searchBtn">
+        <svg
+          class="icon-search"
+          xmlns="http://www.w3.org/2000/svg"
+          width="20"
+          height="20"
+          fill="none"
+          viewBox="0 0 20 20"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="1.3"
+            d="M9.167 15.833a6.667 6.667 0 1 0 0-13.333 6.667 6.667 0 0 0 0 13.333ZM17.5 17.5l-3.625-3.625"
+          />
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="1.3"
+            d="M9.167 15.833a6.667 6.667 0 1 0 0-13.333 6.667 6.667 0 0 0 0 13.333ZM17.5 17.5l-3.625-3.625"
+          />
+        </svg>
+      </button>
+    </form>
 
-        
-        </button>
-        <!-- Кнопка пошукy -->
-        <button type="submit"
-        class="cataloge-btn-search"
-        id="searchBtn">
-        <svg class="icon-search"
-        xmlns="http://www.w3.org/2000/svg" 
-        width="20" 
-        height="20" 
-        fill="none"
-        viewBox="0 0 20 20">
-        
-        <path 
-         stroke-linecap="round" 
-        stroke-linejoin="round" 
-        stroke-width="1.3" 
-        d="M9.167 15.833a6.667 6.667 0 1 0 0-13.333 6.667 6.667 0 0 0 0 13.333ZM17.5 17.5l-3.625-3.625"/> 
-        <path 
-      
-        stroke-linecap="round" 
-        stroke-linejoin="round" 
-        stroke-width="1.3" 
-        d="M9.167 15.833a6.667 6.667 0 1 0 0-13.333 6.667 6.667 0 0 0 0 13.333ZM17.5 17.5l-3.625-3.625"/>
-    </svg>
-   
-        </button>
-            </form>
-            
-               <ul class="catalog-list-gallery" ></ul> 
-            
-            
-    </div>
-    
+    <ul class="catalog-list-gallery"></ul>
+  </div>
 </section>
 <!-- <p class="oops-not-find warning oops-not-find-hide ishidden"> 
     OOPS... 
@@ -94,4 +93,3 @@
 </p> -->
 
 <div id="tui-pagination-container" class="tui-pagination"></div>
-

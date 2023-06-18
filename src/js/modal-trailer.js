@@ -1,4 +1,5 @@
 import TMDBApiService from './tmdb-api.js';
+import { totopOff, totopOn } from './totop.js';
 
 export const modalController = ({ modal, btnOpen, btnClose, time = 300 }) => {
   const buttonElems = document.querySelectorAll(btnOpen);
@@ -31,11 +32,13 @@ export const modalController = ({ modal, btnOpen, btnClose, time = 300 }) => {
 
       window.removeEventListener('keydown', closeModal);
     }
+    totopOn();
     document.body.classList.remove('modal-open');
   };
 
   const openModal = async evt => {
     const el = evt.target.closest('[film-id]');
+    totopOff();
     try {
       const trailerKey = await getListMovie(el.getAttribute('film-id'));
       modalElem.style.visibility = 'visible';

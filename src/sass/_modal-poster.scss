@@ -12,7 +12,7 @@
   width: 100vw;
   height: 100vh;
   opacity: 1;
-  z-index: 11;
+  z-index: 51;
   overflow: auto;
 
   &.is-hidden {
@@ -22,34 +22,35 @@
 
 // ---------------------------------------------- CONTAINER -------------------------------------------------------
 
-.modal-film {
-  width: 280px;
-  min-height: 847px;
+// .modal-film {
+//   width: 280px;
+//   max-height: 847px;
 
-  @media screen and (min-width: 768px) {
-    transform: translate(-50%, -50%) scale(0.9);
-    top: 50%;
-    left: 50%;
-    min-width: 704px;
-    min-height: 488px;
-    padding: 44px;
-  }
-  @media screen and (min-width: 1200px) {
-    transform: translate(-50%, -50%) scale(0.9);
-    top: 50%;
-    left: 50%;
-    min-width: 846px;
-    min-height: 598px;
-    padding: 60px;
-    border-radius: 20px;
-  }
-}
+//   @media screen and (min-width: 768px) {
+//     transform: translate(-50%, -50%) scale(0.9);
+//     top: 50%;
+//     left: 50%;
+//     min-width: 704px;
+//     min-height: 488px;
+//     padding: 44px;
+//   }
+//   @media screen and (min-width: 1200px) {
+//     transform: translate(-50%, -50%) scale(0.9);
+//     top: 50%;
+//     left: 50%;
+//     min-width: 846px;
+//     min-height: 598px;
+//     padding: 60px;
+//     border-radius: 20px;
+//   }
+// }
 
 .modal-film-container {
   padding: 52px 16px 64px 16px;
   box-sizing: border-box;
   border-radius: 16px;
   width: 280px;
+  height: 847px;
 
   display: flex;
   flex-wrap: wrap;
@@ -71,6 +72,7 @@
   @media screen and (min-width: 768px) {
     width: 704px;
     height: 488px;
+    padding: 44px;
     // display: flex;
 
     justify-content: space-between;
@@ -82,35 +84,31 @@
   @media screen and (min-width: 1200px) {
     width: 846px;
     height: 598px;
+    padding: 60px;
     // display: flex;
   }
 }
-
-// .modal-card-table {
-//   margin: 22px, 16px, 64px, 16px;
-// }
-
-// .modal-attributes {
-
-//   @media screen and (min-width: 768px) {
-//   width: 294px;
-//   height: 400px;
-//   }
-
-//   @media screen and (min-width: 1200px) {
-//   width: 375px;
-//   height: 478px;
-//   }
-// }
 
 // ----------------------------------------------- ELEMENTS --------------------------------------------------------
 
 .modal-attributes {
   display: flex;
-
   color: var(--color-grey);
   justify-content: space-between;
   margin-bottom: 20px;
+  flex-wrap: nowrap;
+
+  @media screen and (min-width: 768px) {
+    align-items: center;
+  }
+}
+
+.modal-attributes-data-list {
+  @media screen and (min-width: 768px) {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
 }
 
 .modal-card-title,
@@ -138,17 +136,18 @@
   }
 }
 
+.modal-attributes-title-list {
+  white-space: nowrap;
+  margin-right: 62px;
+}
+
 @media screen and (min-width: 768px) {
   .modal-attributes-title-list li,
   .modal-attributes-data-list li {
     display: flex;
-    justify-content: space-between;
+    justify-content: start;
     align-items: flex-start;
     margin-bottom: 12px;
-  }
-
-  .modal-attributes-data-list {
-    margin-left: 62px;
   }
 }
 
@@ -184,31 +183,14 @@
 .modal-card-data-get {
   color: var(--color-white);
   font-size: 14px;
+  @media screen and (max-width: 767px) {
+    max-height: 32px;
+    width: auto;
+  }
   @media screen and (min-width: 1200px) {
     font-size: 16px;
   }
 }
-
-// .modal-card {
-//   margin-left: 0;
-//   // margin-right: 0;
-// }
-
-// .modal-attributes-list {
-//   display: flex;
-//   justify-content: space-between;
-//   align-items: flex-start;
-//   margin-bottom: 12px;
-//   gap: 30px;
-
-// @media screen and (min-width: 768px) {
-
-// }
-
-//   @media screen and (min-width: 1200px) {
-
-//   }
-// }
 
 //  ---------------------------------------------- IMAGE ---------------------------------------------------------
 
@@ -268,6 +250,12 @@
   line-height: calc(20 / 12);
   color: var(--color-secondary-text);
   margin-bottom: 16px;
+
+  @media screen and (max-width: 767px) {
+    max-height: 180px;
+    overflow: auto;
+  }
+
   @media screen and (min-width: 768px) {
     margin-top: 4px;
     margin-bottom: 24px;
@@ -312,8 +300,7 @@
 
 .close-icon {
   stroke: var(--color-secondary-text);
-  &:hover,
-  &:focus {
+  &:hover {
     stroke: (--color-orange);
   }
 }
@@ -338,8 +325,7 @@
     font-size: 12px;
     line-height: calc(16 / 12);
   }
-  &:hover,
-  &:focus {
+  &:hover {
     background-color: var(--color-white);
     color: var(--color-orange);
     border: 1 px var(--color-white);
@@ -380,8 +366,7 @@
   .modal-card-btn {
     color: var(--color-background);
     background-color: var(--color-white);
-    &:hover,
-    &:focus {
+    &:hover {
       color: var(--color-white);
       background-color: var(--color-background);
       border: 1 px var(--color-background);

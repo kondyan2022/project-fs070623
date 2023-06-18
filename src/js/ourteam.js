@@ -1,19 +1,21 @@
 import team from '/developers.json';
-import imgList from '../images/developers/*.jpg'
+import imgList from '../images/developers/*.jpg';
+import { totopOff, totopOn } from './totop';
 
 const refs = {
   list: document.querySelector('.js-team-list'),
   closeTeamModalBtn: document.querySelector('.team-modal-close-btn'),
-  teamModal: document.querySelector('.backdrop-team-modal')
-}
+  teamModal: document.querySelector('.backdrop-team-modal'),
+};
 const markup = makeTeamCardsMarkup(team.developers);
 refs.list.innerHTML = markup;
 
 refs.closeTeamModalBtn.addEventListener('click', onCloseTeamModalBtnClick);
 
 function makeTeamCardsMarkup(arr) {
-  return arr.map(({name, photo, role, linkedin, github}) => {
-    return `
+  return arr
+    .map(({ name, photo, role, linkedin, github }) => {
+      return `
     <li class="team-modal-item">
         <div
           class="team-modal-item-img"
@@ -96,12 +98,13 @@ function makeTeamCardsMarkup(arr) {
           </ul>
           </div>
       </li>
-    `
-  }).join('');
+    `;
+    })
+    .join('');
 }
 
 function onCloseTeamModalBtnClick() {
   refs.teamModal.classList.toggle('is-hidden');
-
-  document.body.style.overflow = "auto";
+  totopOn();
+  document.body.style.overflow = 'auto';
 }

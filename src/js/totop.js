@@ -18,11 +18,12 @@ let observer = new IntersectionObserver((entieres, observer) => {
 
 export function totopOn() {
   observer.observe(refs.switch);
+  refs.totop.style.display = 'flex';
 }
 
 export function totopOff() {
   observer.unobserve(refs.switch);
-  refs.totop.style.display = 'flex';
+  refs.totop.style.display = 'none';
 }
 refs.totop.addEventListener('click', e => {
   window.scroll({
