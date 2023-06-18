@@ -127,12 +127,12 @@ function renderToMarkup(array) {
     .filter(movie => movie.backdrop_path !== null)
     .map(movie => createMarkup(movie))
     .join('');
-  setTimeout(() => {
-    wrapperForRender.innerHTML = slides;
-    modalController({
-      modal: '.modal1',
-      btnOpen: '.js-newhero-modal-trailer',
-      btnClose: '.modalclose',
-    });
-  }, 1000);
+  // setTimeout(() => {
+  wrapperForRender.innerHTML = slides;
+  modalController({
+    modal: '.modal1',
+    btnOpen: '.js-newhero-modal-trailer',
+    btnClose: '.modalclose',
+  });
+  // }, 1000);
 }
