@@ -105,7 +105,7 @@ function renderSavedFilm() {
     createPaginationMarkUp(getMovies, currentCard);
   } else {
     refs.wrapperForMessage.innerHTML =
-      '<p class="lib-error">OOPS... <br>We are very sorry!</br> You dont have any movies at your library.</p >  <div class="lib-wrap-btn"><a href="./catalog.html" class="lib-btn-search-movie">Search movie</a></div>';
+      '<p class="lib-error">OOPS... <br>We are very sorry!</br> You dont have any movies at your library.</p >  <div class="lib-wrap-btn"><a href="./catalog.html" class="lib-btn-search">Search movie</a></div>';
     refs.btnLoadMore.style.display = 'none';
 
     refs.generalWrapperSelect.innerHTML = '';
