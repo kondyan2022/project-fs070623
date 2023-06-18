@@ -124,8 +124,8 @@ export const modalController = ({ modal, btnOpen, btnClose, time = 300 }) => {
       playerVars: {
         autoplay: 0,
         controls: 1,
-        disablekb: 1,
-        fs: 0,
+        disablekb: 0,
+        fs: 1,
         iv_load_policy: 3,
         rel: 0,
       },

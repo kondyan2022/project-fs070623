@@ -1,5 +1,5 @@
 import team from '/developers.json';
-import imgList from '../images/developers/*.jpg';
+// import imgList from '../images/developers/*.jpg';
 import { totopOff, totopOn } from './totop';
 
 const refs = {
