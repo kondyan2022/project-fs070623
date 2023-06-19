@@ -103,6 +103,9 @@
 .js-light-theme {
   background-color: var(--color-white);
 }
+.no-scroll {
+  overflow: hidden;
+}
 
 .header-container {
   height: 48px;
