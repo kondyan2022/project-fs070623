@@ -58,10 +58,10 @@ function createMarkup(movie) {
                 <p class="newhero-about">${movie.overview.substring(0, numberLetters)}...</p>
                 <div class="newh-wrap-buttons">
                     <div class="newh-wrap-trailer">
-                        <button type="button" class="newhero-modal-trailer js-newhero-modal-trailer">Watch trailer</button>
+                        <button type="button" class="newhero-modal-trailer js-newhero-modal-trailer" data-modal-trigger>Watch trailer</button>
                     </div>
                     <div class="newh-wrap-detail">
-                        <button type="button" class="newhero-modal-detail .js-newhero-modal-detail">More details</button>
+                        <button type="button" class="newhero-modal-detail js-newhero-modal-detail">More details</button>
                     </div>
                   </div>
               </div>
@@ -70,6 +70,7 @@ function createMarkup(movie) {
 }
 
 const wrapperForRender = document.querySelector('.newhero-render-wrapper');
+const swiperContainer = document.querySelector('.swiper')
 
 let shouldInitSwiper = false;
 
@@ -103,6 +104,8 @@ serviceTrendingDaysMovies
           direction: 'horizontal',
           loop: true,
           observer: true,
+          simulateTouch: false,
+          speed: 600
         });
       }, 0);
     }
@@ -111,12 +114,13 @@ serviceTrendingDaysMovies
 
 //------------------------------------------------------------------------
 
-wrapperForRender.addEventListener('click', onBtnDetails)
+swiperContainer.addEventListener('click', onBtnDetails)
 
 function onBtnDetails(evt) {
-  if (evt.target === document.querySelector('.js-newhero-modal-detail')) {
-    const el = evt.target.closest('[film-id]');// console.log('found', el);
-    if (el) {// console.log('button DETAILS');
+  const btnDetails = evt.target.closest('[film-id] .js-newhero-modal-detail');
+  if (btnDetails) {
+    const el = btnDetails.closest('[film-id]');
+    if (el) {
       openModalCard(el.getAttribute('film-id'));
     }
   }
@@ -127,12 +131,13 @@ function renderToMarkup(array) {
     .filter(movie => movie.backdrop_path !== null)
     .map(movie => createMarkup(movie))
     .join('');
-  // setTimeout(() => {
-  wrapperForRender.innerHTML = slides;
-  modalController({
-    modal: '.modal1',
-    btnOpen: '.js-newhero-modal-trailer',
-    btnClose: '.modalclose',
-  });
-  // }, 1000);
+  setTimeout(() => {
+    wrapperForRender.innerHTML = slides;
+
+    modalController({
+      modal: '.modal1',
+      btnOpen: '[data-modal-trigger]',
+      btnClose: '[data-modal-close]',
+    });
+  }, 0);
 }
