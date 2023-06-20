@@ -7,34 +7,30 @@ import { initSwiper } from './hero-swiper';
 const wrapperForRender = document.querySelector('.newhero-render-wrapper');
 const swiperContainer = document.querySelector('.swiper');
 
-let shouldInitSwiper = false;
-
-const serviceTrendingDaysMovies = new TMDBApiService();
-serviceTrendingDaysMovies
-  .fetchTrendingDayMovies()
-  .then(resp => {
+const fetchTrendindMovies = async () => {
+  try {
+    serviceTrendingDaysMovies = new TMDBApiService();
+    const resp = await serviceTrendingDaysMovies.fetchTrendingDayMovies();
     const data = resp.data;
     const arrayResults = data.results; //array with results
     if (arrayResults.length > 0) {
-      const slides = getSlideMarkup(arrayResults);
+      const slides = await getSlideMarkup(arrayResults);
       wrapperForRender.innerHTML = slides;
+      initSwiper();
+      //modal window with trailer
       modalController({
         modal: '.modal1',
         btnOpen: '[data-modal-trigger]',
         btnClose: '[data-modal-close]',
       });
-      shouldInitSwiper = true;
     }
-  })
-  .then(() => {
-    if (shouldInitSwiper) {
-      initSwiper();
-    }
-  })
-  .catch(e => console.error(e));
-
-swiperContainer.addEventListener('click', onBtnDetails)
-
+  } catch (err) {
+    console.error(err);
+  }
+}
+fetchTrendindMovies();
+//modal window with details
+swiperContainer.addEventListener('click', onBtnDetails);
 function onBtnDetails(evt) {
   const btnDetails = evt.target.closest('[film-id] .js-newhero-modal-detail');
   if (btnDetails) {
@@ -43,4 +39,4 @@ function onBtnDetails(evt) {
       openModalCard(el.getAttribute('film-id'));
     }
   }
-}
+};
