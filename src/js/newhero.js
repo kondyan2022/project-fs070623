@@ -9,7 +9,7 @@ const swiperContainer = document.querySelector('.swiper');
 
 const fetchTrendindMovies = async () => {
   try {
-    serviceTrendingDaysMovies = new TMDBApiService();
+    const serviceTrendingDaysMovies = new TMDBApiService();
     const resp = await serviceTrendingDaysMovies.fetchTrendingDayMovies();
     const data = resp.data;
     const arrayResults = data.results; //array with results
