@@ -170,10 +170,12 @@ pagination.reset = function (totalItems) {
   console.log(this);
   if (this._getLastPage() <= this._options.visiblePages) {
     this._view._containerElement.lastChild.hidden = true;
-  }
-  if (this._getLastPage() === this._options.visiblePages + 1) {
+  } else if (this._getLastPage() === this._options.visiblePages + 1) {
     this._view._containerElement.lastChild.hidden = false;
     this._view._containerElement.lastChild.previousSibling.previousSibling.hidden = true;
+  } else {
+    this._view._containerElement.lastChild.hidden = false;
+    this._view._containerElement.lastChild.previousSibling.previousSibling.hidden = false;
   }
   this._view._buttons.first.textContent = 1;
   this._view._buttons.last.textContent = this._getLastPage();
