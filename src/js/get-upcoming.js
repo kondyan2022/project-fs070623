@@ -58,12 +58,12 @@ export default function getUpcomingFilm(array) {
                     <div class="up-wrap-btn">
                         <button type="button" class="up-btn" data-movie-id="${movie.id}">Add to my library</button>
                     </div>
-                </div>;`;
+                </div>`;
             return {
                 id: movie.id,
                 markup: movieMarkup
             }
         })[randomIndex];
 
-    return randomMovie;
+    return randomMovie
 }
