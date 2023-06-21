@@ -1,7 +1,4 @@
 import getSelectByGenres from './get-select-genres';
-// import { createPaginationMarkUp } from './lib-loadmore';
-
-// import getGenres from './get-genres';
 import getFilmCard from './film-card';
 import SlimSelect from 'slim-select';
 import '../sass/_upcoming.scss';
