@@ -47,6 +47,7 @@ export const modalController = ({ modal, btnOpen, btnClose, time = 300 }) => {
 
       if (player) {
         player.loadVideoById(trailerKey);
+        player.stopVideo(); // Останавливаем видео при открытии модального окна
       }
       document.body.classList.add('modal-open');
     } catch (error) {
@@ -120,7 +121,7 @@ export const modalController = ({ modal, btnOpen, btnClose, time = 300 }) => {
     player = new window.YT.Player('youtube-player', {
       width: '600',
       height: '350',
-      videoId: videoId, // Использование переданного ключа видео в качестве значения videoId
+      videoId: videoId,
       playerVars: {
         autoplay: 0,
         controls: 1,
