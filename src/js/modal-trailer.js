@@ -142,9 +142,3 @@ export const modalController = ({ modal, btnOpen, btnClose, time = 300 }) => {
 
   loadYoutubePlayerAPI();
 };
-
-// modalController({
-//   modal: '.modal1',
-//   btnOpen: '.section__button1',
-//   btnClose: '.modal__close',
-// });
