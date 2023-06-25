@@ -10,13 +10,12 @@ refs.closeMenu.addEventListener('click', closeMenu);
 
 function openMenu() {
   refs.menu.classList.add('is-open');
-  refs.body.classList.add('no-scroll');
+  refs.body.classList.toggle('no-scroll');
 }
 
 function closeMenu(e) {
   if (e.target === refs.closeMenu) {
     refs.menu.classList.remove('is-open');
-    refs.body.classList.remove('no-scroll');
   }
 }
 

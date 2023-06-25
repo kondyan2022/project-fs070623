@@ -1,4 +1,4 @@
-import getSelectByGenres from './get-select-genres';
+import getGenres from './get-genres';
 import getFilmCard from './film-card';
 import SlimSelect from 'slim-select';
 import '../sass/_upcoming.scss';
@@ -6,7 +6,7 @@ import 'slim-select/dist/slimselect.css';
 import { getLibraryList } from './local-storage';
 import getFiveStar from './fivezerostar.js';
 import { openModalCard } from './modal-poster.js';
-import { getLibraryList, isInLibrary } from './local-storage';
+import { getLibraryList } from './local-storage';
 import '../sass/_fivestar.scss';
 
 const refs = {
@@ -14,52 +14,59 @@ const refs = {
   selectWrapper: document.querySelector('#library-filter'),
   generalWrapperSelect: document.querySelector('.js-lib-wrap-select'),
   wrapperForMessage: document.querySelector('.js-lib-content-wrap'),
-  btnLoadMore: document.querySelector('.js-load-more')
+  btnLoadMore: document.querySelector('.js-load-more'),
 };
 
+const libraryList = Array.from(
+  new Set(
+    getLibraryList()
+      .map(({ genre_ids }) => genre_ids)
+      .flat()
+  )
+);
+const arrayGenres = getGenres().filter(({ id }) => libraryList.includes(id));
 let arrayFilter = [];
 let currentCard = 0;
 const getMovies = getLibraryList(); //list from local storage
 
+//------------------------------------------------------------------------
 refs.listCards.addEventListener('click', hendlerOpenModalWindow);
-refs.btnLoadMore.addEventListener('click', onLoadMore);
-document.addEventListener('removeCard', event => {
-  const {
-    detail: { film_id },
-  } = event;
-  const cardForDelete = document.querySelector(
-    `.film-card[film-id="${film_id}"]`
-  );
-  cardForDelete.remove();
-});
 
 function hendlerOpenModalWindow(evt) {
   const el = evt.target.closest('[film-id]');
   if (el) {
-    const id = el.getAttribute('film-id');
-    console.log('before open modal', id);
-    openModalCard(id);
-    console.log('after open modal', id);
-    if (!isInLibrary(id)) {
-      console.log(id);
-      renderSavedFilm();
-    }
+    openModalCard(el.getAttribute('film-id'));
   }
 }
 
-function onLoadMore() {
-  renderSavedFilm();
-  if (select.getSelected()[0] === 'all') {
-    createPaginationMarkUp(getMovies, currentCard);
-  } else {
-    createPaginationMarkUp(arrayFilter, currentCard);
-  }
+/**-----------------------------------------------------------------------
+ * function by create markup for function renderMarkUpInSelect()
+ * @param {*object} item
+ * @returns markup
+ */
+function createMarkupInSelect(item) {
+  return `
+    <option class="lib-option lib-spec" value="${item.id}">${item.name}</option>
+    `;
+}
+/**-----------------------------------------------------------------------
+ * function by render genre of movie to select
+ */
+function renderMarkupInSelect() {
+  const gotGenre = arrayGenres
+    .map(genre => createMarkupInSelect(genre))
+    .join('');
+  // refs.selectWrapper.innerHTML = gotGenre;
+  refs.selectWrapper.insertAdjacentHTML('beforeend', gotGenre);
 }
 
-//-----------------SELECT -----------------------
-const getSelectGenres = getSelectByGenres();
-refs.selectWrapper.insertAdjacentHTML('beforeend', getSelectGenres);
+//------------------------------------------------------------------------
+
+renderMarkupInSelect();
+
+//------------------------------------------------------------------------
 // used library slim-select
+
 let select = new SlimSelect({
   select: refs.selectWrapper,
   events: {
@@ -73,29 +80,32 @@ let select = new SlimSelect({
   },
 });
 
+//---------------------------------------------------------------------
 renderSavedFilm();
 
-/**----------------------------------------------
- * function for rander cards
- */
 function renderSavedFilm() {
   if (getMovies.length > 0) {
     createPaginationMarkUp(getMovies, currentCard);
   } else {
     refs.wrapperForMessage.innerHTML =
-      '<p class="lib-error">OOPS... <br>We are very sorry!</br> You dont have any movies at your library.</p >  <div class="lib-wrap-btn"><a href="./catalog.html" class="lib-btn-search">Search movie</a></div>';
+      '<p class="lib-error">OOPS... <br>We are very sorry!</br> You dont have any movies at your library.</p >  <div class="lib-wrap-btn"><a href="./catalog.html" class="lib-btn-search-movie">Search movie</a></div>';
     refs.btnLoadMore.style.display = 'none';
 
     refs.generalWrapperSelect.innerHTML = '';
   }
 }
-// /**----------------------------------------------
-//  * 
-//  * @param {*array} array 
-//  * @param {*number} firstPosition 
-//  * @param {*number} quantityCard 
-//  * @returns object {listHTML, hasMore}
-//  */
+
+refs.btnLoadMore.addEventListener('click', onLoadMore);
+
+function onLoadMore() {
+  renderSavedFilm();
+  if (select.getSelected()[0] === 'all') {
+    createPaginationMarkUp(getMovies, currentCard);
+  } else {
+    createPaginationMarkUp(arrayFilter, currentCard);
+  }
+}
+
 function paginationSavedCards(array, firstPosition, quantityCard) {
   const shownMovies = array.slice(firstPosition, firstPosition + quantityCard);
   currentCard = firstPosition + shownMovies.length;
@@ -109,21 +119,14 @@ function paginationSavedCards(array, firstPosition, quantityCard) {
     hasMore: isMore,
   };
 }
-// /**----------------------------------------------
-//  * function for render pagination
-//  * @param {*array} array 
-//  * @param {*number} lastCard 
-//  */
+
 function createPaginationMarkUp(array, lastCard) {
   const { listHTML, hasMore } = paginationSavedCards(array, lastCard, 9);
   refs.listCards.insertAdjacentHTML('beforeend', listHTML);
 
   refs.btnLoadMore.style.display = hasMore ? 'block' : 'none';
 }
-/**----------------------------------------------
- * function for use pagination on select genre
- * @param {*number} genreId 
- */
+
 function onNewSelect(genreId) {
   currentCard = 0;
   refs.listCards.innerHTML = '';
