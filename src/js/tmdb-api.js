@@ -7,6 +7,7 @@ export default class TMDBApiService {
   currentPage;
   totalPages;
   itemsPerPage = 20;
+  totalItems;
   myAxios;
   constructor() {
     this.searchString = '';
@@ -36,6 +37,9 @@ export default class TMDBApiService {
     this.releaseYear = String(newSearchYear);
     this.currentPage = 1;
   }
+  get totalItems() {
+    return this.totalItems;
+  }
 
   async fetchGenres() {
     return await this.myAxios('genre/movie/list', {
@@ -52,19 +56,33 @@ export default class TMDBApiService {
       params: { language: 'en-US' },
     });
   }
-  async fetchSearchMovies(page = 1) {
+  async fetchTrendingWeekPageMovies() {
+    const response = await this.myAxios('trending/movie/week', {
+      params: {
+        language: 'en-US',
+        page: this.currentPage,
+      },
+    });
+    this.totalPages = response.data.total_pages;
+    this.currentPage = response.data.page;
+    this.totalItems = response.data.total_results;
+    return response;
+  }
+
+  async fetchSearchMovies() {
     const response = await this.myAxios('search/movie', {
       params: {
         query: this.searchString,
         include_adult: false,
         language: 'en-US',
         primary_release_year: this.releaseYear,
-        page: page,
+        page: this.currentPage,
         region: 'US',
       },
     });
     this.totalPages = response.data.total_pages;
     this.currentPage = response.data.page;
+    this.totalItems = response.data.total_results;
     return response;
   }
 
