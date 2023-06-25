@@ -340,6 +340,7 @@ body.js-light-theme .film-card:hover {
   margin-bottom: 100px;
 
   .tui-page-btn {
+    order: 3;
     width: 24px;
     margin-left: 4px;
     margin-right: 4px;
@@ -376,8 +377,30 @@ body.js-light-theme .film-card:hover {
       font-size: 14px;
       line-height: 40px;
     }
+
+    &.custom-class-prev {
+      order: 0;
+      &.tui-prev-is-ellip {
+        order: 2;
+      }
+    }
+    &.custom-class-first {
+      order: 1;
+    }
+    // tui-next-is-ellip custom-class-next tui-last-child
+    &.custom-class-last {
+      order: 5;
+    }
+
+    &.custom-class-next {
+      order: 6;
+      &.tui-next-is-ellip {
+        order: 4;
+      }
+    }
   }
 }
+
 .js-light-theme {
   .tui-pagination {
     .tui-page-btn {
@@ -483,9 +506,9 @@ body.js-light-theme .film-card:hover {
 //   border: none;
 // }
 
-.tui-pagination .tui-first {
-  display: none;
-}
+// .tui-pagination .tui-first {
+//   display: none;
+// }
 
 // .tui-pagination .tui-ico-last {
 //   display: none;
@@ -493,9 +516,9 @@ body.js-light-theme .film-card:hover {
 //   border: none;
 // }
 
-.tui-pagination .tui-last {
-  display: none;
-}
+// .tui-pagination .tui-last {
+//   display: none;
+// }
 
 // .tui-page-btn {
 //   border: 1px solid #b7b7b7;
